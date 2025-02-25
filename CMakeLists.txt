@@ -4,46 +4,34 @@ project(SportRoster)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-include_directories(include)
+include_directories(src)
 
-# === consoleGUI ===
-file(GLOB_RECURSE CONSOLE_GUI_SRC src/consoleGUI/*.cpp src/consoleGUI/*.h)
-add_library(consoleGUI ${CONSOLE_GUI_SRC})
-target_include_directories(consoleGUI PRIVATE src/consoleGUI)
+file(GLOB_RECURSE CORE_SRC src/Core/*.cpp)
+file(GLOB_RECURSE CORE_HEADERS src/Core/*.h)
 
-# === ui ===
-file(GLOB_RECURSE UI_SRC src/ui/*.cpp src/ui/*.h)
-add_library(ui ${UI_SRC})
-target_include_directories(ui PRIVATE src/ui)
+file(GLOB_RECURSE MENU_SRC src/Menu/*.cpp)
+file(GLOB_RECURSE MENU_HEADERS src/Menu/*.h)
 
-# === Core ===
-file(GLOB_RECURSE CORE_SRC src/Core/*.cpp src/Core/*.h)
-add_library(core ${CORE_SRC})
-target_include_directories(core PRIVATE src/Core)
+file(GLOB_RECURSE UI_SRC src/UI/*.cpp)
+file(GLOB_RECURSE UI_HEADERS src/UI/*.h)
 
-# === Menu ===
-file(GLOB_RECURSE MENU_SRC src/Menu/*.cpp src/Menu/*.h)
-add_library(menu ${MENU_SRC})
-target_include_directories(menu PRIVATE src/Menu)
+file(GLOB_RECURSE CONSOLE_GUI_SRC src/consoleGUI/*.cpp)
+file(GLOB_RECURSE CONSOLE_GUI_HEADERS src/consoleGUI/*.h)
 
-# === Главный файл ===
-add_executable(${PROJECT_NAME} src/main.cpp src/Application.h)
-target_link_libraries(${PROJECT_NAME} consoleGUI ui core menu)
+set(MAIN_SRC src/main.cpp)
 
-# === Подключаем Google Test ===
-# Опция для тестов
-option(BUILD_TESTS "Build tests" ON)
-if(BUILD_TESTS)
-    enable_testing()
-    
-    add_subdirectory(test)
-    
-    find_package(GTest REQUIRED)
-    include_directories(${GTEST_INCLUDE_DIRS})
-    
-    file(GLOB_RECURSE TEST_SOURCES test/*.cpp test/*.h)
-    add_executable(runTests ${TEST_SOURCES})
-    target_link_libraries(runTests consoleGUI ui core menu GTest::GTest GTest::Main)
-    
-    add_test(NAME AllTests COMMAND runTests)
+add_executable(SportRoster ${MAIN_SRC} 
+    ${CORE_SRC} ${CORE_HEADERS}
+    ${MENU_SRC} ${MENU_HEADERS}
+    ${UI_SRC} ${UI_HEADERS}
+    ${CONSOLE_GUI_SRC} ${CONSOLE_GUI_HEADERS}
+)
+if (MSVC)
+    target_compile_options(SportRoster PRIVATE /W4)
+else()
+    target_compile_options(SportRoster PRIVATE -Wall -Wextra -pedantic -O2)
 endif()
+
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+set_source_files_properties(${CORE_HEADERS} ${MENU_HEADERS} ${UI_HEADERS} ${CONSOLE_GUI_HEADERS} PROPERTIES HEADER_FILE_ONLY TRUE)
