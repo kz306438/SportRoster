@@ -1,0 +1,87 @@
+# Временные файлы Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Visual Studio
+.vscode/
+.vs/
+*.code-workspace
+
+# Папки отладки, билда и релиза
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa][Rr][Mm]*/
+[Bb]uild/
+[Bb]in/
+[Oo]bj/
+ipch/
+*.vcxproj.user
+*.vcxproj.filters
+*.vcxproj.*
+*.sdf
+*.opensdf
+*.opendb
+*.tlog/
+*.idb
+*.pdb
+*.ilk
+*.obj
+*.log
+*.pch
+*.rsp
+*.ipdb
+*.iobj
+*.tlh
+*.tli
+*.lastbuildstate
+
+# Пакеты и зависимости
+packages/
+*.nupkg
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# CMake файлы
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+build/
+*.ninja
+
+# Файлы Visual Studio CMake
+CMakeSettings.json
+CMakeUserPresets.json
+CMakePresets.json
+
+# Файлы для генерации проекта
+*.vcxproj.*
+*.sln
+*.vcxproj.filters
+*.VC.db
+*.VC.VC.opendb
+*.VC.opendb
+*.user
+
+# Файлы для MSBuild
+msbuild.log
+msbuild.err
+msbuild.wrn
+
+# Временные и кэшированные файлы
+*.tmp
+*.temp
+*.log
+*.cache
+*.directory
+
+# Файлы временного развертывания
+*.deploy.cmd
+*.deploy-readme.txt
+*.pubxml
+*.pubxml.user
