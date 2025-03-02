@@ -5,6 +5,8 @@ namespace ui
 {
 	class UI
 	{
+	public:
+		virtual ~UI() = default;
 	};
 
 } // namespace ui

@@ -51,7 +51,7 @@ set(HEADERS
     "include/UI.h"
 )
 
-add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
+add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS} "src/Application.cpp" "src/UI/ConsoleManager.cpp" "include/ConsoleManager.h" "include/UIFactory.h" "src/UI/UIFactory.cpp")
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/include)
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/consoleGUI)
