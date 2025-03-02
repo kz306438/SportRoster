@@ -2,36 +2,53 @@ cmake_minimum_required(VERSION 3.10)
 project(SportRoster)
 
 set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-include_directories(src)
+set(SOURCES 
+    "src/main.cpp"
 
-file(GLOB_RECURSE CORE_SRC src/Core/*.cpp)
-file(GLOB_RECURSE CORE_HEADERS src/Core/*.h)
+    "consoleGUI/buttons.cpp"
+    "consoleGUI/colors.cpp"
+    "consoleGUI/cursor.cpp"
+    "consoleGUI/Object.cpp"
+    "consoleGUI/window.cpp"
 
-file(GLOB_RECURSE MENU_SRC src/Menu/*.cpp)
-file(GLOB_RECURSE MENU_HEADERS src/Menu/*.h)
+    "src/Core/ApplicationCore.cpp"
+    "src/Core/Player.cpp"
+    "src/Core/Team.cpp"
 
-file(GLOB_RECURSE UI_SRC src/UI/*.cpp)
-file(GLOB_RECURSE UI_HEADERS src/UI/*.h)
+    "src/Menu/MainMenu.cpp"
+    "src/Menu/TUIMenuFactory.cpp"
 
-file(GLOB_RECURSE CONSOLE_GUI_SRC src/consoleGUI/*.cpp)
-file(GLOB_RECURSE CONSOLE_GUI_HEADERS src/consoleGUI/*.h)
-
-set(MAIN_SRC src/main.cpp)
-
-add_executable(SportRoster ${MAIN_SRC} 
-    ${CORE_SRC} ${CORE_HEADERS}
-    ${MENU_SRC} ${MENU_HEADERS}
-    ${UI_SRC} ${UI_HEADERS}
-    ${CONSOLE_GUI_SRC} ${CONSOLE_GUI_HEADERS}
+    "src/UI/TUI.cpp"
+    "src/UI/UI.cpp"
 )
-if (MSVC)
-    target_compile_options(SportRoster PRIVATE /W4)
-else()
-    target_compile_options(SportRoster PRIVATE -Wall -Wextra -pedantic -O2)
-endif()
 
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+set(HEADERS 
+    "src/Application.h"
 
-set_source_files_properties(${CORE_HEADERS} ${MENU_HEADERS} ${UI_HEADERS} ${CONSOLE_GUI_HEADERS} PROPERTIES HEADER_FILE_ONLY TRUE)
+    "consoleGUI/GUI.h"
+    "consoleGUI/buttons.h"
+    "consoleGUI/colors.h"
+    "consoleGUI/cursor.h"
+    "consoleGUI/Object.h"
+    "consoleGUI/window.h"
+
+    "include/ApplicationCore.h"
+    "include/IApplicationCore.h"
+    "include/Player.h"
+    "include/Team.h"
+
+    "include/Menu.h"
+    "include/MainMenu.h"
+    "include/MenuFactory.h"
+    "include/TUIMenuFactory.h"
+    
+    "include/TUI.h"
+    "include/UI.h"
+)
+
+add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
+
+target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/include)
+target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/consoleGUI)
