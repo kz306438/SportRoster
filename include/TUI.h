@@ -2,15 +2,26 @@
 #define TUI_H
 
 #include "UI.h"
+#include "MenuType.h"
+#include "ApplicationCore.h"
 
 namespace ui
 {
 
-	class TUI : public UI
+	class TUI final : public UI
 	{
+	public:
+		TUI(std::uint16_t width, std::uint16_t height, core::ApplicationCore& appCore) noexcept;
+		TUI(std::uint16_t width, std::uint16_t height, std::string title, core::ApplicationCore& appCore);
 	public:
 		void onRender() override;
 		void onUpdate() override;
+	
+		void setMenu(menu::MenuType type);
+	private:
+		void init();
+	private:
+		core::ApplicationCore& m_appCore;
 	};
 
 } // namespace ui

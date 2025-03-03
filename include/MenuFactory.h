@@ -3,6 +3,7 @@
 
 #include "Menu.h"
 #include "MenuType.h"
+#include "ApplicationCore.h"
 #include <memory>
 
 namespace menu
@@ -11,10 +12,16 @@ namespace menu
 	class MenuFactory
 	{
 	public:
+		explicit MenuFactory(core::ApplicationCore& appCore)
+			: m_appCore(appCore) {}
+	public:
 		virtual ~MenuFactory() = default;
 
 	public:
 		[[nodiscard]] virtual std::unique_ptr<Menu> createMenu(MenuType type) = 0;
+	
+	protected:
+		core::ApplicationCore& m_appCore;
 	};
 
 } // menu

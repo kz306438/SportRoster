@@ -2,6 +2,8 @@
 #define UI_H
 
 #include <string>
+#include <memory>
+#include "Menu.h"
 
 namespace ui
 {
@@ -18,6 +20,9 @@ namespace ui
 	public:
 		virtual void onRender() = 0;
 		virtual void onUpdate() = 0;
+
+	protected:
+		std::unique_ptr<menu::Menu> m_menu;
 
 	protected:
 		std::string m_title;

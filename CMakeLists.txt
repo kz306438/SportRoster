@@ -38,7 +38,7 @@ set(HEADERS
     "consoleGUI/window.h"
 
     "include/ApplicationCore.h"
-    "include/IApplicationCore.h"
+    
     "include/Player.h"
     "include/Team.h"
 

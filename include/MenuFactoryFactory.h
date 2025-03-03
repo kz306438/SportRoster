@@ -4,6 +4,7 @@
 #include "MenuFactory.h"
 #include "TUIMenuFactory.h"
 #include "UIType.h"
+#include "ApplicationCore.h"
 #include <memory>
 #include <stdexcept>
 
@@ -13,15 +14,22 @@ namespace menu
 	class MenuFactoryFactory final
 	{
 	public:
-		[[nodiscard]] static std::unique_ptr<MenuFactory> createMenuFactory(ui::UIType type)
+		explicit MenuFactoryFactory(core::ApplicationCore& appCore)
+			: m_appCore(appCore) {}
+
+	public:
+
+		[[nodiscard]] static std::unique_ptr<MenuFactory> createMenuFactory(ui::UIType type, core::ApplicationCore appCore)
 		{
 			if (type == ui::UIType::TUI) {
-				return std::make_unique<TUIMenuFactory>();
+				return std::make_unique<TUIMenuFactory>(appCore);
 			}
 			else {
 				throw std::invalid_argument("There is no such type of UI.");
 			}
 		}
+	private:
+		core::ApplicationCore m_appCore;
 	};
 
 } // namespace menu

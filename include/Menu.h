@@ -8,6 +8,10 @@ namespace menu
 	{
 	public:
 		virtual ~Menu() = default;
+
+	public:
+		virtual void onRender() = 0;
+		virtual void onUpdate() = 0;
 	};
 
 } // namespace menu
