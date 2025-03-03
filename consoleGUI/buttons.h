@@ -10,7 +10,6 @@
 #include "Object.h"
 
 namespace {
-	// ќбъ€вл€ем переменные как статические, чтобы они были видны только внутри данного файла
 	static HANDLE hin = GetStdHandle(STD_INPUT_HANDLE);
 	static INPUT_RECORD InputRecord;
 	static DWORD Events;
@@ -28,13 +27,14 @@ namespace {
 class Button : public Object {
 public:
 	void allowChanges();
+
 protected:
 	virtual void buttonFill() = 0;
 	virtual void buttonDefault() = 0;
 	virtual void buttonPressed() = 0;
 	virtual void changePosition(int positionX, int positionY) = 0;
-	virtual void setBackgroundColor(const ConsoleColor& newColor) = 0;
-	virtual void setForegroundColor(const ConsoleColor& newColor) = 0;
+	virtual void setBackgroundColor(ConsoleColor newColor) = 0;
+	virtual void setForegroundColor(ConsoleColor newColor) = 0;
 	virtual ~Button() {}
 	template<typename... Args>
 	friend void keyboardButtonInteraction(Args*... buttons);
@@ -67,9 +67,8 @@ public:
 
 	void changePosition(int positionX, int positionY) override;
 
-	void setBackgroundColor(const ConsoleColor& newColor) override;
-
-	void setForegroundColor(const ConsoleColor& newColor) override;
+	void setBackgroundColor(ConsoleColor newColor) override;
+	void setForegroundColor(ConsoleColor newColor) override;
 
 	void setValue(int value);
 
@@ -98,10 +97,10 @@ private:
 	void handleKeyboardEvent(int key) override;
 };
 
-class StandartButton : public Button {
+class PushButton : public Button {
 public:
-	StandartButton() = default;
-	StandartButton(int buttonWidth, int buttonHeight, std::string buttonName, int buttonPositionX, int buttonPositionY);
+	PushButton() = default;
+	PushButton(int buttonWidth, int buttonHeight, std::string buttonName, int buttonPositionX, int buttonPositionY);
 
 	template <typename Function>
 	void connect(Function&& func) {
@@ -116,9 +115,9 @@ public:
 
 	void changePosition(int positionX, int positionY) override;
 
-	void setBackgroundColor(const ConsoleColor& newColor) override;
+	void setBackgroundColor(ConsoleColor newColor) override;
 
-	void setForegroundColor(const ConsoleColor& newColor) override;
+	void setForegroundColor(ConsoleColor newColor) override;
 
 	void setTexture(char topLeft, char topRight, char bottomLeft, char bottomRight, char horizontal, char vertical);
 
@@ -169,9 +168,9 @@ public:
 
 	void changePosition(int positionX, int positionY) override;
 
-	void setBackgroundColor(const ConsoleColor& newColor) override;
+	void setBackgroundColor(ConsoleColor newColor) override;
 
-	void setForegroundColor(const ConsoleColor& newColor) override;
+	void setForegroundColor(ConsoleColor newColor) override;
 
 	void setTexture(char topLeft, char topRight, char bottomLeft, char bottomRight, char horizontal, char vertical);
 
@@ -237,9 +236,9 @@ public:
 
 	int getSlideNumber();
 
-	void setBackgroundColor(const ConsoleColor& newColor) override;
+	void setBackgroundColor(ConsoleColor newColor) override;
 
-	void setForegroundColor(const ConsoleColor& newColor) override;
+	void setForegroundColor(ConsoleColor newColor) override;
 
 	void show() override;
 private:
@@ -282,9 +281,9 @@ public:
 	template<typename... Args>
 	friend void mouseButtonInteraction(Args*... buttons);
 
-	void setBackgroundColor(const ConsoleColor& newColor) override;
+	void setBackgroundColor(ConsoleColor newColor) override;
 
-	void setForegroundColor(const ConsoleColor& newColor) override;
+	void setForegroundColor(ConsoleColor newColor) override;
 
 	void changePosition(int positionX, int positionY) override;
 
@@ -303,128 +302,6 @@ private:
 	ConsoleColor backgroundColor = Black;
 	ConsoleColor foregroundColor = White;
 };
-
-class RadioButton : public Button
-{
-public:
-	RadioButton() = default;
-
-	RadioButton(std::string buttonName, int radioPositionX, int radioPositionY);
-
-	friend class RadioButtonManager;
-
-	template<typename... Args>
-	friend void keyboardButtonInteraction(Args*... buttons);
-
-	template<typename... Args>
-	friend void mouseButtonInteraction(Args*... buttons);
-
-	void buttonDefault() override;
-
-	void buttonPressed() override;
-
-	void changePosition(int positionX, int positionY) override;
-
-	void setBackgroundColor(const ConsoleColor& newColor) override;
-
-	void setForegroundColor(const ConsoleColor& newColor) override;
-
-	void show() override;
-
-	template <typename Function>
-	void connect(Function&& func) {
-		userFunction = std::forward<Function>(func);
-	}
-
-	void setState(const bool& newState);
-
-	bool getState() const;
-
-private:
-	std::vector<char> arr;
-	std::string buttonName;
-	bool state = false;
-	int radioPositionX = 0;
-	int radioPositionY = 0;
-	ConsoleColor bracketColor = White;
-	ConsoleColor backgroundColor = Black;
-	ConsoleColor foregroundColor = White;
-	std::function<void()> userFunction;
-
-	void buttonFill() override;
-	void handleMouseEvent(COORD mousePos) override;
-	void handleKeyboardEvent(int key) override;
-};
-
-class RadioButtonManager : public RadioButton
-{
-public:
-	RadioButtonManager(std::vector<RadioButton>& objects, int numberActiveButton);
-
-	void handleMouseEvent(COORD mousePos) override;
-
-	void handleKeyboardEvent(int key) override;
-
-	void show() override;
-
-	void add(RadioButton& newButton);
-
-private:
-	std::vector<RadioButton> objects;
-	int numberActiveButton = 0;
-};
-
-class CheckBox : public Button
-{
-public:
-	CheckBox() = default;
-
-	CheckBox(std::string buttonName, int radioPositionX, int radioPositionY);
-
-	template<typename... Args>
-	friend void keyboardButtonInteraction(Args*... buttons);
-
-	template<typename... Args>
-	friend void mouseButtonInteraction(Args*... buttons);
-
-	void buttonDefault() override;
-
-	void buttonPressed() override;
-
-	void changePosition(int positionX, int positionY) override;
-
-	void setBackgroundColor(const ConsoleColor& newColor) override;
-
-	void setForegroundColor(const ConsoleColor& newColor) override;
-
-	void show() override;
-
-	template <typename Function>
-	void connect(Function&& func) {
-		userFunction = std::forward<Function>(func);
-	}
-
-	void setState(const bool& newState);
-
-	bool getState() const;
-
-private:
-	std::vector<char> arr;
-	std::string buttonName;
-	bool state = false;
-	int radioPositionX = 0;
-	int radioPositionY = 0;
-	ConsoleColor bracketColor = White;
-	ConsoleColor backgroundColor = Black;
-	ConsoleColor foregroundColor = White;
-	std::function<void()> userFunction;
-
-	void buttonFill() override;
-	void handleMouseEvent(COORD mousePos) override;
-	void handleKeyboardEvent(int key) override;
-};
-
-
 
 //функци€ дл€ управлени€ кнопками с помощью клавиатуры
 template<typename... Args>

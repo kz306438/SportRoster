@@ -3,6 +3,7 @@
 
 #include "Menu.h"
 #include "ApplicationCore.h"
+#include "GUI.h"
 
 namespace menu
 {
@@ -19,6 +20,9 @@ namespace menu
 	
 	private:
 		core::ApplicationCore& m_appCore;
+
+	private:
+		std::unique_ptr<
 	};
 
 } // namespace menu

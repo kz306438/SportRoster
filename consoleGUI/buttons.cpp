@@ -17,11 +17,11 @@ void Button::changePosition(int positionX, int positionY)
 {
 }
 
-void Button::setBackgroundColor(const ConsoleColor& newColor)
+void Button::setBackgroundColor(ConsoleColor newColor)
 {
 }
 
-void Button::setForegroundColor(const ConsoleColor& newColor)
+void Button::setForegroundColor(ConsoleColor newColor)
 {
 }
 
@@ -236,13 +236,13 @@ void SliderButton::changePosition(int positionX, int positionY)
 	isChanged = true;
 }
 
-void SliderButton::setBackgroundColor(const ConsoleColor& newColor)
+void SliderButton::setBackgroundColor(ConsoleColor newColor)
 {
 	this->backgroundColor = newColor;
 	isChanged = true;
 }
 
-void SliderButton::setForegroundColor(const ConsoleColor& newColor)
+void SliderButton::setForegroundColor(ConsoleColor newColor)
 {
 	this->foregroundColor = newColor;
 	isChanged = true;
@@ -301,33 +301,16 @@ void SliderButton::handleMouseEvent(COORD mousePos) {
 					if (temp > minValue) {
 						temp--;
 						setValue(temp);
-						if(userFunction1 != nullptr)userFunction1();
+						userFunction1();
 					}
 				}
 				else if (mousePos.X == sliderPositionX + sliderWidth / 2 + 1 && mousePos.Y == sliderPositionY + 1) {
 					if (temp < maxValue) {
 						temp++;
 						setValue(temp);
-						if (userFunction2 != nullptr)userFunction2();
+						userFunction2();
 					}
 				}
-				/*else if (mousePos.Y >= sliderPositionY + 2 && mousePos.Y < sliderPositionY + sliderHeight - 2 && mousePos.X >= sliderPositionX  && mousePos.X <= sliderPositionX + sliderWidth) {
-					int delta = sliderValue + sliderPositionY + 2 - mousePos.Y;
-					temp -= delta;
-					setValue(temp);
-					if (delta < 0) {
-						for (int i = 0; i < abs(delta); i++)
-						{
-							if (userFunction2 != nullptr)userFunction2();
-						}
-					}
-					else if (delta > 0) {
-						for (int i = 0; i < delta; i++)
-						{
-							if (userFunction1 != nullptr)userFunction1();
-						}
-					}
-				}*/
 			}
 
 		}
@@ -357,14 +340,14 @@ void SliderButton::handleKeyboardEvent(int key)
 	}
 }
 
-StandartButton::StandartButton(int buttonWidth, int buttonHeight, std::string buttonName, int buttonPositionX, int buttonPositionY)
+PushButton::PushButton(int buttonWidth, int buttonHeight, std::string buttonName, int buttonPositionX, int buttonPositionY)
 	: buttonWidth(buttonWidth), buttonHeight(buttonHeight),
 	buttonName(buttonName), buttonPositionX(buttonPositionX), buttonPositionY(buttonPositionY)
 {
 	buttonFill();
 }
 
-void StandartButton::buttonFill()
+void PushButton::buttonFill()
 {
 	arr.resize(buttonHeight);
 	for (int i = 0; i < buttonHeight; i++)
@@ -405,7 +388,7 @@ void StandartButton::buttonFill()
 	isChanged = true;
 }
 
-void StandartButton::buttonDefault()
+void PushButton::buttonDefault()
 {
 	if(isPressed == true)isChanged = true;
 	isPressed = false;
@@ -425,7 +408,7 @@ void StandartButton::buttonDefault()
 	arr[buttonHeight - 1][buttonWidth - 1] = bottomRightCorner;
 }
 
-void StandartButton::buttonPressed()
+void PushButton::buttonPressed()
 {
 	if(isPressed != true)isChanged = true;
 	isPressed = true;
@@ -441,18 +424,31 @@ void StandartButton::buttonPressed()
 	}
 }
 
-void StandartButton::setName(const std::string& newName)
+void PushButton::setName(const std::string& newName)
 {
 	this->buttonName = newName;
 	buttonFill();
 }
 
-void StandartButton::show()
+void PushButton::show()
 {
 	if(isChanged)
 	{
 		saveConsoleAttributes();
 		setColorForeground(foregroundColor);
+
+		/*for (int j = 0; j < buttonWidth; j++)
+		{
+			setcur(buttonPositionX + j, buttonPositionY);
+			std::cout << arr[0][j];
+		}
+
+		for (int j = 0; j < buttonWidth; j++)
+		{
+			setcur(buttonPositionX + j, buttonPositionY + buttonHeight - 1);
+			std::cout << arr[buttonHeight - 1][j];
+		}*/
+
 		setColorBackground(backgroundColor);
 
 		for (int i = 0; i < buttonHeight; i++)
@@ -469,26 +465,26 @@ void StandartButton::show()
 
 }
 
-void StandartButton::changePosition(int positionX, int positionY)
+void PushButton::changePosition(int positionX, int positionY)
 {
 	this->buttonPositionX = positionX;
 	this->buttonPositionY = positionY;
 	isChanged = true;
 }
 
-void StandartButton::setBackgroundColor(const ConsoleColor& newColor)
+void PushButton::setBackgroundColor(ConsoleColor newColor)
 {
 	this->backgroundColor = newColor;
 	isChanged = true;
 }
 
-void StandartButton::setForegroundColor(const ConsoleColor& newColor)
+void PushButton::setForegroundColor(ConsoleColor newColor)
 {
 	this->foregroundColor = newColor;
 	isChanged = true;
 }
 
-void StandartButton::setTexture(char topLeft, char topRight, char bottomLeft, char bottomRight, char horizontal, char vertical) {
+void PushButton::setTexture(char topLeft, char topRight, char bottomLeft, char bottomRight, char horizontal, char vertical) {
 	topLeftCorner = topLeft;
 	topRightCorner = topRight;
 	bottomLeftCorner = bottomLeft;
@@ -499,7 +495,7 @@ void StandartButton::setTexture(char topLeft, char topRight, char bottomLeft, ch
 	show();
 }
 
-void StandartButton::handleMouseEvent(COORD mousePos)
+void PushButton::handleMouseEvent(COORD mousePos)
 {
 	if (mousePos.X >= buttonPositionX && mousePos.X < buttonPositionX + buttonWidth &&
 		mousePos.Y >= buttonPositionY && mousePos.Y < buttonPositionY + buttonHeight)
@@ -516,7 +512,7 @@ void StandartButton::handleMouseEvent(COORD mousePos)
 	}
 }
 
-void StandartButton::handleKeyboardEvent(int key)
+void PushButton::handleKeyboardEvent(int key)
 {
 	if (key == 13)
 	{
@@ -587,7 +583,8 @@ void SwitchButton::buttonDefault()
 {
 	if(isPressed == true)isChanged = true;
 	isPressed = false;
-
+	setcur(switchPositionX - 1, switchPositionY - 1); // устранение артефактов
+	std::cout << ' ';
 	for (std::size_t i = 0; i < arr.size(); i++)
 	{
 		arr[i][0] = verticalLine;
@@ -703,13 +700,13 @@ void SwitchButton::addName(std::string name, int namePositionX, int namePosition
 	isChanged = true;
 }
 
-void SwitchButton::setBackgroundColor(const ConsoleColor& newColor)
+void SwitchButton::setBackgroundColor(ConsoleColor newColor)
 {
 	this->backgroundColor = newColor;
 	isChanged = true;
 }
 
-void SwitchButton::setForegroundColor(const ConsoleColor& newColor)
+void SwitchButton::setForegroundColor(ConsoleColor newColor)
 {
 	this->foregroundColor = newColor;
 	isChanged = true;
@@ -909,13 +906,13 @@ void ScrollButton::addName(std::string name, int namePositionX, int namePosition
 	isChanged = true;
 }
 
-void ScrollButton::setBackgroundColor(const ConsoleColor& newColor)
+void ScrollButton::setBackgroundColor(ConsoleColor newColor)
 {
 	this->backgroundColor = newColor;
 	isChanged = true;
 }
 
-void ScrollButton::setForegroundColor(const ConsoleColor& newColor)
+void ScrollButton::setForegroundColor(ConsoleColor newColor)
 {
 	this->foregroundColor = newColor;
 	isChanged = true;
@@ -1079,367 +1076,14 @@ void CustomButton::handleKeyboardEvent(int key)
 	}
 }
 
-void CustomButton::setBackgroundColor(const ConsoleColor& newColor)
+void CustomButton::setBackgroundColor(ConsoleColor newColor)
 {
 	this->backgroundColor = newColor;
 	isChanged = true;
 }
 
-void CustomButton::setForegroundColor(const ConsoleColor& newColor)
+void CustomButton::setForegroundColor(ConsoleColor newColor)
 {
 	this->foregroundColor = newColor;
 	isChanged = true;
-}
-
-RadioButton::RadioButton(std::string buttonName, int radioPositionX, int radioPositionY) : 
-	buttonName(buttonName), radioPositionX(radioPositionX), radioPositionY(radioPositionY)
-{
-	buttonFill();
-}
-
-void RadioButton::buttonFill()
-{
-	isChanged = true;
-	arr.resize(4 + buttonName.size(), ' ');
-	arr[0] = '(';
-	arr[2] = ')';
-	for (int i = 0; i < buttonName.size(); i++)
-	{
-		arr[i + 4] = buttonName[i];
-	}
-}
-
-void RadioButton::buttonDefault()
-{
-	if (isPressed == true)isChanged = true;
-	isPressed = false;
-	bracketColor = foregroundColor;
-}
-
-void RadioButton::buttonPressed()
-{
-	if (isPressed != true)isChanged = true;
-	isPressed = true;
-	bracketColor = BrightCyan;
-}
-
-void RadioButton::show()
-{
-	if (isChanged)
-	{
-		saveConsoleAttributes();
-		setColorForeground(foregroundColor);
-		setColorBackground(backgroundColor);
-
-		for (int i = 0; i < arr.size(); i++)
-		{
-			setcur(radioPositionX + i, radioPositionY);
-			if (i == 0 || i == 2)
-			{
-				setColorForeground(bracketColor);
-			    std::cout << arr[i];
-				setColorForeground(foregroundColor);
-			}
-			else
-			{
-				std::cout << arr[i];
-			}
-		}
-		restoreConsoleAttributes();
-		isChanged = false;
-	}
-}
-
-void RadioButton::handleMouseEvent(COORD mousePos)
-{
-	if (mousePos.X >= radioPositionX && mousePos.X <= radioPositionX + 2 &&
-		mousePos.Y == radioPositionY)
-	{
-		buttonPressed();
-		if (GetAsyncKeyState(VK_LBUTTON) & 0x8000)
-		{
-			state ^= true;
-			if (state)
-			{
-				arr[1] = char(250);
-				if(userFunction != nullptr)userFunction();
-			}
-			else
-			{
-				arr[1] = ' ';
-			}
-			isChanged = true;
-		}
-	}
-	else
-	{
-		buttonDefault();
-	}
-}
-
-
-
-void RadioButton::handleKeyboardEvent(int key)
-{
-	if(key == 13)
-	{
-		state ^= true;
-		if (state)
-		{
-			arr[1] = char(250);
-			if (userFunction != nullptr)userFunction();
-		}
-		else
-		{
-			arr[1] = ' ';
-		}
-		isChanged = true;
-	}
-}
-
-void RadioButton::changePosition(int positionX, int positionY)
-{
-	radioPositionX = positionX;
-	radioPositionY = positionY;
-}
-
-void RadioButton::setBackgroundColor(const ConsoleColor& newColor)
-{
-	backgroundColor = newColor;
-	isChanged = true;
-}
-
-void RadioButton::setForegroundColor(const ConsoleColor& newColor)
-{
-	foregroundColor = newColor;
-	bracketColor = foregroundColor;
-	isChanged = true;
-}
-
-void RadioButton::setState(const bool& newState)
-{ 	state = newState;
-}
-
-bool RadioButton::getState() const
-{
-	return state;
-}
-  
-
-RadioButtonManager::RadioButtonManager(std::vector<RadioButton>& objects, int numberActiveButton) : 
-	objects(objects), numberActiveButton(numberActiveButton)
-{
-	objects[numberActiveButton].arr[1] = char(250);
-	objects[numberActiveButton].state = true;
-	objects[numberActiveButton].isChanged = true;
-}
-
-void RadioButtonManager::handleMouseEvent(COORD mousePos)
-{
-	for (auto& el : objects)
-	{
-		el.handleMouseEvent(mousePos);
-		for (int i = 0; i < objects.size(); ++i)
-		{
-			if (objects[i].state == true && i != numberActiveButton)
-			{
-				int prev = numberActiveButton;
-
-				objects[prev].arr[1] = ' ';
-				objects[prev].state = false;
-				objects[prev].isChanged = true;
-
-				numberActiveButton = i;
-
-				objects[numberActiveButton].arr[1] = char(250);
-				objects[numberActiveButton].state = true;
-				objects[numberActiveButton].isChanged = true;
-			}
-			if (objects[i].state == false && i == numberActiveButton)
-			{
-				objects[numberActiveButton].arr[1] = char(250);
-				objects[numberActiveButton].state = true;
-				objects[numberActiveButton].isChanged = true;
-			}
-		}
-	}
-}
-
-void RadioButtonManager::handleKeyboardEvent(int key)
-{
-	for (auto& el : objects)
-	{
-		el.handleKeyboardEvent(key);
-		for (int i = 0; i < objects.size(); ++i)
-		{
-			if (objects[i].state == true && i != numberActiveButton)
-			{
-				int prev = numberActiveButton;
-
-				objects[prev].arr[1] = ' ';
-				objects[prev].state = false;
-				objects[prev].isChanged = true;
-
-				numberActiveButton = i;
-
-				objects[numberActiveButton].arr[1] = char(250);
-				objects[numberActiveButton].state = true;
-				objects[numberActiveButton].isChanged = true;
-			}
-			if (objects[i].state == false && i == numberActiveButton)
-			{
-				objects[numberActiveButton].arr[1] = char(250);
-				objects[numberActiveButton].state = true;
-				objects[numberActiveButton].isChanged = true;
-			}
-		}
-	}
-}
-
-void RadioButtonManager::show()
-{
-	for (auto& el : objects)
-	{
-		el.show();
-	}
-}
-
-void RadioButtonManager::add(RadioButton& newButton)
-{
-	objects.push_back(newButton);
-}
-
-CheckBox::CheckBox(std::string buttonName, int radioPositionX, int radioPositionY) :
-	buttonName(buttonName), radioPositionX(radioPositionX), radioPositionY(radioPositionY)
-{
-	buttonFill();
-}
-
-void CheckBox::buttonFill()
-{
-	isChanged = true;
-	arr.resize(4 + buttonName.size(), ' ');
-	arr[0] = '[';
-	arr[2] = ']';
-	for (int i = 0; i < buttonName.size(); i++)
-	{
-		arr[i + 4] = buttonName[i];
-	}
-}
-
-void CheckBox::buttonDefault()
-{
-	if (isPressed == true)isChanged = true;
-	isPressed = false;
-	bracketColor = foregroundColor;
-}
-
-void CheckBox::buttonPressed()
-{
-	if (isPressed != true)isChanged = true;
-	isPressed = true;
-	bracketColor = BrightCyan;
-}
-
-void CheckBox::show()
-{
-	if (isChanged)
-	{
-		saveConsoleAttributes();
-		setColorForeground(foregroundColor);
-		setColorBackground(backgroundColor);
-
-		for (int i = 0; i < arr.size(); i++)
-		{
-			setcur(radioPositionX + i, radioPositionY);
-			if (i == 0 || i == 2)
-			{
-				setColorForeground(bracketColor);
-				std::cout << arr[i];
-				setColorForeground(foregroundColor);
-			}
-			else
-			{
-				std::cout << arr[i];
-			}
-		}
-		restoreConsoleAttributes();
-		isChanged = false;
-	}
-}
-
-void CheckBox::handleMouseEvent(COORD mousePos)
-{
-	if (mousePos.X >= radioPositionX && mousePos.X <= radioPositionX + 2 &&
-		mousePos.Y == radioPositionY)
-	{
-		buttonPressed();
-		if (GetAsyncKeyState(VK_LBUTTON) & 0x8000)
-		{
-			state ^= true;
-			if (state)
-			{
-				arr[1] = char(251);
-				if (userFunction != nullptr)userFunction();
-			}
-			else
-			{
-				arr[1] = ' ';
-			}
-			isChanged = true;
-		}
-	}
-	else
-	{
-		buttonDefault();
-	}
-}
-
-
-
-void CheckBox::handleKeyboardEvent(int key)
-{
-	if (key == 13)
-	{
-		state ^= true;
-		if (state)
-		{
-			arr[1] = char(251);
-			if (userFunction != nullptr)userFunction();
-		}
-		else
-		{
-			arr[1] = ' ';
-		}
-		isChanged = true;
-	}
-}
-
-void CheckBox::changePosition(int positionX, int positionY)
-{
-	radioPositionX = positionX;
-	radioPositionY = positionY;
-}
-
-void CheckBox::setBackgroundColor(const ConsoleColor& newColor)
-{
-	backgroundColor = newColor;
-	isChanged = true;
-}
-
-void CheckBox::setForegroundColor(const ConsoleColor& newColor)
-{
-	foregroundColor = newColor;
-	bracketColor = foregroundColor;
-	isChanged = true;
-}
-
-void CheckBox::setState(const bool& newState)
-{
-	state = newState;
-}
-
-bool CheckBox::getState() const
-{
-	return state;
 }
