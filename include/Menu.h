@@ -6,6 +6,7 @@ namespace menu
 
 	class Menu
 	{
+	public:
 
 	};
 

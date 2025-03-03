@@ -3,14 +3,10 @@
 
 #include <memory>
 #include "UI.h"
+#include "UIType.h"
 
 namespace ui
 {
-	enum class UIType : std::uint16_t
-	{
-		TUI,
-		Unknown
-	};
 
 	class UIFactory final
 	{

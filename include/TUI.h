@@ -8,7 +8,9 @@ namespace ui
 
 	class TUI : public UI
 	{
-		
+	public:
+		void onRender() override;
+		void onUpdate() override;
 	};
 
 } // namespace ui

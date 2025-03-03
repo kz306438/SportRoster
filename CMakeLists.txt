@@ -44,14 +44,14 @@ set(HEADERS
 
     "include/Menu.h"
     "include/MainMenu.h"
-    "include/MenuFactory.h"
+    "include/MenuFactoryFactory.h"
     "include/TUIMenuFactory.h"
     
     "include/TUI.h"
     "include/UI.h"
 )
 
-add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS} "src/Application.cpp" "src/UI/ConsoleManager.cpp" "include/ConsoleManager.h" "include/UIFactory.h" "src/UI/UIFactory.cpp")
+add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS} "src/Application.cpp" "src/UI/ConsoleManager.cpp" "include/ConsoleManager.h" "include/UIFactory.h" "src/UI/UIFactory.cpp" "include/MenuFactory.h" "include/UIType.h" "include/MenuType.h")
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/include)
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/consoleGUI)
