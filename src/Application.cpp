@@ -12,6 +12,11 @@ namespace SportRoster
 		m_ui = ui::UIFactory::createUI(ui::UIType::TUI, spec.width, spec.height, spec.title, *m_appCore);
 	}
 
+	void Application::run()
+	{
+		applicationLoop();
+	}
+
 	void Application::applicationLoop()
 	{
 		while (true) {
@@ -22,10 +27,12 @@ namespace SportRoster
 
 	void Application::onUpdate()
 	{
+		m_ui->onUpdate();
 	}
 
 	void Application::onRender()
 	{
+		m_ui->onRender();
 	}
 
 } // namespace SportRoster

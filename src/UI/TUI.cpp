@@ -3,7 +3,7 @@
 #include "ConsoleManager.h"
 #include "MenuFactoryFactory.h"
 #include "TUIMenuFactory.h"
-
+#include "GUI.h"
 namespace ui
 {
 	TUI::TUI(std::uint16_t width, std::uint16_t height, core::ApplicationCore& appCore) noexcept
@@ -39,6 +39,11 @@ namespace ui
 		ConsoleManager::getInstance().DisableResize();
 		ConsoleManager::getInstance().SetSize(m_width, m_height);
 		ConsoleManager::getInstance().SetTitle(m_title);
+		ConsoleManager::getInstance().SetCursorVisibility(false);
+
+		setupInputHandling();
+
+		setMenu(menu::MenuType::MainMenu);
 	}
 
 } // namespace ui

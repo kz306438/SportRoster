@@ -11,18 +11,21 @@ namespace menu
 	class MainMenu final : public Menu
 	{
 	public:
-		explicit MainMenu(core::ApplicationCore& appCore)
-			: m_appCore(appCore) {}
+		explicit MainMenu(core::ApplicationCore& appCore);
 
 	public:
 		void onRender() override;
 		void onUpdate() override;
 	
 	private:
+		void connectButtons();
+
+	private:
 		core::ApplicationCore& m_appCore;
 
 	private:
-		std::unique_ptr<
+		int m_select = -1;
+		std::unique_ptr<PushButton> m_PBQuit;
 	};
 
 } // namespace menu

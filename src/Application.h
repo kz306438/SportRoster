@@ -19,7 +19,10 @@ namespace SportRoster
 	public:
 		explicit Application(const ApplicationSpecification& spec = ApplicationSpecification());
 	
-	public:
+	public: 
+		void run();
+
+	private:
 		void applicationLoop();
 
 		void onUpdate();
