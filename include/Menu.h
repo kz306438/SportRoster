@@ -7,7 +7,7 @@ namespace menu
 	class Menu
 	{
 	public:
-
+		virtual ~Menu() = default;
 	};
 
 } // namespace menu

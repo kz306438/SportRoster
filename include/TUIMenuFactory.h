@@ -7,7 +7,7 @@
 namespace menu
 {
 
-	class TUIMenuFactory : public MenuFactory
+	class TUIMenuFactory final: public MenuFactory
 	{
 	public:
 		[[nodiscard]] std::unique_ptr<Menu> createMenu(MenuType type) override;

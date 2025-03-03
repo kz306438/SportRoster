@@ -3,13 +3,14 @@
 
 #include "MenuFactory.h"
 #include "TUIMenuFactory.h"
+#include "UIType.h"
 #include <memory>
 #include <stdexcept>
 
 namespace menu
 {
 
-	class MenuFactoryFactory
+	class MenuFactoryFactory final
 	{
 	public:
 		[[nodiscard]] static std::unique_ptr<MenuFactory> createMenuFactory(ui::UIType type)

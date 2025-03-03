@@ -11,6 +11,9 @@ namespace menu
 	class MenuFactory
 	{
 	public:
+		virtual ~MenuFactory() = default;
+
+	public:
 		[[nodiscard]] virtual std::unique_ptr<Menu> createMenu(MenuType type) = 0;
 	};
 
