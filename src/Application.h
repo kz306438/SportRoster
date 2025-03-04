@@ -2,8 +2,8 @@
 #define APPLICATION_H
 
 #include <memory>
-#include "UI.h"
-#include "ApplicationCore.h"
+#include "UI/UI.h"
+#include "Core/ApplicationCore.h"
 
 namespace SportRoster
 {

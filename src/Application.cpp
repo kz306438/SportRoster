@@ -1,7 +1,7 @@
 #include "Application.h"
 
-#include "UIFactory.h"
-#include "ApplicationCore.h"
+#include "UI/UIFactory.h"
+#include "Core/ApplicationCore.h"
 
 namespace SportRoster
 {

@@ -1,4 +1,4 @@
-#include "ApplicationCore.h"
+#include "Core/ApplicationCore.h"
 
 namespace core
 {

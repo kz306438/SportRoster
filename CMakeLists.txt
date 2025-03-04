@@ -37,21 +37,21 @@ set(HEADERS
     "consoleGUI/Object.h"
     "consoleGUI/window.h"
 
-    "include/ApplicationCore.h"
+    "include/Core/ApplicationCore.h"
     
-    "include/Player.h"
-    "include/Team.h"
+    "include/Core/Player.h"
+    "include/Core/Team.h"
 
-    "include/Menu.h"
-    "include/MainMenu.h"
-    "include/MenuFactoryFactory.h"
-    "include/TUIMenuFactory.h"
+    "include/Menu/Menu.h"
+    "include/Menu/MainMenu.h"
+    "include/Menu/MenuFactoryFactory.h"
+    "include/Menu/TUIMenuFactory.h"
     
-    "include/TUI.h"
-    "include/UI.h"
+    "include/UI/TUI.h"
+    "include/UI/UI.h"
 )
 
-add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS} "src/Application.cpp" "src/UI/ConsoleManager.cpp" "include/ConsoleManager.h" "include/UIFactory.h" "src/UI/UIFactory.cpp" "include/MenuFactory.h" "include/UIType.h" "include/MenuType.h")
+add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS} "src/Application.cpp" "src/UI/ConsoleManager.cpp" "include/UI/ConsoleManager.h" "include/UI/UIFactory.h" "src/UI/UIFactory.cpp" "include/Menu/MenuFactory.h" "include/UI/UIType.h" "include/Menu/MenuType.h")
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/include)
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/consoleGUI)

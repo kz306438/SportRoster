@@ -2,8 +2,8 @@
 #define TUI_H
 
 #include "UI.h"
-#include "MenuType.h"
-#include "ApplicationCore.h"
+#include "Menu/MenuType.h"
+#include "Core/ApplicationCore.h"
 
 namespace ui
 {

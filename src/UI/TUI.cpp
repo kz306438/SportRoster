@@ -1,8 +1,8 @@
-#include "TUI.h"
+#include "UI/TUI.h"
 
-#include "ConsoleManager.h"
-#include "MenuFactoryFactory.h"
-#include "TUIMenuFactory.h"
+#include "UI/ConsoleManager.h"
+#include "Menu/MenuFactoryFactory.h"
+#include "Menu/TUIMenuFactory.h"
 #include "GUI.h"
 namespace ui
 {

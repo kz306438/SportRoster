@@ -3,8 +3,8 @@
 
 #include "MenuFactory.h"
 #include "TUIMenuFactory.h"
-#include "UIType.h"
-#include "ApplicationCore.h"
+#include "UI/UIType.h"
+#include "Core/ApplicationCore.h"
 #include <memory>
 #include <stdexcept>
 

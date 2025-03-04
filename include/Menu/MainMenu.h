@@ -2,7 +2,7 @@
 #define MAIN_MENU_H
 
 #include "Menu.h"
-#include "ApplicationCore.h"
+#include "Core/ApplicationCore.h"
 #include "GUI.h"
 
 namespace menu

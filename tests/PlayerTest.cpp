@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "Player.h"
+#include "Core/Player.h"
 
 namespace core {
 

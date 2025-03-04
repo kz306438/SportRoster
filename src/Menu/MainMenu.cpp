@@ -1,6 +1,6 @@
-#include "MainMenu.h"
+#include "Menu/MainMenu.h"
 
-#include "ConsoleManager.h"
+#include "UI/ConsoleManager.h"
 namespace menu
 {
 	/*explicit*/ MainMenu::MainMenu(core::ApplicationCore& appCore)

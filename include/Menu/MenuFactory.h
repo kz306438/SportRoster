@@ -3,7 +3,7 @@
 
 #include "Menu.h"
 #include "MenuType.h"
-#include "ApplicationCore.h"
+#include "Core/ApplicationCore.h"
 #include <memory>
 
 namespace menu

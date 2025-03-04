@@ -1,6 +1,6 @@
-#include "TUIMenuFactory.h"
+#include "Menu/TUIMenuFactory.h"
 
-#include "MainMenu.h"
+#include "Menu/MainMenu.h"
 #include <stdexcept>
 
 namespace menu
