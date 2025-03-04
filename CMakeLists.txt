@@ -9,6 +9,7 @@ add_subdirectory(lib/googletest)
 
 set(SOURCES 
     "src/main.cpp"
+    "src/Application.cpp"
 
     "consoleGUI/buttons.cpp"
     "consoleGUI/colors.cpp"
@@ -25,6 +26,8 @@ set(SOURCES
 
     "src/UI/TUI.cpp"
     "src/UI/UI.cpp"
+    "src/UI/ConsoleManager.cpp"
+    "src/UI/UIFactory.cpp"
 )
 
 set(HEADERS 
@@ -46,12 +49,17 @@ set(HEADERS
     "include/Menu/MainMenu.h"
     "include/Menu/MenuFactoryFactory.h"
     "include/Menu/TUIMenuFactory.h"
+    "include/Menu/MenuFactory.h"
+    "include/Menu/MenuType.h"
     
     "include/UI/TUI.h"
     "include/UI/UI.h"
+    "include/UI/ConsoleManager.h"
+    "include/UI/UIFactory.h"
+    "include/UI/UIType.h"
 )
 
-add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS} "src/Application.cpp" "src/UI/ConsoleManager.cpp" "include/UI/ConsoleManager.h" "include/UI/UIFactory.h" "src/UI/UIFactory.cpp" "include/Menu/MenuFactory.h" "include/UI/UIType.h" "include/Menu/MenuType.h")
+add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/include)
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/consoleGUI)
