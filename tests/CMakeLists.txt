@@ -9,8 +9,10 @@ endif()
 add_executable(RosterTests 
     main.cpp
     PlayerTest.cpp
+    TeamTest.cpp
     StorageTest.cpp
     ${CMAKE_SOURCE_DIR}/src/Core/Player.cpp 
+    ${CMAKE_SOURCE_DIR}/src/Core/Team.cpp 
     ${CMAKE_SOURCE_DIR}/src/Core/Storage.cpp 
 )   
  
