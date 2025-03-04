@@ -9,9 +9,11 @@ endif()
 add_executable(RosterTests 
     main.cpp
     PlayerTest.cpp
+    StorageTest.cpp
     ${CMAKE_SOURCE_DIR}/src/Core/Player.cpp 
-)
-
+    ${CMAKE_SOURCE_DIR}/src/Core/Storage.cpp 
+)   
+ 
 target_include_directories(RosterTests PUBLIC ${CMAKE_SOURCE_DIR}/include)
 
 target_link_libraries(RosterTests gtest gtest_main)

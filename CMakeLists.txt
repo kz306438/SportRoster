@@ -20,6 +20,7 @@ set(SOURCES
     "src/Core/ApplicationCore.cpp"
     "src/Core/Player.cpp"
     "src/Core/Team.cpp"
+    "src/Core/Storage.cpp"
 
     "src/Menu/MainMenu.cpp"
     "src/Menu/TUIMenuFactory.cpp"
@@ -41,9 +42,9 @@ set(HEADERS
     "consoleGUI/window.h"
 
     "include/Core/ApplicationCore.h"
-    
     "include/Core/Player.h"
     "include/Core/Team.h"
+    "include/Core/Storage.h"
 
     "include/Menu/Menu.h"
     "include/Menu/MainMenu.h"
