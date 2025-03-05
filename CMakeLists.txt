@@ -21,6 +21,7 @@ set(SOURCES
     "src/Core/Player.cpp"
     "src/Core/Team.cpp"
     "src/Core/Storage.cpp"
+    "src/Core/Utils.cpp"
 
     "src/Menu/MainMenu.cpp"
     "src/Menu/TUIMenuFactory.cpp"
@@ -45,6 +46,7 @@ set(HEADERS
     "include/Core/Player.h"
     "include/Core/Team.h"
     "include/Core/Storage.h"
+    "src/Core/Utils.cpp"
 
     "include/Menu/Menu.h"
     "include/Menu/MainMenu.h"

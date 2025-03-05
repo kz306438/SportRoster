@@ -15,18 +15,27 @@ namespace core
 
     void Team::addPlayer(const Player& newPlayer) {
         m_players[newPlayer.getGameNumber()] = newPlayer;
+        m_cachedPlayers.reset();
     }
 
     void Team::removePlayer(std::uint16_t gameNumber) {
         m_players.erase(gameNumber);
+        m_cachedPlayers.reset();
     }
 
-    [[nodiscard]] std::string Team::getTeamName() const {
+    std::string Team::getTeamName() const {
         return m_teamName;
     }
 
-    [[nodiscard]] std::vector<Player> Team::getPlayers() const {
+    std::vector<Player> Team::getPlayers() const {
         return convertToVector();
+    }
+
+    const std::vector<Player>& Team::getPlayersRef() const {
+        if (!m_cachedPlayers.has_value()) {
+            m_cachedPlayers = convertToVector();
+        }
+        return m_cachedPlayers.value();
     }
 
     [[nodiscard]] Player Team::getPlayer(std::uint16_t gameNumber) {

@@ -3,6 +3,7 @@
 
 #include <string>
 #include <unordered_map>
+#include <optional>
 #include <vector>
 #include "Player.h"
 
@@ -12,6 +13,7 @@ namespace core
 	class Team final
 	{
 	public:
+		Team() = default;
 		Team(const std::string& teamName);
 		Team(const std::string& teamName, const std::vector<Player>& players);
 
@@ -21,6 +23,7 @@ namespace core
 		std::string getTeamName() const;
 
 		[[nodiscard]] std::vector<Player> getPlayers() const;
+		[[nodiscard]] const std::vector<Player>& getPlayersRef() const;
 		[[nodiscard]] Player getPlayer(std::uint16_t gameNumber);
 
 	private:
@@ -30,6 +33,9 @@ namespace core
 	private:
 		std::string m_teamName;
 		std::unordered_map<int, Player> m_players;
+
+	private:
+		mutable std::optional<std::vector<Player>> m_cachedPlayers;
 	};
 
 } // namespace core

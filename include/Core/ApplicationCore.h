@@ -5,31 +5,43 @@
 #include <optional>
 #include "Player.h"
 #include "Team.h"
-
+#include "Storage.h"
 
 namespace core
 {
+    const std::string STORAGE_DIRECTORY = "storage";
+
+    using PlayerDataList = std::vector<std::string>;
+    using TeamDataList   = std::vector<std::string>;
 
 	class ApplicationCore
 	{
 	public:
-        void createFile(const std::string& filename);
+        ApplicationCore();
 
-        void viewFile(const std::string& filename);
+        void createTeam(const std::string& team_name);
+        [[nodiscard]] TeamDataList getTeam(const std::string& team_name) const;
 
-        void addEntry(const std::string& filename, const Player& entry);
+        void addPlayer(const std::string& team, const PlayerDataList& playerData);
 
-        Team linearSearch(const std::string& filename, std::uint16_t gameNumber);
+        /*void selectionSort(const std::string& team);
+        void quickSort(const std::string& team);*/
+        
+        TeamDataList findYoungestTeam() const;
 
-        void selectionSort(const std::string& filename);
+        [[nodiscard]] PlayerDataList linearSearch(const std::string& team_name, std::uint16_t gameNumber) const;
+        [[nodiscard]] PlayerDataList binarySearch(const std::string& team_name, std::uint16_t gameNumber) const;
 
-        void quickSort(const std::string& filename);
-
-        std::optional<Player> binarySearch(const std::string& filename, int key);
-
-        Team findYoungestTeam(const std::vector<std::string>& filenames);
-	};
+    private:
+        Team __getTeam(const std::string& team) const;
+        
+        std::optional<Player> __binarySearch(const std::string& team_name, std::uint16_t game_number) const;
+        std::optional<Player> __linearSearch(const std::string& team_name, std::uint16_t game_number) const;
+	
+    private:
+        Storage m_storage;
+    };
 
 } // namespace core
 
-#endif // APPLICATION_CORE_H
+#endif // APPLICATION_CORE_H2
