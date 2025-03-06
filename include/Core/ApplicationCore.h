@@ -72,6 +72,8 @@ namespace core
          * @brief Finds the team with the youngest average age.
          *
          * @return TeamDataList A list of strings representing the youngest team's data.
+         * 
+         * @throws std::runtime_error If storage is empty
          */
         TeamDataList findYoungestTeam() const;
 
@@ -81,6 +83,8 @@ namespace core
          * @param team_name The name of the team.
          * @param gameNumber The game number of the player to find.
          * @return PlayerDataList A list of strings representing the player's data if found.
+         * 
+         * @throws throw std::runtime_error If the player was not found
          */
         [[nodiscard]] PlayerDataList linearSearch(const std::string& team_name, std::uint16_t gameNumber) const;
 
@@ -90,6 +94,8 @@ namespace core
          * @param team_name The name of the team.
          * @param gameNumber The game number of the player to find.
          * @return PlayerDataList A list of strings representing the player's data if found.
+         * 
+         * @throws throw std::runtime_error If the player was not found
          */
         [[nodiscard]] PlayerDataList binarySearch(const std::string& team_name, std::uint16_t gameNumber) const;
 
