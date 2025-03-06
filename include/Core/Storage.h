@@ -30,6 +30,8 @@ namespace core
          * @brief Creates a new file in the specified directory.
          *
          * @param filename The name of the file to create.
+         * 
+         * @throws std::runtime_error If the file could not be created
          */
         void createFile(const std::string& filename);
 
@@ -38,6 +40,8 @@ namespace core
          *
          * @param filename The name of the file to add content to.
          * @param fileContent The content to add to the file.
+         * 
+         * @throws std::runtime_error If the file could not be opened for writing
          */
         void addContent(const std::string& filename, const File—ontent& fileContent);
 
@@ -46,6 +50,8 @@ namespace core
          *
          * @param filename The name of the file to overwrite.
          * @param fileContent The content to write to the file.
+         * 
+         * @throws std::runtime_error If the file could not be opened for overwriting
          */
         void overwriteContent(const std::string& filename, const File—ontent& fileContent);
 
@@ -54,6 +60,8 @@ namespace core
          *
          * @param filename The name of the file to retrieve content from.
          * @return File—ontent The content of the file.
+         * 
+         * @throws std::runtime_error If file could mot be opened for read
          */
         [[nodiscard]] File—ontent getContent(const std::string& filename) const;
 
