@@ -1,7 +1,9 @@
 #include "Core/ApplicationCore.h"
 
 #include "Core/Utils.h"
+#include "Core/Sort.h"
 #include <algorithm>
+#include <utility>
 
 namespace core
 {
@@ -18,6 +20,26 @@ namespace core
 
 	void ApplicationCore::addPlayer(const std::string& team, const PlayerDataList& playerData) {
 		m_storage.addContent(team, playerData);
+	}
+
+	void ApplicationCore::selectionSort(const std::string& team_name)
+	{
+		Team team = __getTeam(team_name);
+		std::vector<Player> players = team.getPlayers();
+		utils::selectionSort(players.begin(), players.end(), 
+			[](const Player& p1, const Player& p2) { return p1.getAge() < p2.getAge(); });
+		team.addAllPlayers(players);
+		m_storage.overwriteContent(team_name, utils::teamToText(team));
+	}
+
+	void ApplicationCore::quickSort(const std::string& team_name)
+	{
+		Team team = __getTeam(team_name);
+		std::vector<Player> players = team.getPlayers();
+		utils::quicksort(players.begin(), players.end(),
+			[](const Player& p1, const Player& p2) { return p1.getAge() < p2.getAge(); });
+		team.addAllPlayers(players);
+		m_storage.overwriteContent(team_name, utils::teamToText(team));
 	}
 
 	TeamDataList ApplicationCore::findYoungestTeam() const

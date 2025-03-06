@@ -5,11 +5,11 @@
 namespace core
 {
 
-	Team::Team(const std::string& teamName)
-		: m_teamName(teamName) {}
+    Team::Team(const std::string& teamName)
+        : m_teamName(teamName) {}
 
     Team::Team(const std::string& teamName, const std::vector<Player>& players)
-        : m_teamName(teamName) { 
+        : m_teamName(teamName) {
         convertToMap(players);
     }
 
@@ -18,8 +18,18 @@ namespace core
         m_cachedPlayers.reset();
     }
 
+    void Team::addAllPlayers(const std::vector<Player>& players) {
+        convertToMap(players);
+        m_cachedPlayers.reset();
+    }
+
     void Team::removePlayer(std::uint16_t gameNumber) {
         m_players.erase(gameNumber);
+        m_cachedPlayers.reset();
+    }
+
+    void Team::removeAllPlayers() {
+        m_players.clear();
         m_cachedPlayers.reset();
     }
 

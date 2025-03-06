@@ -46,7 +46,8 @@ set(HEADERS
     "include/Core/Player.h"
     "include/Core/Team.h"
     "include/Core/Storage.h"
-    "src/Core/Utils.cpp"
+    "include/Core/Utils.h"
+    "include/Core/Sort.h"
 
     "include/Menu/Menu.h"
     "include/Menu/MainMenu.h"

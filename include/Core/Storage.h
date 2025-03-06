@@ -16,6 +16,7 @@ namespace core
 
 		void createFile(const std::string& filename);
 		void addContent(const std::string& filename, const File—ontent& fileContent);
+		void overwriteContent(const std::string& filename, const File—ontent& fileContent);
 		[[nodiscard]] File—ontent getContent(const std::string& filename) const;
 
 		std::string getDirectory() const;

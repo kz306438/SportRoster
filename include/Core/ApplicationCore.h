@@ -24,8 +24,8 @@ namespace core
 
         void addPlayer(const std::string& team, const PlayerDataList& playerData);
 
-        /*void selectionSort(const std::string& team);
-        void quickSort(const std::string& team);*/
+        void selectionSort(const std::string& team_name);
+        void quickSort(const std::string& team_name);
         
         TeamDataList findYoungestTeam() const;
 

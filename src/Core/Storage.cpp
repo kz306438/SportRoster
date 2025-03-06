@@ -35,6 +35,19 @@ namespace core
 		}
 	}
 
+	void Storage::overwriteContent(const std::string& filename, const File—ontent& fileContent) {
+		std::string filePath = m_directory + "/" + filename;
+		std::ofstream file(filePath, std::ios::trunc);
+		if (!file) {
+			throw std::runtime_error("Unable to open file for overwriting: " + filePath);
+		}
+
+		for (const auto& line : fileContent) {
+			file << line << '\n';
+		}
+	}
+
+
 	File—ontent Storage::getContent(const std::string& filename) const{
 		std::string filePath = m_directory + "/" + filename;
 		std::ifstream file(filePath);

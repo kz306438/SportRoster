@@ -18,7 +18,10 @@ namespace core
 		Team(const std::string& teamName, const std::vector<Player>& players);
 
 		void addPlayer(const Player& newPlayer);
+		void addAllPlayers(const std::vector<Player>& players);
+
 		void removePlayer(std::uint16_t gameNumber);
+		void removeAllPlayers();
 
 		std::string getTeamName() const;
 
