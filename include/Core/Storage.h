@@ -7,29 +7,85 @@
 
 namespace core
 {
-	using File—ontent = std::vector<std::string>;
+    // Alias for a vector of strings representing file content
+    using File—ontent = std::vector<std::string>;
 
-	class Storage final
-	{
-	public:
-		explicit Storage(const std::string& dir);
+    /**
+     * @brief A class for managing file storage operations in a specified directory.
+     *
+     * The class allows for creating files, adding or overwriting their content,
+     * retrieving content, and listing files in the directory.
+     */
+    class Storage final
+    {
+    public:
+        /**
+         * @brief Constructs a Storage object with a specified directory path.
+         *
+         * @param dir The directory path where files will be stored.
+         */
+        explicit Storage(const std::string& dir);
 
-		void createFile(const std::string& filename);
-		void addContent(const std::string& filename, const File—ontent& fileContent);
-		void overwriteContent(const std::string& filename, const File—ontent& fileContent);
-		[[nodiscard]] File—ontent getContent(const std::string& filename) const;
+        /**
+         * @brief Creates a new file in the specified directory.
+         *
+         * @param filename The name of the file to create.
+         */
+        void createFile(const std::string& filename);
 
-		std::string getDirectory() const;
-		[[nodiscard]] std::vector<std::string> getFiles() const;
+        /**
+         * @brief Adds content to an existing file.
+         *
+         * @param filename The name of the file to add content to.
+         * @param fileContent The content to add to the file.
+         */
+        void addContent(const std::string& filename, const File—ontent& fileContent);
 
-	private:
-		void init();
-		void load();
+        /**
+         * @brief Overwrites the content of an existing file.
+         *
+         * @param filename The name of the file to overwrite.
+         * @param fileContent The content to write to the file.
+         */
+        void overwriteContent(const std::string& filename, const File—ontent& fileContent);
 
-	private:
-		std::string m_directory;
-		std::vector<std::string> m_files;
-	};
+        /**
+         * @brief Retrieves the content of a specified file.
+         *
+         * @param filename The name of the file to retrieve content from.
+         * @return File—ontent The content of the file.
+         */
+        [[nodiscard]] File—ontent getContent(const std::string& filename) const;
+
+        /**
+         * @brief Retrieves the directory where files are stored.
+         *
+         * @return std::string The directory path.
+         */
+        std::string getDirectory() const;
+
+        /**
+         * @brief Retrieves a list of filenames in the storage directory.
+         *
+         * @return std::vector<std::string> A list of filenames.
+         */
+        [[nodiscard]] std::vector<std::string> getFiles() const;
+
+    private:
+        /**
+         * @brief Initializes the storage by loading existing files and their content.
+         */
+        void init();
+
+        /**
+         * @brief Loads the files from the storage directory.
+         */
+        void load();
+
+    private:
+        std::string m_directory; ///< The directory path where files are stored
+        std::vector<std::string> m_files; ///< A list of filenames in the storage directory
+    };
 
 } // namespace core
 
