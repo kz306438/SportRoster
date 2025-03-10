@@ -33,35 +33,35 @@ namespace ui
          *
          * This method fixes the size of the console window, preventing the user from resizing it.
          */
-        void DisableResize();
+        void disableResize();
 
         /**
          * @brief Disables the console's scrollbars.
          *
          * This method hides or disables the scrollbars in the console window.
          */
-        void DisableScrollbars();
+        void disableScrollbars();
 
         /**
          * @brief Retrieves the current width of the console window.
          *
          * @return The width of the console window in characters.
          */
-        int GetWidth();
+        int getWidth();
 
         /**
          * @brief Retrieves the current height of the console window.
          *
          * @return The height of the console window in characters.
          */
-        int GetHeight();
+        int getHeight();
 
         /**
          * @brief Sets the title of the console window.
          *
          * @param title The new title to set for the console window.
          */
-        void SetTitle(const std::string& title);
+        void setTitle(const std::string& title);
 
         /**
          * @brief Sets the size of the console window.
@@ -69,7 +69,7 @@ namespace ui
          * @param width The desired width of the console window in characters.
          * @param height The desired height of the console window in characters.
          */
-        void SetSize(int width, int height);
+        void setSize(int width, int height);
 
         /**
          * @brief Sets the position of the cursor in the console window.
@@ -77,14 +77,14 @@ namespace ui
          * @param x The x-coordinate (column) to move the cursor to.
          * @param y The y-coordinate (row) to move the cursor to.
          */
-        void SetCursorPosition(int x, int y);
+        void setCursorPosition(int x, int y);
 
         /**
          * @brief Controls the visibility of the cursor.
          *
          * @param visible If true, the cursor will be visible; if false, it will be hidden.
          */
-        void SetCursorVisibility(bool visible);
+        void setCursorVisibility(bool visible);
 
         /**
          * @brief Sets the font size of the console text.
@@ -92,14 +92,14 @@ namespace ui
          * @param width The width (size) of the font.
          * @param height The height (size) of the font.
          */
-        void SetFontSize(int width, int height);
+        void setFontSize(int width, int height);
 
         /**
          * @brief Clears the console screen.
          *
          * This method clears all text and resets the console screen.
          */
-        void ClearScreen();
+        void clearScreen();
         
         /**
          * @brief Sets the background color of the console.

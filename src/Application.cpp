@@ -2,6 +2,7 @@
 
 #include "UI/UIFactory.h"
 #include "Core/ApplicationCore.h"
+#include "UI/ConsoleManager.h"
 
 namespace SportRoster
 {
@@ -19,9 +20,12 @@ namespace SportRoster
 
 	void Application::applicationLoop()
 	{
+		ui::ConsoleManager::getInstance().setColorBackground(Blue);
+		ui::ConsoleManager::getInstance().clearScreen();
+
 		while (true) {
-			onUpdate();
 			onRender();
+			onUpdate();
 		}
 	}
 

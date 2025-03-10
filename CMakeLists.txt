@@ -31,6 +31,7 @@ set(SOURCES
     "src/UI/UI.cpp"
     "src/UI/ConsoleManager.cpp"
     "src/UI/UIFactory.cpp"
+    "src/UI/EditBox.cpp"
 )
 
 set(HEADERS 
@@ -63,6 +64,7 @@ set(HEADERS
     "include/UI/ConsoleManager.h"
     "include/UI/UIFactory.h"
     "include/UI/UIType.h"
+    "include/UI/EditBox.h"
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})

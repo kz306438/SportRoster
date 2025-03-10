@@ -22,7 +22,7 @@ namespace ui
 
 	ConsoleManager::~ConsoleManager() { }
 
-	void ConsoleManager::DisableResize()
+	void ConsoleManager::disableResize()
 	{
 		if (m_consoleWindow)
 		{
@@ -34,12 +34,12 @@ namespace ui
 		}
 	}
 
-	void ConsoleManager::SetTitle(const std::string& title)
+	void ConsoleManager::setTitle(const std::string& title)
 	{
 		SetConsoleTitleA(title.c_str());
 	}
 
-	void ConsoleManager::SetSize(int width, int height)
+	void ConsoleManager::setSize(int width, int height)
 	{
 		SMALL_RECT rect;
 		COORD coord;
@@ -56,7 +56,7 @@ namespace ui
 		SetConsoleWindowInfo(m_consoleOutput, TRUE, &rect);
 	}
 
-	int ConsoleManager::GetWidth()
+	int ConsoleManager::getWidth()
 	{
 		CONSOLE_SCREEN_BUFFER_INFO csbi;
 		if (GetConsoleScreenBufferInfo(m_consoleOutput, &csbi))
@@ -66,7 +66,7 @@ namespace ui
 		return 0;
 	}
 
-	int ConsoleManager::GetHeight()
+	int ConsoleManager::getHeight()
 	{
 		CONSOLE_SCREEN_BUFFER_INFO csbi;
 		if (GetConsoleScreenBufferInfo(m_consoleOutput, &csbi))
@@ -76,7 +76,7 @@ namespace ui
 		return 0;
 	}
 
-	void ConsoleManager::DisableScrollbars()
+	void ConsoleManager::disableScrollbars()
 	{
 		if (m_consoleOutput != INVALID_HANDLE_VALUE)
 		{
@@ -92,7 +92,7 @@ namespace ui
 		}
 	}
 
-	void ConsoleManager::SetCursorPosition(int x, int y)
+	void ConsoleManager::setCursorPosition(int x, int y)
 	{
 		if (m_consoleOutput != INVALID_HANDLE_VALUE)
 		{
@@ -101,7 +101,7 @@ namespace ui
 		}
 	}
 
-	void ConsoleManager::SetCursorVisibility(bool visible)
+	void ConsoleManager::setCursorVisibility(bool visible)
 	{
 		if (m_consoleOutput != INVALID_HANDLE_VALUE)
 		{
@@ -112,7 +112,7 @@ namespace ui
 		}
 	}
 
-	void ConsoleManager::SetFontSize(int width, int height)
+	void ConsoleManager::setFontSize(int width, int height)
 	{
 		if (m_consoleOutput != INVALID_HANDLE_VALUE)
 		{
@@ -124,7 +124,7 @@ namespace ui
 		}
 	}
 
-	void ConsoleManager::ClearScreen() {
+	void ConsoleManager::clearScreen() {
 		if (m_consoleOutput != INVALID_HANDLE_VALUE) {
 			CONSOLE_SCREEN_BUFFER_INFO csbi;
 			DWORD count;

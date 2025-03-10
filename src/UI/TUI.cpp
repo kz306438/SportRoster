@@ -27,20 +27,21 @@ namespace ui
 
 	void TUI::onUpdate() /*override*/
 	{
+		m_currentMenu->onUpdate();
+		
 		menu::MenuType menuType = m_currentMenu->getPendingMenu();
 		if (menuType != menu::MenuType::Unknown) {
 			m_currentMenu = m_menuFactory->createMenu(menuType);
 		}
 
-		m_currentMenu->onUpdate();
 	}
 
 	void TUI::init()
 	{
-		ConsoleManager::getInstance().DisableResize();
-		ConsoleManager::getInstance().SetSize(m_width, m_height);
-		ConsoleManager::getInstance().SetTitle(m_title);
-		ConsoleManager::getInstance().SetCursorVisibility(false);
+		ConsoleManager::getInstance().disableResize();
+		ConsoleManager::getInstance().setSize(m_width, m_height);
+		ConsoleManager::getInstance().setTitle(m_title);
+		ConsoleManager::getInstance().setCursorVisibility(false);
 
 		setupInputHandling();
 

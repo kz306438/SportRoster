@@ -17,7 +17,9 @@ namespace menu
 		void onRender() override;
 		void onUpdate() override;
 	private:
+		void createButtons();
 		void connectButtons();
+		void colorizeButtos();
 
 	private:
 		core::ApplicationCore& m_appCore;

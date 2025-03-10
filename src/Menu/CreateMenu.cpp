@@ -15,7 +15,7 @@ namespace menu
 
 	void CreateMenu::onRender()
 	{
-		m_PBBack->allowChanges();			 m_PBBack->show();
+		m_PBBack->allowChanges(); m_PBBack->show();
 	}
 
 	void CreateMenu::onUpdate()
@@ -23,8 +23,11 @@ namespace menu
 		mouseButtonInteraction(m_PBBack.get());
 
 		if (m_select == 0) {
+			ui::ConsoleManager::getInstance().clearScreen();
 			setPendingMenu(MenuType::MainMenu);
 		}
+
+		m_select = -1;
 	}
 
 	void CreateMenu::connectButtons()
