@@ -16,7 +16,6 @@ namespace menu
 	public:
 		void onRender() override;
 		void onUpdate() override;
-	
 	private:
 		void connectButtons();
 
@@ -25,6 +24,13 @@ namespace menu
 
 	private:
 		int m_select = -1;
+		std::unique_ptr<PushButton> m_PBCreateTeam;
+		std::unique_ptr<PushButton> m_PBAddPlayer;
+		std::unique_ptr<PushButton> m_PBEditTeam;
+		std::unique_ptr<PushButton> m_PBDeleteTeam;
+		std::unique_ptr<PushButton> m_PBViewTeam;
+		std::unique_ptr<PushButton> m_PBViewYoungestTeam;
+		std::unique_ptr<PushButton> m_PBSort;
 		std::unique_ptr<PushButton> m_PBQuit;
 	};
 

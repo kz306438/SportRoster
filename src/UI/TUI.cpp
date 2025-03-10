@@ -4,6 +4,8 @@
 #include "Menu/MenuFactoryFactory.h"
 #include "Menu/TUIMenuFactory.h"
 #include "GUI.h"
+#include <Menu/CreateMenu.h>
+#include <Menu/MainMenu.h>
 namespace ui
 {
 	TUI::TUI(std::uint16_t width, std::uint16_t height, core::ApplicationCore& appCore) noexcept
@@ -20,18 +22,17 @@ namespace ui
 	
 	void TUI::onRender() /*override*/
 	{
-		m_menu->onRender();
+		m_currentMenu->onRender();
 	}
 
 	void TUI::onUpdate() /*override*/
 	{
-		m_menu->onUpdate();
-	}
+		menu::MenuType menuType = m_currentMenu->getPendingMenu();
+		if (menuType != menu::MenuType::Unknown) {
+			m_currentMenu = m_menuFactory->createMenu(menuType);
+		}
 
-	void TUI::setMenu(menu::MenuType type)
-	{
-		auto tuiMenuFactory = menu::MenuFactoryFactory::createMenuFactory(UIType::TUI, m_appCore);
-		m_menu = tuiMenuFactory->createMenu(type);
+		m_currentMenu->onUpdate();
 	}
 
 	void TUI::init()
@@ -43,7 +44,8 @@ namespace ui
 
 		setupInputHandling();
 
-		setMenu(menu::MenuType::MainMenu);
+		m_menuFactory = menu::MenuFactoryFactory::createMenuFactory(UIType::TUI, m_appCore);
+		m_currentMenu = m_menuFactory->createMenu(menu::MenuType::MainMenu);
 	}
 
 } // namespace ui

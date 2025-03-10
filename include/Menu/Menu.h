@@ -1,6 +1,10 @@
 #ifndef MENU_H
 #define MENU_H
 
+#include <functional>
+#include <memory>
+#include "Menu/MenuType.h"
+
 namespace menu
 {
     /**
@@ -32,7 +36,35 @@ namespace menu
          * Derived classes should implement this method to define how the menu responds to user actions
          * or other system events.
          */
-        virtual void onUpdate() = 0;
+        virtual void onUpdate() = 0;    
+
+        /**
+         * @brief Sets the pending menu to be displayed.
+         *
+         * This method updates the menu that is pending to be shown in the next cycle or update.
+         *
+         * @param newMenu The type of the new menu to be set as pending.
+         */
+        void setPendingMenu(MenuType newMenu) { m_pendingMenu = newMenu; }
+
+        /**
+         * @brief Retrieves the currently pending menu.
+         *
+         * This method returns the type of the menu that is set to be shown next.
+         *
+         * @return The type of the pending menu.
+         */
+        MenuType getPendingMenu() { return m_pendingMenu; }
+
+    private:
+        /**
+         * @brief The type of the pending menu.
+         *
+         * This member stores the type of the menu that is pending and will be displayed next.
+         * The default value is `MenuType::Unknown` until set by `setPendingMenu()`.
+         */
+        MenuType m_pendingMenu = MenuType::Unknown;
+
     };
 
 } // namespace menu

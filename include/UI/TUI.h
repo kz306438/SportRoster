@@ -53,15 +53,6 @@ namespace ui
          */
         void onUpdate() override;
 
-        /**
-         * @brief Sets the menu type for the TUI.
-         *
-         * Allows switching between different types of menus within the TUI.
-         *
-         * @param type The menu type to be set.
-         */
-        void setMenu(menu::MenuType type);
-
     private:
         /**
          * @brief Initializes the TUI.
@@ -75,6 +66,11 @@ namespace ui
          * @brief A reference to the core application, used for accessing business logic.
          */
         core::ApplicationCore& m_appCore;
+      
+        /**
+         * @brief A factory for creating menu instances dynamically.
+         */
+        std::unique_ptr<menu::MenuFactory> m_menuFactory;
     };
 
 } // namespace ui

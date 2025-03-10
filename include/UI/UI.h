@@ -3,7 +3,9 @@
 
 #include <string>
 #include <memory>
-#include "Menu/Menu.h"
+#include <functional>
+#include "Menu/MenuType.h"
+#include "Menu/MenuFactory.h"
 
 namespace ui
 {
@@ -59,14 +61,16 @@ namespace ui
          * This method must be implemented by derived classes to define how the UI should be updated.
          */
         virtual void onUpdate() = 0;
+   
 
     protected:
+
         /**
-         * @brief A unique pointer to the menu object associated with the UI.
+         * @brief The currently active menu in the application.
          */
-        std::unique_ptr<menu::Menu> m_menu;
+        std::unique_ptr<menu::Menu> m_currentMenu;
 
-    protected:
+
         /**
          * @brief The title of the UI.
          */

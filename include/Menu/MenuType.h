@@ -21,6 +21,14 @@ namespace menu
         MainMenu,
 
         /**
+         * @brief Represents the menu used for creating new entities.
+         *
+         * This menu provides options and input fields for creating new items or configurations.
+         */
+        CreateMenu,
+
+
+        /**
          * @brief Represents an unknown or undefined menu type.
          *
          * This value is used as a fallback or placeholder when the menu type is not recognized or is unspecified.
