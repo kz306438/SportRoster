@@ -139,4 +139,32 @@ namespace ui
 			}
 		}
 	}
+
+	void ConsoleManager::setColorBackground(ConsoleColor color) {
+		CONSOLE_SCREEN_BUFFER_INFO consoleInfo;
+		GetConsoleScreenBufferInfo(m_consoleOutput, &consoleInfo);
+		WORD attributes = consoleInfo.wAttributes;
+		attributes &= 0x0F;
+		attributes |= ((WORD)color << 4);
+		SetConsoleTextAttribute(m_consoleOutput, attributes);
+	}
+
+	void ConsoleManager::setColorForeground(ConsoleColor color) {
+		CONSOLE_SCREEN_BUFFER_INFO consoleInfo;
+		GetConsoleScreenBufferInfo(m_consoleOutput, &consoleInfo);
+		WORD attributes = consoleInfo.wAttributes;
+		attributes &= 0xF0;
+		attributes |= (WORD)color;
+		SetConsoleTextAttribute(m_consoleOutput, attributes);
+	}
+
+	void ConsoleManager::saveConsoleAttributes() {
+		GetConsoleScreenBufferInfo(m_consoleOutput, &m_savedConsoleInfo);
+		m_savedAttributes = m_savedConsoleInfo.wAttributes;
+	}
+
+	void ConsoleManager::restoreConsoleAttributes() {
+		SetConsoleTextAttribute(m_consoleOutput, m_savedAttributes);
+	}
+
 } // namespace ui

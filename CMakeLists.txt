@@ -24,6 +24,7 @@ set(SOURCES
     "src/Core/Utils.cpp"
 
     "src/Menu/MainMenu.cpp"
+    "src/Menu/CreateMenu.cpp"
     "src/Menu/TUIMenuFactory.cpp"
 
     "src/UI/TUI.cpp"
@@ -51,6 +52,7 @@ set(HEADERS
 
     "include/Menu/Menu.h"
     "include/Menu/MainMenu.h"
+    "include/Menu/CreateMenu.h"
     "include/Menu/MenuFactoryFactory.h"
     "include/Menu/TUIMenuFactory.h"
     "include/Menu/MenuFactory.h"
@@ -63,7 +65,7 @@ set(HEADERS
     "include/UI/UIType.h"
 )
 
-add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS} "include/Menu/CreateMenu.h" "src/Menu/CreateMenu.cpp")
+add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/include)
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/consoleGUI)

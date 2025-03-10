@@ -2,6 +2,8 @@
 #include <windows.h>
 #include <string>
 
+#include "colors.h"
+
 namespace ui
 {
     /**
@@ -98,6 +100,32 @@ namespace ui
          * This method clears all text and resets the console screen.
          */
         void ClearScreen();
+        
+        /**
+         * @brief Sets the background color of the console.
+         * @param color The background color to set.
+         */
+        void setColorBackground(ConsoleColor color);
+
+        /**
+         * @brief Sets the foreground color of the console.
+         * @param color The foreground color to set.
+         */
+        void setColorForeground(ConsoleColor color);
+
+        /**
+         * @brief Saves the current console attributes.
+         *
+         * This method stores the current text and background attributes of the console.
+         */
+        void saveConsoleAttributes();
+
+        /**
+         * @brief Restores the previously saved console attributes.
+         *
+         * This method restores the text and background attributes that were saved earlier.
+         */
+        void restoreConsoleAttributes();
 
     private:
         // Private constructor to ensure the class is used as a singleton.
@@ -116,6 +144,16 @@ namespace ui
          * @brief Handle to the console's output buffer.
          */
         HANDLE m_consoleOutput;
+
+        /**
+         * @brief Saved text attributes of the console.
+         */
+        WORD m_savedAttributes = 0;
+
+        /**
+         * @brief Structure storing the console screen buffer information.
+         */
+        CONSOLE_SCREEN_BUFFER_INFO m_savedConsoleInfo;
     };
 
 } // namespace ui
