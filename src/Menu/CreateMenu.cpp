@@ -3,36 +3,35 @@
 #include "UI/ConsoleManager.h"
 #include "Menu/MainMenu.h"
 
+#include <conio.h>
+
 namespace menu
 {
 
 	CreateMenu::CreateMenu(core::ApplicationCore& appCore)
 		: m_appCore(appCore)
 	{
-		m_PBBack = std::make_unique<PushButton>(20, 5, "BACK", 10, 5);
-		connectButtons();
+		m_editLine = std::make_unique<ui::widgets::EditLine>(48, 3, 36, 14, 14);
+		m_editLine->renderAll();
 	}
 
 	void CreateMenu::onRender()
 	{
-		m_PBBack->allowChanges(); m_PBBack->show();
+		m_editLine->onRender();
 	}
 
 	void CreateMenu::onUpdate()
 	{
-		mouseButtonInteraction(m_PBBack.get());
+		if (_kbhit())
+		{
+			int key = _getch();
+			if (key == 27) {
+				ui::ConsoleManager::getInstance().clearScreen();
+				setPendingMenu(MenuType::MainMenu);
+			}
 
-		if (m_select == 0) {
-			ui::ConsoleManager::getInstance().clearScreen();
-			setPendingMenu(MenuType::MainMenu);
+			m_editLine->onUpdate(key);
 		}
-
-		m_select = -1;
-	}
-
-	void CreateMenu::connectButtons()
-	{
-		m_PBBack->connect([&]() { m_select = 0; });
 	}
 
 } // menu

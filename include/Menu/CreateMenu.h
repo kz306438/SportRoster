@@ -4,6 +4,7 @@
 #include "Menu/Menu.h"
 #include "Core/ApplicationCore.h"
 #include "GUI.h"
+#include "UI/Widgets/EditLine.h"
 
 namespace menu
 {
@@ -18,14 +19,10 @@ namespace menu
 		void onUpdate() override;
 
 	private:
-		void connectButtons();
-
-	private:
 		core::ApplicationCore& m_appCore;
 
 	private:
-		int m_select = -1;
-		std::unique_ptr<PushButton> m_PBBack;
+		std::unique_ptr<ui::widgets::EditLine> m_editLine;
 		
 	};
 
