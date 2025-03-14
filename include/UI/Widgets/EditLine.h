@@ -24,6 +24,9 @@ namespace ui::widgets
 		std::string getText() const;
 
 	private:
+		void init();
+
+	private:
 		void handleInput(int key);
 		void handleInsertCharacter(int key);
 
@@ -43,6 +46,9 @@ namespace ui::widgets
 		std::size_t m_capacity{};
 	private:
 		std::string m_text;
+
+	private:
+		bool m_needRender = true;
 
 	};
 

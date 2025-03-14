@@ -7,15 +7,24 @@ namespace ui::widgets
 {
 
 	EditLine::EditLine(std::uint16_t width, std::uint16_t height, std::size_t capacity) noexcept
-		: m_width(width), m_height(height), m_capacity(capacity) {}
+		: m_width(width), m_height(height), m_capacity(capacity)
+	{
+		init();
+	}
 
 	EditLine::EditLine(std::uint16_t width, std::uint16_t height, std::uint16_t posX, std::uint16_t posY, std::size_t capacity) noexcept
-		: m_width(width), m_height(height), m_posX(posX), m_posY(posY), m_capacity(capacity) {}
+		: m_width(width), m_height(height), m_posX(posX), m_posY(posY), m_capacity(capacity)
+	{
+		init();
+	}
 
 	void EditLine::onRender()
 	{
-		displayText();
-		displayCursor();
+		if (m_needRender) {
+			displayText();
+			displayCursor();
+			m_needRender = false;
+		}
 	}
 
 	void EditLine::onUpdate(int key)
@@ -33,10 +42,14 @@ namespace ui::widgets
 		displayCursor();
 	}
 
-
-
 	std::string EditLine::getText() const {
 		return m_text;
+	}
+
+	void EditLine::init() {
+		if (m_width < m_capacity + 3) m_width = m_capacity + 3;
+		if (m_width < 5) m_width = 5;
+		if (m_height < 3) m_height = 3;
 	}
 
 	void EditLine::handleInput(int key) {
@@ -55,6 +68,7 @@ namespace ui::widgets
 		else if (isValidCharacter(key)) {
 			handleInsertCharacter(key);
 		}
+		m_needRender = true;
 	}
 
 	void EditLine::handleInsertCharacter(int key)
@@ -73,15 +87,17 @@ namespace ui::widgets
 		ConsoleManager::getInstance().setColorForeground(Black);
 
 		ConsoleManager::getInstance().setCursorPosition(m_curPos + m_posX + 2, m_posY + 1);
-		std::cout << ' ';
+		std::cout << ((m_curPos < m_text.size()) ? m_text[m_curPos] : ' ');
 		ConsoleManager::getInstance().setCursorPosition(m_curPos + m_posX + 2, m_posY + 1);
-
 
 		ConsoleManager::getInstance().restoreConsoleAttributes();
 	}
 
 	void EditLine::displayText() const
 	{
+		ConsoleManager::getInstance().setCursorPosition(m_posX + 2, m_posY + 1);
+		std::cout << std::string(m_capacity + 1, ' ');
+
 		ConsoleManager::getInstance().setCursorPosition(m_posX + 2, m_posY + 1);
 		std::cout << m_text;
 	}
