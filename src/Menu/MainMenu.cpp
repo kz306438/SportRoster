@@ -35,7 +35,7 @@ namespace menu
 
 
 		if (m_select == 0) {
-			ui::ConsoleManager::getInstance().clearScreen();
+			//ui::ConsoleManager::getInstance().clearScreen();
 			setPendingMenu(MenuType::CreateMenu);
 		} else if (m_select == 1) {
 			exit(0);

@@ -47,6 +47,13 @@ namespace core
         [[nodiscard]] TeamDataList getTeam(const std::string& team_name) const;
 
         /**
+         * @brief Retrieves a list of all team names.
+         *
+         * @return std::vector<std::string> A list of team names.
+         */
+        [[nodiscard]] std::vector<std::string> getTeams() const;
+
+        /**
          * @brief Adds a player to a specified team using player data.
          *
          * @param team The name of the team.

@@ -33,6 +33,8 @@ set(SOURCES
     "src/UI/UIFactory.cpp"
     "src/UI/EditBox.cpp"
     "src/UI/EditLine.cpp"
+
+    "src/Message/ConfirmMSG.cpp"
 )
 
 set(HEADERS 
@@ -67,6 +69,11 @@ set(HEADERS
     "include/UI/UIType.h"
     "include/UI/Widgets/EditBox.h"
     "include/UI/Widgets/EditLine.h"
+
+    "include/Message/Message.h"
+    "include/Message/ConfirmMSG.h"
+   
+
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})

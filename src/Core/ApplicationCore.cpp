@@ -18,6 +18,10 @@ namespace core
 		return m_storage.getContent(team_name);
 	}
 
+	std::vector<std::string> ApplicationCore::getTeams() const {
+		return m_storage.getFiles();
+	}
+
 	void ApplicationCore::addPlayer(const std::string& team, const PlayerDataList& playerData) {
 		m_storage.addContent(team, playerData);
 	}

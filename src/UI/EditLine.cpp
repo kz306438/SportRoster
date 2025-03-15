@@ -35,11 +35,15 @@ namespace ui::widgets
 	void EditLine::renderAll() {
 
 		Window wnd(m_width, m_height, m_posX, m_posY);
-		wnd.addWindowName("edit line", 3, 0);
+		wnd.addWindowName(m_title, 1, 0);
 		wnd.show();
 
 		displayText();
 		displayCursor();
+	}
+
+	void EditLine::setTitle(const std::string& title){
+		m_title = title;
 	}
 
 	std::string EditLine::getText() const {
@@ -50,6 +54,7 @@ namespace ui::widgets
 		if (m_width < m_capacity + 3) m_width = m_capacity + 3;
 		if (m_width < 5) m_width = 5;
 		if (m_height < 3) m_height = 3;
+		m_title = "edit line";
 	}
 
 	void EditLine::handleInput(int key) {
@@ -103,7 +108,8 @@ namespace ui::widgets
 	}
 
 	bool EditLine::isValidCharacter(int key) const {
-		return std::isalpha(key) || std::isspace(key) || std::isdigit(key) || key == '_';
+		return std::isalpha(key) || std::isdigit(key) || key == '_' || key == ' ';
 	}
+
 
 } // namespace ui::widgets

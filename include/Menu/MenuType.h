@@ -27,7 +27,6 @@ namespace menu
          */
         CreateMenu,
 
-
         /**
          * @brief Represents an unknown or undefined menu type.
          *

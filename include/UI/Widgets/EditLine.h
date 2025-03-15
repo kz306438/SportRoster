@@ -1,5 +1,5 @@
-#ifndef WIDGETS_INPUT_FIELD_H
-#define WIDGETS_INPUT_FIELD_H
+#ifndef WIDGETS_EDIT_LINE_H
+#define WIDGETS_EDIT_LINE_H
 
 #include <string>
 
@@ -21,6 +21,8 @@ namespace ui::widgets
 		void renderAll();
 
 	public:
+		void setTitle(const std::string& title);
+
 		std::string getText() const;
 
 	private:
@@ -45,6 +47,7 @@ namespace ui::widgets
 
 		std::size_t m_capacity{};
 	private:
+		std::string m_title;
 		std::string m_text;
 
 	private:
@@ -54,4 +57,4 @@ namespace ui::widgets
 
 } // namespace ui::widgets
 
-#endif WIDGETS_INPUT_FIELD_H
+#endif WIDGETS_EDIT_LINE_H

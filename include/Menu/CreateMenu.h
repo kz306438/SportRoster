@@ -3,7 +3,6 @@
 
 #include "Menu/Menu.h"
 #include "Core/ApplicationCore.h"
-#include "GUI.h"
 #include "UI/Widgets/EditLine.h"
 
 namespace menu
@@ -18,6 +17,7 @@ namespace menu
 		void onRender() override;
 		void onUpdate() override;
 
+		void renderAll();
 	private:
 		core::ApplicationCore& m_appCore;
 
