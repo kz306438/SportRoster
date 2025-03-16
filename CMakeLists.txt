@@ -36,6 +36,7 @@ set(SOURCES
 
     "src/Message/ConfirmMSG.cpp"
     "src/Message/NotificationMSG.cpp"
+    "src/Message/FatalErrorMSG.cpp" 
 )
 
 set(HEADERS 
@@ -74,10 +75,11 @@ set(HEADERS
     "include/Message/Message.h"
     "include/Message/ConfirmMSG.h"
     "include/Message/NotificationMSG.h" 
+    "include/Message/FatalErrorMSG.h"
 
 )
 
-add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS} "src/Message/FatalErrorMSG.cpp" "include/Message/FatalErrorMSG.h")
+add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/include)
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/consoleGUI)

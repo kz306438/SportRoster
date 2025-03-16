@@ -11,26 +11,42 @@ namespace core
 		: m_storage(STORAGE_DIRECTORY) {}
 
 	void ApplicationCore::createTeam(const std::string& team_name) {
-		m_storage.createFile(team_name);
+		try {
+			m_storage.createFile(team_name);
+		}
+		catch (const std::runtime_error& e) {
+			throw std::runtime_error("Failed to create team: " + std::string(e.what()));
+		}
 	}
 
 	TeamDataList ApplicationCore::getTeam(const std::string& team_name) const {
-		return m_storage.getContent(team_name);
+		try {
+			return m_storage.getContent(team_name);
+		}
+		catch (const std::runtime_error& e) {
+			throw std::runtime_error("Failed to get team: " + std::string(e.what()));
+		}
 	}
+
 
 	std::vector<std::string> ApplicationCore::getTeams() const {
 		return m_storage.getFiles();
 	}
 
 	void ApplicationCore::addPlayer(const std::string& team, const PlayerDataList& playerData) {
-		m_storage.addContent(team, playerData);
+		try {
+			m_storage.addContent(team, playerData);
+		}
+		catch (const std::runtime_error& e) {
+			throw std::runtime_error("Failed to add player: " + std::string(e.what()));
+		}
 	}
 
 	void ApplicationCore::selectionSort(const std::string& team_name)
 	{
 		Team team = __getTeam(team_name);
 		std::vector<Player> players = team.getPlayers();
-		utils::selectionSort(players.begin(), players.end(), 
+		utils::selectionSort(players.begin(), players.end(),
 			[](const Player& p1, const Player& p2) { return p1.getAge() < p2.getAge(); });
 		team.addAllPlayers(players);
 		m_storage.overwriteContent(team_name, utils::teamToText(team));

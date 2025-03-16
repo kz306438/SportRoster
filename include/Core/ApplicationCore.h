@@ -35,7 +35,11 @@ namespace core
          * @brief Creates a new team with the specified name.
          *
          * @param team_name The name of the team to create.
-         */
+         *
+         * @throws std::runtime_error If the team could not be created.
+         * 
+         * @throws std::runtime_error If the team could not be retrieved.
+        */
         void createTeam(const std::string& team_name);
 
         /**
@@ -58,6 +62,7 @@ namespace core
          *
          * @param team The name of the team.
          * @param playerData A list of strings containing the player's data.
+         * @throws std::runtime_error If the player could not be added.
          */
         void addPlayer(const std::string& team, const PlayerDataList& playerData);
 
@@ -123,7 +128,7 @@ namespace core
          * @return std::optional<Player> The player if found, otherwise an empty optional.
          */
         std::optional<Player> __binarySearch(const std::string& team_name, std::uint16_t game_number) const;
-
+            
         /**
          * @brief Performs a linear search to find a player by their game number in a team.
          *
