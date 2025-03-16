@@ -3,6 +3,7 @@
 #include "UI/ConsoleManager.h"
 #include "Menu/MainMenu.h"
 #include "Message/NotificationMSG.h"
+#include "Message/FatalErrorMSG.h"
 #include "window.h"
 #include <conio.h>
 
@@ -93,7 +94,16 @@ namespace menu
 			handleNotification("THE FILE NAME CANNOT BE EMPTY!", 63, 9, 28, 10);
 		}
 		else {
-			m_appCore.createTeam(m_editLine->getText());
+			try {
+				m_appCore.createTeam(m_editLine->getText());
+			}
+			catch (const std::runtime_error& e) {
+				std::unique_ptr<msg::FatalErrorMSG> notificationMSG
+					= std::make_unique<msg::FatalErrorMSG>(63,9);
+				notificationMSG->setPosition(28, 10);
+				notificationMSG->setTitle(e.what());
+				notificationMSG->run();
+			}
 			handleNotification("FILE CREATED SUCCESSFULLY!", 63, 9, 28, 10);
 			ui::ConsoleManager::getInstance().clearScreen();
 			setPendingMenu(MenuType::MainMenu);

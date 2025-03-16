@@ -36,9 +36,7 @@ namespace core
          *
          * @param team_name The name of the team to create.
          *
-         * @throws std::runtime_error If the team could not be created.
-         * 
-         * @throws std::runtime_error If the team could not be retrieved.
+         * @throws std::runtime_error If the team could not be created. 
         */
         void createTeam(const std::string& team_name);
 
