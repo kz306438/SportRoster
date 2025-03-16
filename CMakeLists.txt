@@ -35,6 +35,7 @@ set(SOURCES
     "src/UI/EditLine.cpp"
 
     "src/Message/ConfirmMSG.cpp"
+    "src/Message/NotificationMSG.cpp"
 )
 
 set(HEADERS 
@@ -72,7 +73,7 @@ set(HEADERS
 
     "include/Message/Message.h"
     "include/Message/ConfirmMSG.h"
-   
+    "include/Message/NotificationMSG.h" 
 
 )
 

@@ -2,6 +2,7 @@
 
 #include "UI/ConsoleManager.h"
 #include "Menu/MainMenu.h"
+#include "Message/NotificationMSG.h"
 #include "window.h"
 #include <conio.h>
 
@@ -31,7 +32,7 @@ namespace menu
 			}
 
 			if (key == 13) {
-				
+				handleEnterKey();
 			}
 
 			m_editLine->onUpdate(key);
@@ -66,6 +67,47 @@ namespace menu
 
 		m_editLine->renderAll();
 
+	}
+
+	void CreateMenu::handleNotification(std::string title
+		, std::uint16_t width
+		, std::uint16_t height
+		, std::uint16_t posX
+		, std::uint16_t posY)
+	{
+		std::unique_ptr<msg::NotificationMSG> notificationMSG
+			= std::make_unique<msg::NotificationMSG>(width, height);
+		notificationMSG->setPosition(posX, posY);
+		notificationMSG->setTitle(title);
+		notificationMSG->run();
+		ui::ConsoleManager::getInstance().clearScreen();
+		renderAll();
+	}
+
+	void CreateMenu::handleEnterKey()
+	{
+		if (isTeamNameDuplicate()) {
+			handleNotification("A TEAM WITH THE SAME NAME ALREADY EXISTS!", 63, 9, 28, 10);
+		}
+		else if(m_editLine->getText().size() == 0) {
+			handleNotification("THE FILE NAME CANNOT BE EMPTY!", 63, 9, 28, 10);
+		}
+		else {
+			m_appCore.createTeam(m_editLine->getText());
+			handleNotification("FILE CREATED SUCCESSFULLY!", 63, 9, 28, 10);
+			ui::ConsoleManager::getInstance().clearScreen();
+			setPendingMenu(MenuType::MainMenu);
+		}
+	}
+
+	bool CreateMenu::isTeamNameDuplicate()
+	{
+		std::vector<std::string> teams = m_appCore.getTeams();
+		for (const auto& team : teams) {
+			if (team == m_editLine->getText())
+				return true;
+		}
+		return false;
 	}
 
 } // namespace menu

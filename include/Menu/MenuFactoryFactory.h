@@ -41,7 +41,7 @@ namespace menu
          *
          * @throws std::invalid_argument If the UI type does not have a corresponding MenuFactory.
          */
-        [[nodiscard]] static std::unique_ptr<MenuFactory> createMenuFactory(ui::UIType type, core::ApplicationCore appCore)
+        [[nodiscard]] static std::unique_ptr<MenuFactory> createMenuFactory(ui::UIType type, core::ApplicationCore& appCore)
         {
             if (type == ui::UIType::TUI) {
                 return std::make_unique<TUIMenuFactory>(appCore);

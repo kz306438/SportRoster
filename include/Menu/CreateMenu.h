@@ -19,6 +19,17 @@ namespace menu
 
 		void renderAll();
 	private:
+		void handleNotification(std::string,
+			std::uint16_t,
+			std::uint16_t,
+			std::uint16_t,
+			std::uint16_t);
+
+
+		void handleEnterKey();
+		bool isTeamNameDuplicate();
+
+	private:
 		core::ApplicationCore& m_appCore;
 
 	private:

@@ -30,7 +30,7 @@ namespace SportRoster
 
 	private:
 		std::unique_ptr<ui::UI> m_ui;
-		std::unique_ptr<core::ApplicationCore> m_appCore;
+		std::shared_ptr<core::ApplicationCore> m_appCore;
 	};
 
 } // namespace core
