@@ -28,6 +28,13 @@ namespace menu
         CreateMenu,
 
         /**
+         * @brief Represents the menu for adding a player to the system or a team.
+         *
+         * This menu allows selecting a team and entering player details for registration.
+         */
+        AddPlayerMenu,
+
+        /**
          * @brief Represents an unknown or undefined menu type.
          *
          * This value is used as a fallback or placeholder when the menu type is not recognized or is unspecified.

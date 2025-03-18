@@ -25,6 +25,7 @@ set(SOURCES
 
     "src/Menu/MainMenu.cpp"
     "src/Menu/CreateMenu.cpp"
+    "src/Menu/AddPlayerMenu.cpp"
     "src/Menu/TUIMenuFactory.cpp"
 
     "src/UI/TUI.cpp"
@@ -59,6 +60,7 @@ set(HEADERS
     "include/Menu/Menu.h"
     "include/Menu/MainMenu.h"
     "include/Menu/CreateMenu.h"
+    "include/Menu/AddPlayerMenu.h"
     "include/Menu/MenuFactoryFactory.h"
     "include/Menu/TUIMenuFactory.h"
     "include/Menu/MenuFactory.h"
