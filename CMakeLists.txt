@@ -34,6 +34,7 @@ set(SOURCES
     "src/UI/UIFactory.cpp"
     "src/UI/EditBox.cpp"
     "src/UI/EditLine.cpp"
+    "src/UI/Slider.cpp"
 
     "src/Message/ConfirmMSG.cpp"
     "src/Message/NotificationMSG.cpp"
@@ -73,6 +74,7 @@ set(HEADERS
     "include/UI/UIType.h"
     "include/UI/Widgets/EditBox.h"
     "include/UI/Widgets/EditLine.h"
+    "include/UI/Widgets/Slider.h"
 
     "include/Message/Message.h"
     "include/Message/ConfirmMSG.h"

@@ -35,6 +35,13 @@ namespace menu
         AddPlayerMenu,
 
         /**
+         * @brief Represents the menu used for deleting teams.
+         *
+         * This menu provides options for selecting and removing existing items or configurations.
+         */
+        DeleteMenu,
+
+        /**
          * @brief Represents an unknown or undefined menu type.
          *
          * This value is used as a fallback or placeholder when the menu type is not recognized or is unspecified.
