@@ -23,6 +23,15 @@ namespace core
 		m_files.push_back(filename);
 	}
 
+	void Storage::deleteFile(const std::string& filename) {
+		std::string filePath = m_directory + "/" + filename;
+		if (!std::filesystem::exists(filePath)) {
+			throw std::invalid_argument("File does not exist: " + filename);
+		}
+		std::filesystem::remove(filePath);
+		m_files.erase(std::remove(m_files.begin(), m_files.end(), filename), m_files.end());
+	}
+
 	void Storage::addContent(const std::string& filename, const File—ontent& fileContent) {
 		std::string filePath = m_directory + "/" + filename;
 		std::ofstream file(filePath, std::ios::app);

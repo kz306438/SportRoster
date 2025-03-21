@@ -59,10 +59,10 @@ namespace ui::widgets
 		));
 		
 		int i = 0;
-		for (; i < m_capacity; i++) {
+		for (; i < m_capacity - 2; i++) {
 			m_buttons.push_back(
 				std::make_unique<PushButton>(
-					m_buttonWidth, m_buttonHeight, "", m_posX + m_buttonWidth * (i + 1), m_posY + m_buttonHeight * (i + 1)
+					m_buttonWidth, m_buttonHeight, "", m_posX, m_posY + m_buttonHeight * (i + 1)
 				)
 			);
 		}
@@ -70,8 +70,8 @@ namespace ui::widgets
 		m_buttons.push_back(std::make_unique<PushButton>(
 			m_buttonWidth,
 			m_buttonHeight,
-			sym_down, 
-			m_posX + m_buttonWidth * (i + 1),
+			sym_down,
+			m_posX,
 			m_posY + m_buttonHeight * (i + 1)
 		));
 

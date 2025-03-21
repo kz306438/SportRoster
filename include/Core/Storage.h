@@ -34,6 +34,16 @@ namespace core
          * @throws std::runtime_error If the file could not be created
          */
         void createFile(const std::string& filename);
+        
+        /**
+         * @brief Deletes a file from the specified directory.
+         *
+         * @param filename The name of the file to delete.
+         *
+         * @throws std::invalid_argument If the file does not exist.
+         */
+        void deleteFile(const std::string& filename);
+        
 
         /**
          * @brief Adds content to an existing file.

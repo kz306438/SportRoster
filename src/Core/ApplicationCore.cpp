@@ -19,6 +19,16 @@ namespace core
 		}
 	}
 
+	void ApplicationCore::deleteTeam(const std::string& team_name)
+	{
+		try {
+			m_storage.deleteFile(team_name);
+		}
+		catch (const std::invalid_argument& e) {
+			throw std::invalid_argument("Failed to delete team: " + std::string(e.what()));
+		}
+	}
+
 	TeamDataList ApplicationCore::getTeam(const std::string& team_name) const {
 		try {
 			return m_storage.getContent(team_name);

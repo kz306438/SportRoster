@@ -43,7 +43,8 @@ namespace menu
 		} else if (m_select == 2) {
 			exit(0);
 		} else if (m_select == 3) {
-			exit(0);
+			ui::ConsoleManager::getInstance().clearScreen();
+			setPendingMenu(MenuType::DeleteMenu);
 		} else if (m_select == 4) {
 			exit(0);
 		} else if (m_select == 5) {

@@ -40,6 +40,8 @@ namespace core
         */
         void createTeam(const std::string& team_name);
 
+        void deleteTeam(const std::string& team_name);
+
         /**
          * @brief Retrieves the data of a team.
          *
