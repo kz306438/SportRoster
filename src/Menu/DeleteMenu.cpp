@@ -9,33 +9,35 @@ namespace menu
 {
 
 	DeleteMenu::DeleteMenu(core::ApplicationCore& appCore)
-		: m_appCore(appCore), Slider(5, 20, 3, 36, 5)
+		: m_appCore(appCore)
 	{
 		init();
 	}
 
 	void DeleteMenu::onRender()
 	{
-		m_buttons[0]->allowChanges(); m_buttons[0]->show();
-		m_buttons[1]->allowChanges(); m_buttons[1]->show();
-		m_buttons[2]->allowChanges(); m_buttons[2]->show();
-		m_buttons[3]->allowChanges(); m_buttons[3]->show();
-		m_buttons[4]->allowChanges(); m_buttons[4]->show();
-		m_buttons[5]->allowChanges(); m_buttons[5]->show();
-		m_buttons[6]->allowChanges(); m_buttons[6]->show();
+		auto& buttons = m_slider->getButtons();
+		buttons[0]->allowChanges(); buttons[0]->show();
+		buttons[1]->allowChanges(); buttons[1]->show();
+		buttons[2]->allowChanges(); buttons[2]->show();
+		buttons[3]->allowChanges(); buttons[3]->show();
+		buttons[4]->allowChanges(); buttons[4]->show();
+		buttons[5]->allowChanges(); buttons[5]->show();
+		buttons[6]->allowChanges(); buttons[6]->show();
 		m_PBBack->allowChanges(); m_PBBack->show();
 	}
 
 	void DeleteMenu::onUpdate()
 	{
+		auto& buttons = m_slider->getButtons();
 		mouseButtonInteraction(
-			m_buttons[0].get(),
-			m_buttons[1].get(),
-			m_buttons[2].get(),
-			m_buttons[3].get(),
-			m_buttons[4].get(),
-			m_buttons[5].get(),
-			m_buttons[6].get(),
+			buttons[0].get(),
+			buttons[1].get(),
+			buttons[2].get(),
+			buttons[3].get(),
+			buttons[4].get(),
+			buttons[5].get(),
+			buttons[6].get(),
 			m_PBBack.get()
 		);
 	}
@@ -60,6 +62,8 @@ namespace menu
 
 	void DeleteMenu::init()
 	{
+		m_slider = std::make_unique<ui::widgets::Slider>(5, 20, 3, 36, 5);
+
 		m_PBBack = std::make_unique<PushButton>(20, 5, "BACK", 62, 21);
 		m_PBBack->setBackgroundColor(White);
 		m_PBBack->setForegroundColor(Black);
@@ -77,16 +81,18 @@ namespace menu
 			setPendingMenu(MenuType::MainMenu);
 			});
 
-		m_buttons[0]->connect([&]() { sliderMoveUp(); updateButtonsName(); });
+		auto& buttons = m_slider->getButtons();
 
-		for (size_t i = 1; i < m_buttons.size() - 1; ++i) {
+		buttons[0]->connect([&]() { sliderMoveUp(); updateButtonsName(); });
+
+		for (int i = 1; i < buttons.size() - 1; ++i) {
 			int indexOfTeam = i - 1;
-			m_buttons[i]->connect([this, indexOfTeam]() {
+			buttons[i]->connect([this, indexOfTeam]() {
 				this->deleteTeam(indexOfTeam + this->m_sliderShift);
 				});
 		}
 
-		m_buttons[m_capacity - 1]->connect([&]() { sliderMoveDown(); updateButtonsName(); });
+		buttons[m_slider->capacity() - 1]->connect([&]() { sliderMoveDown(); updateButtonsName(); });
 	}
 
 	void DeleteMenu::deleteTeam(int indexOfTeam)
@@ -127,9 +133,10 @@ namespace menu
 
 	void DeleteMenu::updateButtonsName()
 	{
+		auto& buttons = m_slider->getButtons();
 		const std::vector<std::string> teams = m_appCore.getTeams();
-		for (int i = 1; i < m_buttons.size() - 1; i++) {
-			m_buttons[i]->setName(
+		for (int i = 1; i < buttons.size() - 1; i++) {
+			buttons[i]->setName(
 				(i - 1 + m_sliderShift < teams.size()) ?
 				teams[i - 1 + m_sliderShift]
 				: "");
@@ -144,7 +151,7 @@ namespace menu
 
 	void DeleteMenu::sliderMoveDown()
 	{
-		if (m_sliderShift + m_capacity - 2 < m_appCore.getTeams().size())
+		if (m_sliderShift + m_slider->capacity() - 2 < m_appCore.getTeams().size())
 			m_sliderShift++;
 	}
 

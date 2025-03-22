@@ -14,6 +14,11 @@ namespace ui::widgets
 		Slider(std::uint16_t capacity, std::uint16_t buttonWidth, std::uint16_t buttonHeight);
 		Slider(std::uint16_t capacity, std::uint16_t buttonWidth, std::uint16_t buttonHeight, std::uint16_t posX, std::uint16_t posY);
 
+	public:
+
+		[[nodiscard]] std::vector<std::unique_ptr<PushButton>>& getButtons();
+		[[nodiscard]] int capacity();
+
 	private:
 		void init();
 

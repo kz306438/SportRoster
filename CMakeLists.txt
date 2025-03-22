@@ -26,6 +26,7 @@ set(SOURCES
     "src/Menu/MainMenu.cpp"
     "src/Menu/CreateMenu.cpp"
     "src/Menu/AddPlayerMenu.cpp"
+    "src/Menu/DeleteMenu.cpp"
     "src/Menu/TUIMenuFactory.cpp"
 
     "src/UI/TUI.cpp"
@@ -62,6 +63,7 @@ set(HEADERS
     "include/Menu/MainMenu.h"
     "include/Menu/CreateMenu.h"
     "include/Menu/AddPlayerMenu.h"
+    "include/Menu/DeleteMenu.h"
     "include/Menu/MenuFactoryFactory.h"
     "include/Menu/TUIMenuFactory.h"
     "include/Menu/MenuFactory.h"
@@ -83,7 +85,7 @@ set(HEADERS
 
 )
 
-add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS} "src/Menu/DeleteMenu.cpp" "include/Menu/DeleteMenu.h")
+add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS} "include/UI/Widgets/TextBox.h" "src/UI/TextBox.cpp")
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/include)
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/consoleGUI)

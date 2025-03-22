@@ -39,6 +39,14 @@ namespace ui::widgets
 		init();
 	}
 
+	std::vector<std::unique_ptr<PushButton>>& widgets::Slider::getButtons() {
+		return m_buttons;
+	}
+
+	int widgets::Slider::capacity() {
+		return m_capacity;
+	}
+
 	void Slider::init()
 	{
 		// fix size

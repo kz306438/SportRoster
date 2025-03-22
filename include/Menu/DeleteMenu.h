@@ -8,7 +8,7 @@
 namespace menu
 {
 
-	class DeleteMenu : public Menu, public ui::widgets::Slider
+	class DeleteMenu : public Menu
 	{
 	public:
 		DeleteMenu(core::ApplicationCore& appCore);
@@ -42,6 +42,7 @@ namespace menu
 
 	private:
 		int m_sliderShift{};
+		std::unique_ptr<ui::widgets::Slider> m_slider;
 		std::unique_ptr<PushButton> m_PBBack;
 	};
 
