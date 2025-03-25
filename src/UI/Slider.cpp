@@ -39,6 +39,14 @@ namespace ui::widgets
 		init();
 	}
 
+	void widgets::Slider::onRender()
+	{
+		for (const auto& button : m_buttons) {
+			button->allowChanges();
+			button->show();
+		}
+	}
+
 	std::vector<std::unique_ptr<PushButton>>& widgets::Slider::getButtons() {
 		return m_buttons;
 	}

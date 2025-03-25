@@ -1,5 +1,6 @@
 #include "Core/Utils.h"
 
+#include <array>
 #include <stdexcept>
 
 namespace core::utils
@@ -63,6 +64,45 @@ namespace core::utils
 
         return team;
     }
+
+    TeamDataList teamToLabeledText(const TeamDataList& dataList) {
+        if (dataList.size() % NUMBER_OF_PLAYER_FIELDS != 0)
+            throw std::invalid_argument("Incorrect TeamDataList object.");
+
+        TeamDataList labeledData;
+        labeledData.reserve(dataList.size());
+
+        static const std::array<std::string, NUMBER_OF_PLAYER_FIELDS> labels = {
+            "Name: ", "Surname: ", "Age: ", "Height: ", "Weight: ", "Game Number: ", "Country: "
+        };
+
+        for (size_t i = 0; i < dataList.size(); i += NUMBER_OF_PLAYER_FIELDS) {
+            for (size_t j = 0; j < NUMBER_OF_PLAYER_FIELDS; ++j) {
+                labeledData.push_back(labels[j] + dataList[i + j]);
+            }
+        }
+
+        return labeledData;
+    }
+
+    TeamDataList textToTeamDataList(const TeamDataList& labeledDataList) {
+        if (labeledDataList.size() % NUMBER_OF_PLAYER_FIELDS != 0)
+            throw std::invalid_argument("Incorrect TeamDataList object.");
+
+        TeamDataList dataList;
+        dataList.reserve(labeledDataList.size());
+
+        for (const auto& labeledEntry : labeledDataList) {
+            size_t colonPos = labeledEntry.find(": ");
+            if (colonPos == std::string::npos || colonPos + 2 >= labeledEntry.size())
+                throw std::invalid_argument("Invalid labeled entry format.");
+
+            dataList.push_back(labeledEntry.substr(colonPos + 2));
+        }
+
+        return dataList;
+    }
+
 
     double averageAgeOfTeam(const Team& team)
     {

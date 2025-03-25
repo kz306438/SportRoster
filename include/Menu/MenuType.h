@@ -42,6 +42,13 @@ namespace menu
         DeleteMenu,
 
         /**
+         * @brief Represents the menu used for viewing team details.
+         *
+         * This menu provides options for displaying team information and related settings.
+         */
+        ViewTeamMenu,
+
+        /**
          * @brief Represents an unknown or undefined menu type.
          *
          * This value is used as a fallback or placeholder when the menu type is not recognized or is unspecified.

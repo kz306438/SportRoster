@@ -27,6 +27,7 @@ set(SOURCES
     "src/Menu/CreateMenu.cpp"
     "src/Menu/AddPlayerMenu.cpp"
     "src/Menu/DeleteMenu.cpp"
+     "src/Menu/ViewTeamMenu.cpp"
     "src/Menu/TUIMenuFactory.cpp"
 
     "src/UI/TUI.cpp"
@@ -36,6 +37,7 @@ set(SOURCES
     "src/UI/EditBox.cpp"
     "src/UI/EditLine.cpp"
     "src/UI/Slider.cpp"
+    "src/UI/TextBox.cpp"
 
     "src/Message/ConfirmMSG.cpp"
     "src/Message/NotificationMSG.cpp"
@@ -64,6 +66,7 @@ set(HEADERS
     "include/Menu/CreateMenu.h"
     "include/Menu/AddPlayerMenu.h"
     "include/Menu/DeleteMenu.h"
+    "include/Menu/ViewTeamMenu.h"
     "include/Menu/MenuFactoryFactory.h"
     "include/Menu/TUIMenuFactory.h"
     "include/Menu/MenuFactory.h"
@@ -77,6 +80,7 @@ set(HEADERS
     "include/UI/Widgets/EditBox.h"
     "include/UI/Widgets/EditLine.h"
     "include/UI/Widgets/Slider.h"
+    "include/UI/Widgets/TextBox.h"
 
     "include/Message/Message.h"
     "include/Message/ConfirmMSG.h"
@@ -85,7 +89,7 @@ set(HEADERS
 
 )
 
-add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS} "include/UI/Widgets/TextBox.h" "src/UI/TextBox.cpp")
+add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/include)
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/consoleGUI)

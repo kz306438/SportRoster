@@ -57,34 +57,47 @@ namespace ui::widgets
 
 		for (size_t i = 0; i < content.size(); i++) {
 			
-			std::string str(' ', m_width - 2);
+			std::string str(m_width - 2, ' ');
 
 			for (size_t j = 0; j < m_width - 2; j++) {
 				str[j] = (j < content[i].size())? content[i][j] : ' ';
 			}
 			m_content[i] = str;
 		}
-
-		m_content = content;
 	}
 
 	void TextBox::displayText() {
 		for (int i = 1; i < m_height - 2 * MIN_ELEMENT_HEIGHT - 1; i++) {
-			ui::ConsoleManager::getInstance().setCursorPosition(m_width + 1, m_posY + MIN_ELEMENT_HEIGHT + i);
-			std::cout << m_content[i - 1];
+			ui::ConsoleManager::getInstance().setCursorPosition(m_posX + 1, m_posY + MIN_ELEMENT_HEIGHT + i);
+			std::cout <<
+				((i - 1 + m_shift < m_content.size())
+				? m_content[i - 1 + m_shift]
+				: std::string(m_width - 2, ' '));
 		}
+	}
+
+	void TextBox::moveUp()
+	{
+		if (m_shift > 0)
+			m_shift--;
+	}
+
+	void TextBox::moveDown()
+	{
+		if (m_content.size() - m_shift > m_height - 2 * MIN_ELEMENT_HEIGHT - 2)
+			m_shift++;
 	}
 
 	void TextBox::init()
 	{
 		if (m_width < MIN_ELEMENT_HEIGHT) m_width = MIN_ELEMENT_WIDTH;
-		if (m_height < MIN_ELEMENT_HEIGHT) m_height = MIN_ELEMENT_HEIGHT;
+		if (m_height < MIN_ELEMENT_HEIGHT * 3) m_height = MIN_ELEMENT_HEIGHT * 3;
 
 		const std::string sym_up(1, char(30));
 		const std::string sym_down(1, char(31));
 
 		m_PBUp = std::make_unique<PushButton>(m_width, MIN_ELEMENT_WIDTH, sym_up, m_posX, m_posY);
-		m_PBUp = std::make_unique<PushButton>(m_width, MIN_ELEMENT_WIDTH, sym_down, m_posX, m_posY + m_height - MIN_ELEMENT_HEIGHT);
+		m_PBDown = std::make_unique<PushButton>(m_width, MIN_ELEMENT_WIDTH, sym_down, m_posX, m_posY + m_height - MIN_ELEMENT_HEIGHT);
 
 		m_PBUp->setBackgroundColor(BrightRed);
 		m_PBUp->setForegroundColor(Black);

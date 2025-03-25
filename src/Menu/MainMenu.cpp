@@ -46,7 +46,8 @@ namespace menu
 			ui::ConsoleManager::getInstance().clearScreen();
 			setPendingMenu(MenuType::DeleteMenu);
 		} else if (m_select == 4) {
-			exit(0);
+			ui::ConsoleManager::getInstance().clearScreen();
+			setPendingMenu(MenuType::ViewTeamMenu);
 		} else if (m_select == 5) {
 			exit(0);
 		} else if (m_select == 6) {

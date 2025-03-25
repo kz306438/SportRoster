@@ -16,14 +16,7 @@ namespace menu
 
 	void DeleteMenu::onRender()
 	{
-		auto& buttons = m_slider->getButtons();
-		buttons[0]->allowChanges(); buttons[0]->show();
-		buttons[1]->allowChanges(); buttons[1]->show();
-		buttons[2]->allowChanges(); buttons[2]->show();
-		buttons[3]->allowChanges(); buttons[3]->show();
-		buttons[4]->allowChanges(); buttons[4]->show();
-		buttons[5]->allowChanges(); buttons[5]->show();
-		buttons[6]->allowChanges(); buttons[6]->show();
+		m_slider->onRender();
 		m_PBBack->allowChanges(); m_PBBack->show();
 	}
 

@@ -53,6 +53,29 @@ namespace core
         [[nodiscard]] Team textToTeam(const std::string& teamname, const TeamDataList& dataList);
 
         /**
+         * @brief Adds labels to a team's data fields.
+         *
+         * This function takes a list of player data and adds labels (e.g., "Name: ", "Game Number: ")
+         * to each field, making the data more readable.
+         *
+         * @param dataList The list of strings representing raw player data.
+         * @return TeamDataList A list of labeled strings with field names prefixed.
+         */
+        [[nodiscard]] TeamDataList teamToLabeledText(const TeamDataList& dataList);
+
+        /**
+         * @brief Removes labels from a team's labeled data fields.
+         *
+         * This function reverses the effect of teamToLabeledText by stripping field names
+         * from each entry, leaving only the raw player data.
+         *
+         * @param labeledDataList The list of labeled strings.
+         * @return TeamDataList A list of raw player data without labels.
+         */
+        [[nodiscard]] TeamDataList textToTeamDataList(const TeamDataList& labeledDataList);
+
+
+        /**
          * @brief Calculates the average age of all players in a team.
          *
          * This function computes the average age of the players in the given team.

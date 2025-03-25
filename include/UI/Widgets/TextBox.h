@@ -21,19 +21,25 @@ namespace ui::widgets
 		void renderAll();
 
 		[[nodiscard]] std::unique_ptr<PushButton>& getUpButton();
-		[[nodiscrad]] std::unique_ptr<PushButton>& getDownButton();
+		[[nodiscard]] std::unique_ptr<PushButton>& getDownButton();
 
 	public:
 		void setContent(const Content& content);
-		
 		void displayText();
 	
+	public:
+		void moveUp();
+		void moveDown();
+
 	private:
 		void init();
 
 	protected:
 		static const int MIN_ELEMENT_WIDTH = 3;
-		static const int MIN_ELEMENT_HEIGHT = 9;
+		static const int MIN_ELEMENT_HEIGHT = 3;
+
+	protected:
+		int m_shift{};
 
 	protected:
 		std::uint16_t m_width{};
