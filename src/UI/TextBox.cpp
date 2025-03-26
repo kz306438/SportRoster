@@ -52,6 +52,8 @@ namespace ui::widgets
 	}
 
 	void TextBox::setContent(const Content& content) {
+		m_shift = 0;
+
 		m_content.clear();
 		m_content.resize(content.size());
 
@@ -65,6 +67,7 @@ namespace ui::widgets
 			m_content[i] = str;
 		}
 	}
+
 
 	void TextBox::displayText() {
 		for (int i = 1; i < m_height - 2 * MIN_ELEMENT_HEIGHT - 1; i++) {

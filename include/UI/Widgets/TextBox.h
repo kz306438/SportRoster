@@ -34,7 +34,7 @@ namespace ui::widgets
 	private:
 		void init();
 
-	protected:
+	private:
 		static const int MIN_ELEMENT_WIDTH = 3;
 		static const int MIN_ELEMENT_HEIGHT = 3;
 
@@ -50,7 +50,7 @@ namespace ui::widgets
 	protected:
 		Content m_content;
 
-	protected:
+	private:
 		std::unique_ptr<PushButton> m_PBUp;
 		std::unique_ptr<PushButton> m_PBDown;
 	};

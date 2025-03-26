@@ -7,9 +7,11 @@
 
 #include "GUI.h"
 
-namespace ui
+namespace ui::widgets
 {
 	
+	using Content = std::vector<std::string>;
+
 	class EditBox
 	{
 	public:
@@ -18,18 +20,43 @@ namespace ui
 			std::uint16_t posX,
 			std::uint16_t posY);
 
+	public:
+		void onUpdate(int key);
+
+		void renderAll();
+
+	public:
+		void setContent(Content content);
+		void display();
 
 	private:
-		std::vector<std::string> m_currentContent;
+		void init();
 
 	private:
+		void displayCursor();
 
-		std::uint16_t m_height;    // Height of the edit box (in lines)
-		std::uint16_t m_width;     // Width of the edit box (in characters)
-		std::uint16_t m_positionX; // X position of the edit box on the console
-		std::uint16_t m_positionY; // Y position of the edit box on the console
+		void moveUp();
+		void moveDown();
+
+	private:
+		void handleBackspace();
+		void handleInsert(int key);
+
+	private:
+		Content m_content;
+		int m_shift{};
+
+	private:
+		std::uint16_t m_cursorPosX{};
+		std::uint16_t m_cursorPosY{};
+
+	private:
+		std::uint16_t m_width{};
+		std::uint16_t m_height{};
+		std::uint16_t m_posX{};
+		std::uint16_t m_posY{};
 	};
 
-} // namespace ui
+} // namespace ui::widgets
 
 #endif // EDIT_BOX_H
