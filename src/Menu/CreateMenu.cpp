@@ -61,7 +61,7 @@ namespace menu
 		saveConsoleAttributes();
 		setColorBackground(BrightRed);
 		
-		ui::ConsoleManager::getInstance().setCursorPosition(45, 22); std::cout << "THE FILE NAME CANNOT BE EMPTY!";
+		ui::ConsoleManager::getInstance().setCursorPosition(45, 22); std::cout << "THE TEAM NAME CANNOT BE EMPTY!";
 		ui::ConsoleManager::getInstance().setCursorPosition(42, 24); std::cout << "MAXIMUM LINE LENGTH 14 CHARACTERS!";
 
 		restoreConsoleAttributes();
@@ -91,7 +91,7 @@ namespace menu
 			handleNotification("A TEAM WITH THE SAME NAME ALREADY EXISTS!", 63, 9, 28, 10);
 		}
 		else if(m_editLine->getText().size() == 0) {
-			handleNotification("THE FILE NAME CANNOT BE EMPTY!", 63, 9, 28, 10);
+			handleNotification("THE TEAM NAME CANNOT BE EMPTY!", 63, 9, 28, 10);
 		}
 		else {
 			try {
@@ -104,7 +104,7 @@ namespace menu
 				notificationMSG->setTitle(e.what());
 				notificationMSG->run();
 			}
-			handleNotification("FILE CREATED SUCCESSFULLY!", 63, 9, 28, 10);
+			handleNotification("TEAM CREATED SUCCESSFULLY!", 63, 9, 28, 10);
 			ui::ConsoleManager::getInstance().clearScreen();
 			setPendingMenu(MenuType::MainMenu);
 		}

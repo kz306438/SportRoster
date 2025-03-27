@@ -4,6 +4,7 @@
 #include <UI/UI.h>
 #include <memory>
 #include "Menu/CreateMenu.h"
+#include "Message/ConfirmMSG.h"
 
 namespace menu
 {
@@ -54,7 +55,8 @@ namespace menu
 		} else if (m_select == 6) {
 			exit(0);
 		} else if (m_select == 7) {
-			exit(0);
+			if(confirmCloseApplication()) 
+				exit(0);
 		}
 
 		m_select = -1;
@@ -109,6 +111,24 @@ namespace menu
 
 		m_PBQuit->setBackgroundColor(White);
 		m_PBQuit->setForegroundColor(Black);
+	}
+
+	bool MainMenu::confirmCloseApplication()
+	{
+		bool shouldeClose = false;
+		std::unique_ptr<msg::ConfirmMSG> confirm_msg = std::make_unique<msg::ConfirmMSG>(65, 9, [&](bool bSave) {
+			shouldeClose = bSave;
+			});
+
+		confirm_msg->setTitle("CONFIRM CLOSING THE APPLICATION");
+		confirm_msg->setPosition(27, 10);
+		confirm_msg->run();
+
+		if (!shouldeClose) {
+			ui::ConsoleManager::getInstance().clearScreen();
+		}
+
+		return shouldeClose;
 	}
 
 } // namespace menu

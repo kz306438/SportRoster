@@ -27,6 +27,7 @@ namespace menu
 	private:
 		void deleteTeam(int indexOfTeam);
 
+		bool confirmDelete();
 	private:
 		void handleNotification(std::string,
 			std::uint16_t,

@@ -3,6 +3,7 @@
 #include "UI/ConsoleManager.h"
 #include "Message/FatalErrorMSG.h"
 #include "Message/NotificationMSG.h"
+#include "Message/ConfirmMSG.h"
 #include "window.h"
 
 namespace menu
@@ -93,6 +94,9 @@ namespace menu
 		const auto teams = m_appCore.getTeams();
 		if (indexOfTeam >= teams.size()) return;
 
+		if (!confirmDelete())
+			return;
+
 		try {
 			m_appCore.deleteTeam(teams[indexOfTeam]);
 		}
@@ -106,6 +110,26 @@ namespace menu
 		handleNotification("TEAM " + teams[indexOfTeam] + " SUCCESSFULLY DELETED!", 69, 9, 25, 10);
 		ui::ConsoleManager::getInstance().clearScreen();
 		setPendingMenu(MenuType::MainMenu);
+	}
+
+	bool DeleteMenu::confirmDelete()
+	{
+		bool needDelete = false;
+		std::unique_ptr<msg::ConfirmMSG> confirm_msg = std::make_unique<msg::ConfirmMSG>(65, 9, [&](bool bSave) {
+			needDelete = bSave;
+			});
+
+		confirm_msg->setTitle("CONFIRM DELETION OF THE TEAM");
+		confirm_msg->setPosition(27, 10);
+		confirm_msg->run();
+
+		if(!needDelete)
+		{
+			ui::ConsoleManager::getInstance().clearScreen();
+			renderAll();
+		}
+
+		return needDelete;
 	}
 
 	void DeleteMenu::handleNotification(

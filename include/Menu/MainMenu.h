@@ -22,6 +22,9 @@ namespace menu
 		void colorizeButtos();
 
 	private:
+		bool confirmCloseApplication();
+
+	private:
 		core::ApplicationCore& m_appCore;
 
 	private:
