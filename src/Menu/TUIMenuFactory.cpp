@@ -3,6 +3,7 @@
 #include "Menu/MainMenu.h"
 #include "Menu/CreateMenu.h"
 #include "Menu/AddPlayerMenu.h"
+#include "Menu/EditMenu.h"
 #include "Menu/DeleteMenu.h"
 #include "Menu/ViewTeamMenu.h"
 #include <stdexcept>
@@ -17,6 +18,8 @@ namespace menu
 			return std::make_unique<CreateMenu>(m_appCore);
 		} else if (type == MenuType::AddPlayerMenu) {
 			return std::make_unique<AddPlayerMenu>(m_appCore);
+		} else if (type == MenuType::EditMenu) {
+			return std::make_unique<EditMenu>(m_appCore);
 		} else if (type == MenuType::DeleteMenu) {
 			return std::make_unique<DeleteMenu>(m_appCore);
 		} else if (type == MenuType::ViewTeamMenu) {

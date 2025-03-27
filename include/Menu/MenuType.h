@@ -35,6 +35,13 @@ namespace menu
         AddPlayerMenu,
 
         /**
+         * @brief Represents the menu for editing player or team information.
+         *
+         * This menu provides options to modify player details, team details, or other relevant information.
+         */
+        EditMenu,
+
+        /**
          * @brief Represents the menu used for deleting teams.
          *
          * This menu provides options for selecting and removing existing items or configurations.

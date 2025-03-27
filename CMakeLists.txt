@@ -27,7 +27,8 @@ set(SOURCES
     "src/Menu/CreateMenu.cpp"
     "src/Menu/AddPlayerMenu.cpp"
     "src/Menu/DeleteMenu.cpp"
-     "src/Menu/ViewTeamMenu.cpp"
+    "src/Menu/EditMenu.cpp"
+    "src/Menu/ViewTeamMenu.cpp"
     "src/Menu/TUIMenuFactory.cpp"
 
     "src/UI/TUI.cpp"
@@ -65,6 +66,7 @@ set(HEADERS
     "include/Menu/MainMenu.h"
     "include/Menu/CreateMenu.h"
     "include/Menu/AddPlayerMenu.h"
+    "include/Menu/EditMenu.h"
     "include/Menu/DeleteMenu.h"
     "include/Menu/ViewTeamMenu.h"
     "include/Menu/MenuFactoryFactory.h"

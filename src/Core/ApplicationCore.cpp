@@ -29,6 +29,16 @@ namespace core
 		}
 	}
 
+	void ApplicationCore::overwriteTeam(const std::string& team_name, const TeamDataList& teamData)
+	{
+		try {
+			m_storage.overwriteContent(team_name, teamData);
+		}
+		catch (const std::runtime_error& e) {
+			throw std::runtime_error("Failed to overwrite team: " + std::string(e.what()));
+		}
+	}
+
 	TeamDataList ApplicationCore::getTeam(const std::string& team_name) const {
 		try {
 			return m_storage.getContent(team_name);

@@ -41,7 +41,8 @@ namespace menu
 			ui::ConsoleManager::getInstance().clearScreen();
 			setPendingMenu(MenuType::AddPlayerMenu);
 		} else if (m_select == 2) {
-			exit(0);
+			ui::ConsoleManager::getInstance().clearScreen();
+			setPendingMenu(MenuType::EditMenu);
 		} else if (m_select == 3) {
 			ui::ConsoleManager::getInstance().clearScreen();
 			setPendingMenu(MenuType::DeleteMenu);

@@ -16,6 +16,11 @@ namespace ui::widgets
 		init();
 	}
 
+	void EditBox::onRender()
+	{
+		displayCursor();
+	}
+
 	void EditBox::onUpdate(int key)
 	{
 		if (key == 224) { // Arrow keys
@@ -30,7 +35,7 @@ namespace ui::widgets
 					moveUp();
 				break;
 			case 80: // Down arrow
-				if (m_cursorPosY < m_height - 1)
+				if (m_cursorPosY < m_height - 3)
 					m_cursorPosY++;
 				else
 					moveDown();
@@ -39,7 +44,7 @@ namespace ui::widgets
 				if (m_cursorPosX > 0) m_cursorPosX--;
 				break;
 			case 77: // Right arrow
-				if (m_cursorPosX < m_width - 1) m_cursorPosX++;
+				if (m_cursorPosX < m_width - 3) m_cursorPosX++;
 				break;
 			}
 		}
@@ -49,6 +54,7 @@ namespace ui::widgets
 		else if (key >= 32 && key <= 126) { // Printable characters
 			handleInsert(key);
 		}
+		displayText();
 	}
 
 	void EditBox::renderAll()
@@ -56,24 +62,30 @@ namespace ui::widgets
 		Window editBoxFrame(m_width, m_height, m_posX, m_posY);
 		editBoxFrame.addWindowName("edit box", 1, 0);
 		editBoxFrame.show();
+
+		displayText();
+		displayCursor();
 	}
 
-	void EditBox::setContent(Content content)
+	void EditBox::setContent(const Content& content)
 	{
 		m_shift = 0;
-
 		m_content.clear();
 		m_content.resize(content.size());
 
 		for (size_t i = 0; i < content.size(); i++) {
 
-			std::string str(m_width - 2, ' ');
-
-			for (size_t j = 0; j < m_width - 2; j++) {
-				str[j] = (j < content[i].size()) ? content[i][j] : ' ';
+			if (content[i].size() >= m_width - 2) {
+				m_content[i] = content[i];
 			}
-			m_content[i] = str;
+			else {
+				m_content[i] = content[i] + std::string(m_width - 2 - content[i].size(), ' ');
+			}
 		}
+	}
+
+	Content EditBox::getContent() {
+		return m_content;
 	}
 
 	void EditBox::displayCursor()
@@ -82,9 +94,11 @@ namespace ui::widgets
 		setColorBackground(White);
 		setColorForeground(Black);
 
-		setcur(m_posX + m_cursorPosX, m_posY + m_cursorPosY);
-		std::cout << m_content[m_cursorPosY + m_shift][m_cursorPosX];
+		ui::ConsoleManager::getInstance().setCursorPosition(m_posX + m_cursorPosX + 1, m_posY + m_cursorPosY + 1);
 		
+		if(m_content.size() > m_cursorPosY && m_content[0].size() > m_cursorPosX) {
+			std::cout << m_content[m_cursorPosY + m_shift][m_cursorPosX];
+		}
 		restoreConsoleAttributes();
 	}
 
@@ -113,25 +127,31 @@ namespace ui::widgets
 	{
 		if (m_cursorPosY >= 0 && m_cursorPosY < m_content.size()) {
 			m_content[m_cursorPosY + m_shift].insert(m_cursorPosX, 1, key);
-			if (m_cursorPosX < m_width - 1)
+			if (m_cursorPosX < m_width - 3)
 				m_cursorPosX++;
 		}
 	}
 
-	void EditBox::display()
+	void EditBox::displayText()
 	{
 		for (int i = 1; i < m_height - 1; i++) {
 			ui::ConsoleManager::getInstance().setCursorPosition(m_posX + 1, m_posY + i);
-			std::cout <<
-				((i - 1 + m_shift < m_content.size())
-					? m_content[i - 1 + m_shift]
-					: std::string(m_width - 2, ' '));
+
+			if (i - 1 + m_shift < m_content.size()) {
+				std::string line = m_content[i - 1 + m_shift];
+				std::cout << line.substr(0, m_width - 2);
+			}
+			else {
+				std::cout << std::string(m_width - 2, ' ');
+			}
 		}
 	}
 
+
 	void EditBox::init()
 	{
-		renderAll();
+		m_cursorPosX = 0;
+		m_cursorPosY = 0;
 	}
 
 } // namespace ui::widgets

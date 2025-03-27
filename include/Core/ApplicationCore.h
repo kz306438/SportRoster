@@ -40,7 +40,24 @@ namespace core
         */
         void createTeam(const std::string& team_name);
 
+        /**
+         * @brief Deletes the specified team.
+         *
+         * @param team_name The name of the team to delete.
+         *
+         * @throws std::runtime_error If the team could not be deleted.
+         */
         void deleteTeam(const std::string& team_name);
+
+        /**
+         * @brief Overwrites the data of the specified team.
+         *
+         * @param team_name The name of the team to overwrite.
+         * @param teamData The new data to replace the existing team data.
+         *
+         * @throws std::runtime_error If the data could not be overwritten.
+         */
+        void overwriteTeam(const std::string& team_name, const TeamDataList& teamData);
 
         /**
          * @brief Retrieves the data of a team.

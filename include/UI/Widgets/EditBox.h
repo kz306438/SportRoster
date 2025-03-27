@@ -21,13 +21,15 @@ namespace ui::widgets
 			std::uint16_t posY);
 
 	public:
+		void onRender();
 		void onUpdate(int key);
 
 		void renderAll();
 
 	public:
-		void setContent(Content content);
-		void display();
+		void setContent(const Content& content);
+		[[nodiscard]] Content getContent();
+		void displayText();
 
 	private:
 		void init();
