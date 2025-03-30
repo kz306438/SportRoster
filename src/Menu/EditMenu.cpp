@@ -88,7 +88,8 @@ namespace menu
 	bool EditMenu::confirmSave()
 	{
 		bool needSave = false;
-		std::unique_ptr<msg::ConfirmMSG> confirm_msg = std::make_unique<msg::ConfirmMSG>(65, 9, [&](bool bSave) {
+		std::unique_ptr<msg::ConfirmMSG> confirm_msg
+			= std::make_unique<msg::ConfirmMSG>(65, 9, [&](bool bSave) {
 			needSave = bSave;
 			});
 
@@ -100,7 +101,8 @@ namespace menu
 
 	void EditMenu::displayError(const std::string& errorMessage)
 	{
-		std::unique_ptr<msg::FatalErrorMSG> notificationMSG = std::make_unique<msg::FatalErrorMSG>(63, 9);
+		std::unique_ptr<msg::FatalErrorMSG> notificationMSG
+			= std::make_unique<msg::FatalErrorMSG>(63, 9);
 		notificationMSG->setPosition(28, 10);
 		notificationMSG->setTitle(errorMessage);
 		notificationMSG->run();

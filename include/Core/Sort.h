@@ -7,57 +7,74 @@
 
 namespace core::utils
 {
+	/// @brief Threshold for switching to insertion sort
+	const int INSERTION_SORT_THRESHOLD = 16;
 
-	/**
-	 * @brief Performs quicksort on a range using iterators and a custom comparator.
-	 * @tparam RandomIt Iterator type (must be random-access).
-	 * @tparam Compare Comparator type.
-	 * @param first Iterator to the beginning of the range.
-	 * @param last Iterator to the end of the range.
-	 * @param comp Comparator for element comparison.
-	 */
-	template <typename RandomIt, typename Compare = std::less<>()>
-	void quicksort(RandomIt first, RandomIt last, Compare comp) {
-		if (first >= last) return;
-
-		auto pivot = *std::next(first, std::distance(first, last) / 2);
-		RandomIt left = first, right = last - 1;
-
-		while (left <= right) {
-			while (comp(*left, pivot)) ++left;
-			while (comp(pivot, *right)) --right;
-			if (left <= right) {
-				std::iter_swap(left, right);
-				++left;
-				--right;
+	/// @brief Sorts a range using insertion sort (used for small subarrays)
+	/// @param first Iterator to the beginning of the range
+	/// @param last Iterator to the end of the range
+	/// @param comp Comparison function
+	template <typename RandomIt, typename Compare>
+	void insertion_sort(RandomIt first, RandomIt last, Compare comp) {
+		for (RandomIt it = first + 1; it < last; ++it) {
+			auto key = std::move(*it);
+			RandomIt jt = it;
+			while (jt > first && comp(key, *(jt - 1))) {
+				*jt = std::move(*(jt - 1));
+				--jt;
 			}
+			*jt = std::move(key);
 		}
-
-		if (first < right) quicksort(first, right + 1, comp);
-		if (left < last) quicksort(left, last, comp);
 	}
 
-	/**
-    * @brief Performs selection sort on a range using iterators and a custom comparator.
-    * @tparam ForwardIt Iterator type (must be forward-accessible).
-    * @tparam Compare Comparator type.
-    * @param first Iterator to the beginning of the range.
-    * @param last Iterator to the end of the range.
-    * @param comp Comparator for element comparison.
-    */
-	template <typename ForwardIt, typename Compare = std::less<>()>
-	void selectionSort(ForwardIt first, ForwardIt last, Compare comp = std::less<>()) {
-		for (ForwardIt it = first; it != last; ++it) {
-			ForwardIt minIt = it;
-			for (ForwardIt jt = std::next(it); jt != last; ++jt) {
-				if (comp(*jt, *minIt)) {
-					minIt = jt;
-				}
+	/// @brief Partitions the range around a pivot
+	/// @param first Iterator to the beginning of the range
+	/// @param last Iterator to the end of the range
+	/// @param comp Comparison function
+	/// @return Iterator pointing to the partition boundary
+	template <typename RandomIt, typename Compare>
+	RandomIt my_partition(RandomIt first, RandomIt last, Compare comp) {
+		auto pivot = *std::next(first, std::distance(first, last) / 2);
+		RandomIt left = first;
+		RandomIt right = last - 1;
+		while (true) {
+			while (comp(*left, pivot)) ++left;
+			while (comp(pivot, *right)) --right;
+			if (left >= right) return right + 1;
+			std::iter_swap(left, right);
+			++left;
+			--right;
+		}
+	}
+
+	/// @brief Recursively sorts a range using quicksort
+	/// @param first Iterator to the beginning of the range
+	/// @param last Iterator to the end of the range
+	/// @param comp Comparison function
+	template <typename RandomIt, typename Compare>
+	void quicksort(RandomIt first, RandomIt last, Compare comp) {
+		while (std::distance(first, last) > INSERTION_SORT_THRESHOLD) {
+			RandomIt pivot_pos = my_partition(first, last, comp);
+			if (pivot_pos - first < last - pivot_pos) {
+				quicksort(first, pivot_pos, comp);
+				first = pivot_pos;
 			}
-			if (minIt != it) {
-				std::iter_swap(it, minIt);
+			else {
+				quicksort(pivot_pos, last, comp);
+				last = pivot_pos;
 			}
 		}
+		insertion_sort(first, last, comp);
+	}
+
+	/// @brief Sorts a range using quicksort with insertion sort for small subarrays
+	/// @param first Iterator to the beginning of the range
+	/// @param last Iterator to the end of the range
+	/// @param comp Comparison function (default: std::less<>)
+	template <typename RandomIt, typename Compare = std::less<>>
+	void my_sort(RandomIt first, RandomIt last, Compare comp = Compare()) {
+		if (first == last) return;
+		quicksort(first, last, comp);
 	}
 
 } // namespace core::utils

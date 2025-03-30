@@ -6,6 +6,7 @@
 #include "Menu/EditMenu.h"
 #include "Menu/DeleteMenu.h"
 #include "Menu/ViewTeamMenu.h"
+#include "Menu/SortMenu.h"
 #include <stdexcept>
 
 namespace menu
@@ -24,6 +25,8 @@ namespace menu
 			return std::make_unique<DeleteMenu>(m_appCore);
 		} else if (type == MenuType::ViewTeamMenu) {
 			return std::make_unique<ViewTeamMenu>(m_appCore);
+		} else if (type == MenuType::SortMenu) {
+			return std::make_unique<SortMenu>(m_appCore);
 		}
 		else {
 			throw std::invalid_argument("There is no such type of Menu.");

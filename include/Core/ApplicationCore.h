@@ -84,22 +84,8 @@ namespace core
         void addPlayer(const std::string& team, const PlayerDataList& playerData);
 
         /**
-         * @brief Sorts the players in a team using selection sort.
          *
-         * @param team_name The name of the team to sort.
-         */
-        void selectionSort(const std::string& team_name);
-
-        /**
-         * @brief Sorts the players in a team using quicksort.
-         *
-         * @param team_name The name of the team to sort.
-         */
-        void quickSort(const std::string& team_name);
-
-        /**
          * @brief Finds the team with the youngest average age.
-         *
          * @return TeamDataList A list of strings representing the youngest team's data.
          * 
          * @throws std::runtime_error If storage is empty

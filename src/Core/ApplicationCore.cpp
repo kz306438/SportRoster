@@ -62,26 +62,6 @@ namespace core
 		}
 	}
 
-	void ApplicationCore::selectionSort(const std::string& team_name)
-	{
-		Team team = __getTeam(team_name);
-		std::vector<Player> players = team.getPlayers();
-		utils::selectionSort(players.begin(), players.end(),
-			[](const Player& p1, const Player& p2) { return p1.getAge() < p2.getAge(); });
-		team.addAllPlayers(players);
-		m_storage.overwriteContent(team_name, utils::teamToText(team));
-	}
-
-	void ApplicationCore::quickSort(const std::string& team_name)
-	{
-		Team team = __getTeam(team_name);
-		std::vector<Player> players = team.getPlayers();
-		utils::quicksort(players.begin(), players.end(),
-			[](const Player& p1, const Player& p2) { return p1.getAge() < p2.getAge(); });
-		team.addAllPlayers(players);
-		m_storage.overwriteContent(team_name, utils::teamToText(team));
-	}
-
 	TeamDataList ApplicationCore::findYoungestTeam() const
 	{
 		std::vector<std::string> files = m_storage.getFiles();

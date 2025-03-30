@@ -56,6 +56,14 @@ namespace menu
         ViewTeamMenu,
 
         /**
+         * @brief Represents the menu for sorting teams based on various parameters.
+         *
+         * This menu allows users to sort teams using different criteria and displays
+         * the sorted team results on the screen.
+         */
+        SortMenu,
+
+        /**
          * @brief Represents an unknown or undefined menu type.
          *
          * This value is used as a fallback or placeholder when the menu type is not recognized or is unspecified.

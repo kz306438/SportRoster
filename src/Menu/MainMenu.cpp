@@ -9,7 +9,7 @@
 namespace menu
 {
 	/*explicit*/ MainMenu::MainMenu(core::ApplicationCore& appCore)
-		: m_appCore(appCore) 
+		: m_appCore(appCore)
 	{
 		createButtons();
 		connectButtons();
@@ -17,7 +17,7 @@ namespace menu
 	}
 
 	void MainMenu::onRender() /*override*/
-	{		
+	{
 		m_PBCreateTeam->allowChanges();			 m_PBCreateTeam->show();
 		m_PBAddPlayer->allowChanges();			 m_PBAddPlayer->show();
 		m_PBEditTeam->allowChanges();			 m_PBEditTeam->show();
@@ -27,35 +27,43 @@ namespace menu
 		m_PBSort->allowChanges();				 m_PBSort->show();
 		m_PBQuit->allowChanges();				 m_PBQuit->show();
 	}
-	
+
 	void MainMenu::onUpdate() /*override*/
 	{
 		mouseButtonInteraction(m_PBCreateTeam.get(), m_PBAddPlayer.get(), m_PBEditTeam.get(),
-			m_PBDeleteTeam.get(), m_PBViewTeam.get(), m_PBViewYoungestTeam.get(), 
+			m_PBDeleteTeam.get(), m_PBViewTeam.get(), m_PBViewYoungestTeam.get(),
 			m_PBSort.get(), m_PBQuit.get());
 
 
 		if (m_select == 0) {
 			ui::ConsoleManager::getInstance().clearScreen();
 			setPendingMenu(MenuType::CreateMenu);
-		} else if (m_select == 1) {
+		}
+		else if (m_select == 1) {
 			ui::ConsoleManager::getInstance().clearScreen();
 			setPendingMenu(MenuType::AddPlayerMenu);
-		} else if (m_select == 2) {
+		}
+		else if (m_select == 2) {
 			ui::ConsoleManager::getInstance().clearScreen();
 			setPendingMenu(MenuType::EditMenu);
-		} else if (m_select == 3) {
+		}
+		else if (m_select == 3) {
 			ui::ConsoleManager::getInstance().clearScreen();
 			setPendingMenu(MenuType::DeleteMenu);
-		} else if (m_select == 4) {
+		}
+		else if (m_select == 4) {
 			ui::ConsoleManager::getInstance().clearScreen();
 			setPendingMenu(MenuType::ViewTeamMenu);
-		} else if (m_select == 5) {
+		}
+		else if (m_select == 5) {
 			exit(0);
-		} else if (m_select == 6) {
-			exit(0);
-		} else if (m_select == 7) {
-			if(confirmCloseApplication()) 
+		}
+		else if (m_select == 6) {
+			ui::ConsoleManager::getInstance().clearScreen();
+			setPendingMenu(MenuType::SortMenu);
+		}
+		else if (m_select == 7) {
+			if (confirmCloseApplication())
 				exit(0);
 		}
 
@@ -64,14 +72,14 @@ namespace menu
 
 	void MainMenu::createButtons()
 	{
-		m_PBCreateTeam		 = std::make_unique<PushButton>(30, 3, "CREATE TEAM", 50, 14);
-		m_PBAddPlayer		 = std::make_unique<PushButton>(30, 3, "ADD PLAYER", 50, 17);
-		m_PBEditTeam		 = std::make_unique<PushButton>(30, 3, "EDIT TEAM", 50, 20);
-		m_PBDeleteTeam		 = std::make_unique<PushButton>(30, 3, "DELETE TEAM", 50, 23);
-		m_PBViewTeam		 = std::make_unique<PushButton>(30, 3, "VIEW TEAM", 85, 14);
+		m_PBCreateTeam = std::make_unique<PushButton>(30, 3, "CREATE TEAM", 50, 14);
+		m_PBAddPlayer = std::make_unique<PushButton>(30, 3, "ADD PLAYER", 50, 17);
+		m_PBEditTeam = std::make_unique<PushButton>(30, 3, "EDIT TEAM", 50, 20);
+		m_PBDeleteTeam = std::make_unique<PushButton>(30, 3, "DELETE TEAM", 50, 23);
+		m_PBViewTeam = std::make_unique<PushButton>(30, 3, "VIEW TEAM", 85, 14);
 		m_PBViewYoungestTeam = std::make_unique<PushButton>(30, 3, "VIEW YOUNGEST TEAM", 85, 17);
-		m_PBSort			 = std::make_unique<PushButton>(30, 3, "SORT", 85, 20);
-		m_PBQuit			 = std::make_unique<PushButton>(30, 3, "QUIT", 85, 23);
+		m_PBSort = std::make_unique<PushButton>(30, 3, "SORT", 85, 20);
+		m_PBQuit = std::make_unique<PushButton>(30, 3, "QUIT", 85, 23);
 	}
 
 	void MainMenu::connectButtons()
@@ -88,7 +96,7 @@ namespace menu
 
 	void MainMenu::colorizeButtos()
 	{
-		m_PBCreateTeam->setBackgroundColor(White); 
+		m_PBCreateTeam->setBackgroundColor(White);
 		m_PBCreateTeam->setForegroundColor(Black);
 
 		m_PBAddPlayer->setBackgroundColor(White);
