@@ -64,7 +64,9 @@ namespace menu
 
 		handleEditLoop();
 
-		auto resultText = core::utils::textToTeamDataList(m_editBox->getContent());
+		auto content = m_editBox->getContent();
+		cleanFileLines(content);
+		auto resultText = core::utils::textToTeamDataList(content);
 		if (confirmSave()) {
 			saveTeamData(teams[indexOfTeam], resultText);
 		}
@@ -91,12 +93,23 @@ namespace menu
 		std::unique_ptr<msg::ConfirmMSG> confirm_msg
 			= std::make_unique<msg::ConfirmMSG>(65, 9, [&](bool bSave) {
 			needSave = bSave;
-			});
+				});
 
 		confirm_msg->setTitle("SAVE THE CHANGES");
 		confirm_msg->setPosition(27, 10);
 		confirm_msg->run();
 		return needSave;
+	}
+
+	void EditMenu::cleanFileLines(std::vector<std::string>& lines)
+	{
+		for (std::string& line : lines) {
+			line.erase(line.find_last_not_of(" \t") + 1);
+		}
+
+		while (!lines.empty() && lines.back().empty()) {
+			lines.pop_back();
+		}
 	}
 
 	void EditMenu::displayError(const std::string& errorMessage)
@@ -201,5 +214,6 @@ namespace menu
 		if (m_sliderShift + m_slider->capacity() - 2 < m_appCore.getTeams().size())
 			m_sliderShift++;
 	}
+
 
 } // namespace menu

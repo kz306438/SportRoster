@@ -29,6 +29,8 @@ namespace menu
 		void displayError(const std::string& errorMessage);
 		void saveTeamData(const std::string& teamName, const std::vector<std::string>& resultText);
 		bool confirmSave();
+
+		void cleanFileLines(std::vector<std::string>& lines);
 	
 	private:
 		void renderAll();
