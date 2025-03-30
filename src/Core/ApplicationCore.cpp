@@ -12,7 +12,7 @@ namespace core
 
 	void ApplicationCore::createTeam(const std::string& team_name) {
 		try {
-			m_storage.createFile(team_name);
+			m_storage.createFile(team_name + ".txt");
 		}
 		catch (const std::runtime_error& e) {
 			throw std::runtime_error("Failed to create team: " + std::string(e.what()));
@@ -22,7 +22,7 @@ namespace core
 	void ApplicationCore::deleteTeam(const std::string& team_name)
 	{
 		try {
-			m_storage.deleteFile(team_name);
+			m_storage.deleteFile(team_name + ".txt");
 		}
 		catch (const std::invalid_argument& e) {
 			throw std::invalid_argument("Failed to delete team: " + std::string(e.what()));
@@ -32,7 +32,7 @@ namespace core
 	void ApplicationCore::overwriteTeam(const std::string& team_name, const TeamDataList& teamData)
 	{
 		try {
-			m_storage.overwriteContent(team_name, teamData);
+			m_storage.overwriteContent(team_name + ".txt", teamData);
 		}
 		catch (const std::runtime_error& e) {
 			throw std::runtime_error("Failed to overwrite team: " + std::string(e.what()));
@@ -41,7 +41,7 @@ namespace core
 
 	TeamDataList ApplicationCore::getTeam(const std::string& team_name) const {
 		try {
-			return m_storage.getContent(team_name);
+			return m_storage.getContent(team_name + ".txt");
 		}
 		catch (const std::runtime_error& e) {
 			throw std::runtime_error("Failed to get team: " + std::string(e.what()));
@@ -50,12 +50,16 @@ namespace core
 
 
 	std::vector<std::string> ApplicationCore::getTeams() const {
-		return m_storage.getFiles();
+		auto files = m_storage.getFiles();
+		for (auto& file : files) {
+			file = utils::removeTxtExtension(file);
+		}
+		return files;
 	}
 
 	void ApplicationCore::addPlayer(const std::string& team, const PlayerDataList& playerData) {
 		try {
-			m_storage.addContent(team, playerData);
+			m_storage.addContent(team + ".txt", playerData);
 		}
 		catch (const std::runtime_error& e) {
 			throw std::runtime_error("Failed to add player: " + std::string(e.what()));
@@ -86,7 +90,7 @@ namespace core
 
 	PlayerDataList ApplicationCore::linearSearch(const std::string& team_name, std::uint16_t game_number) const
 	{
-		auto result = __linearSearch(team_name, game_number);
+		auto result = __linearSearch(team_name + ".txt", game_number);
 
 		if (!result) {
 			throw std::runtime_error("Player not found!");
@@ -97,7 +101,7 @@ namespace core
 
 	PlayerDataList ApplicationCore::binarySearch(const std::string& team_name, std::uint16_t gameNumber) const
 	{
-		auto result = __binarySearch(team_name, gameNumber);
+		auto result = __binarySearch(team_name + ".txt", gameNumber);
 
 		if (!result) {
 			throw std::runtime_error("Player not found!");
@@ -108,7 +112,7 @@ namespace core
 
 	Team ApplicationCore::__getTeam(const std::string& team_name) const
 	{
-		TeamDataList teamDataList = m_storage.getContent(team_name);
+		TeamDataList teamDataList = m_storage.getContent(team_name + ".txt");
 		return utils::textToTeam(team_name, teamDataList);
 	}
 

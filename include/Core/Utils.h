@@ -74,6 +74,12 @@ namespace core
          */
         [[nodiscard]] TeamDataList textToTeamDataList(const TeamDataList& labeledDataList);
 
+        /**
+         * @brief Removes the ".txt" extension from the filename if present.
+         * @param filename The original filename.
+         * @return Filename without the ".txt" extension.
+         */
+        [[nodiscard]] std::string removeTxtExtension(const std::string& filename);
 
         /**
          * @brief Calculates the average age of all players in a team.

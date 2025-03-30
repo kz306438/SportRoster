@@ -104,6 +104,13 @@ namespace core::utils
     }
 
 
+    std::string removeTxtExtension(const std::string& filename) {
+        if (filename.size() > 4 && filename.substr(filename.size() - 4) == ".txt") {
+            return filename.substr(0, filename.size() - 4);
+        }
+        return filename;
+    }
+
     double averageAgeOfTeam(const Team& team)
     {
         const auto& players = team.getPlayersRef();
