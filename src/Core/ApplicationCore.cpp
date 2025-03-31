@@ -88,23 +88,27 @@ namespace core
 		return utils::teamToText(youngestTeam);
 	}
 
-	PlayerDataList ApplicationCore::linearSearch(const std::string& team_name, std::uint16_t game_number) const
+	PlayerDataList ApplicationCore::linearSearch(
+		const std::string& team_name,
+		const std::string& surname) const
 	{
-		auto result = __linearSearch(team_name + ".txt", game_number);
+		auto result = __linearSearch(team_name, surname);
 
 		if (!result) {
-			throw std::runtime_error("Player not found!");
+			return PlayerDataList();
 		}
 
 		return utils::playerToText(result.value());
 	}
 
-	PlayerDataList ApplicationCore::binarySearch(const std::string& team_name, std::uint16_t gameNumber) const
+	PlayerDataList ApplicationCore::binarySearch(
+		const std::string& team_name,
+		const std::string& surname) const
 	{
-		auto result = __binarySearch(team_name + ".txt", gameNumber);
+		auto result = __binarySearch(team_name, surname);
 
 		if (!result) {
-			throw std::runtime_error("Player not found!");
+			return PlayerDataList();
 		}
 
 		return utils::playerToText(result.value());
@@ -116,28 +120,28 @@ namespace core
 		return utils::textToTeam(team_name, teamDataList);
 	}
 
-	std::optional<Player> ApplicationCore::__binarySearch(const std::string& team_name, std::uint16_t game_number) const
+	std::optional<Player> ApplicationCore::__binarySearch(
+		const std::string& team_name,
+		const std::string& surname) const
 	{
 		Team team = __getTeam(team_name);
 		const std::vector<Player>& players = team.getPlayersRef();
 
-		if (!std::is_sorted(players.begin(), players.end(),
-			[](const Player& p1, const Player& p2) {
-				return p1.getGameNumber() < p2.getGameNumber();
-			}))
-		{
-			return std::nullopt;
-		}
-
 		int left = 0, right = players.size() - 1;
 		while (left <= right) {
 			int mid = left + (right - left) / 2;
-			std::uint16_t midGameNumber = players[mid].getGameNumber();
+			std::string midSurname = players[mid].getSurname();
 
-			if (midGameNumber == game_number) {
+			if ((mid > left && players[mid].getSurname() < players[mid - 1].getSurname()) ||
+				(mid < right && players[mid].getSurname() > players[mid + 1].getSurname()))
+			{
+				return std::nullopt; 
+			}
+
+			if (midSurname == surname) {
 				return players[mid];
 			}
-			else if (midGameNumber < game_number) {
+			else if (midSurname < surname) {
 				left = mid + 1;
 			}
 			else {
@@ -148,13 +152,16 @@ namespace core
 		return std::nullopt;
 	}
 
-	std::optional<Player> ApplicationCore::__linearSearch(const std::string& team_name, std::uint16_t game_number) const
+
+	std::optional<Player> ApplicationCore::__linearSearch(
+		const std::string& team_name, 
+		const std::string& surname) const
 	{
 		const Team team = __getTeam(team_name);
 		const std::vector<Player>& players = team.getPlayersRef();
 
 		for (const auto& player : players) {
-			if (player.getGameNumber() == game_number) {
+			if (player.getSurname() == surname) {
 				return player;
 			}
 		}

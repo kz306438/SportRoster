@@ -91,6 +91,27 @@ namespace core
          */
         [[nodiscard]] double averageAgeOfTeam(const Team& team);
 
+        /**
+         * @brief Calculates the average height of all players in a team.
+         *
+         * This function computes the average height of the players in the given team.
+         *
+         * @param team The team whose players' heights will be averaged.
+         * @return double The average height of the players in the team.
+         */
+        [[nodiscard]] double averageHeightOfTeam(const Team& team);
+    
+        /**
+         * @brief Calculates the average weight of all players in a team.
+         *
+         * This function computes the average weight of the players in the given team.
+         *
+         * @param team The team whose players' weights will be averaged.
+         * @return double The average weight of the players in the team.
+         */
+        [[nodiscard]] double averageWeightOfTeam(const Team& team);
+
+
     } // namespace utils
 
 } // namespace core

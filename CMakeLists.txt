@@ -29,6 +29,7 @@ set(SOURCES
     "src/Menu/DeleteMenu.cpp"
     "src/Menu/EditMenu.cpp"
     "src/Menu/ViewTeamMenu.cpp"
+    "src/Menu/AnalyticsMenu.cpp"
     "src/Menu/SortMenu.cpp"
     "src/Menu/TUIMenuFactory.cpp"
 
@@ -70,6 +71,7 @@ set(HEADERS
     "include/Menu/EditMenu.h"
     "include/Menu/DeleteMenu.h"
     "include/Menu/ViewTeamMenu.h"
+    "include/Menu/AnalyticsMenu.h"
     "include/Menu/SortMenu.h"
     "include/Menu/MenuFactoryFactory.h"
     "include/Menu/TUIMenuFactory.h"

@@ -174,12 +174,15 @@ namespace menu
 	void SortMenu::updateSliderButtonsName()
 	{
 		auto& buttons = m_slider->getButtons();
-		const std::vector<std::string> teams = m_appCore.getTeams();
-		for (int i = 1; i < buttons.size() - 1; i++) {
-			buttons[i]->setName(
-				(i - 1 + m_sliderShift < teams.size()) ?
-				teams[i - 1 + m_sliderShift]
-				: "");
+		const std::vector<std::string>& teams = m_appCore.getTeams();
+
+		if (buttons.size() < 2) {
+			return;
+		}
+
+		for (size_t i = 1; i + 1 < buttons.size(); ++i) {
+			size_t index = i - 1 + m_sliderShift;
+			buttons[i]->setName(index < teams.size() ? teams[index] : "");
 		}
 	}
 
@@ -255,7 +258,7 @@ namespace menu
 
 		m_textBox->displayText();
 	}
-
+	
 	bool SortMenu::applySort(const std::string& teamname, std::vector<std::string>& teamDataList)
 	{
 		if (m_currentSortKey == SortKey::Unknown) {

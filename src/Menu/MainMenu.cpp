@@ -23,7 +23,7 @@ namespace menu
 		m_PBEditTeam->allowChanges();			 m_PBEditTeam->show();
 		m_PBDeleteTeam->allowChanges();			 m_PBDeleteTeam->show();
 		m_PBViewTeam->allowChanges();			 m_PBViewTeam->show();
-		m_PBViewYoungestTeam->allowChanges();	 m_PBViewYoungestTeam->show();
+		m_PBAnalytics->allowChanges();	 m_PBAnalytics->show();
 		m_PBSort->allowChanges();				 m_PBSort->show();
 		m_PBQuit->allowChanges();				 m_PBQuit->show();
 	}
@@ -31,7 +31,7 @@ namespace menu
 	void MainMenu::onUpdate() /*override*/
 	{
 		mouseButtonInteraction(m_PBCreateTeam.get(), m_PBAddPlayer.get(), m_PBEditTeam.get(),
-			m_PBDeleteTeam.get(), m_PBViewTeam.get(), m_PBViewYoungestTeam.get(),
+			m_PBDeleteTeam.get(), m_PBViewTeam.get(), m_PBAnalytics.get(),
 			m_PBSort.get(), m_PBQuit.get());
 
 
@@ -56,7 +56,8 @@ namespace menu
 			setPendingMenu(MenuType::ViewTeamMenu);
 		}
 		else if (m_select == 5) {
-			exit(0);
+			ui::ConsoleManager::getInstance().clearScreen();
+			setPendingMenu(MenuType::AnalyticsMenu);
 		}
 		else if (m_select == 6) {
 			ui::ConsoleManager::getInstance().clearScreen();
@@ -77,7 +78,7 @@ namespace menu
 		m_PBEditTeam = std::make_unique<PushButton>(30, 3, "EDIT TEAM", 50, 20);
 		m_PBDeleteTeam = std::make_unique<PushButton>(30, 3, "DELETE TEAM", 50, 23);
 		m_PBViewTeam = std::make_unique<PushButton>(30, 3, "VIEW TEAM", 85, 14);
-		m_PBViewYoungestTeam = std::make_unique<PushButton>(30, 3, "VIEW YOUNGEST TEAM", 85, 17);
+		m_PBAnalytics = std::make_unique<PushButton>(30, 3, "ANALYTICS", 85, 17);
 		m_PBSort = std::make_unique<PushButton>(30, 3, "SORT", 85, 20);
 		m_PBQuit = std::make_unique<PushButton>(30, 3, "QUIT", 85, 23);
 	}
@@ -89,7 +90,7 @@ namespace menu
 		m_PBEditTeam->connect([&]() { m_select = 2; });
 		m_PBDeleteTeam->connect([&]() { m_select = 3; });
 		m_PBViewTeam->connect([&]() { m_select = 4; });
-		m_PBViewYoungestTeam->connect([&]() { m_select = 5; });
+		m_PBAnalytics->connect([&]() { m_select = 5; });
 		m_PBSort->connect([&]() { m_select = 6; });
 		m_PBQuit->connect([&]() { m_select = 7; });
 	}
@@ -111,8 +112,8 @@ namespace menu
 		m_PBViewTeam->setBackgroundColor(White);
 		m_PBViewTeam->setForegroundColor(Black);
 
-		m_PBViewYoungestTeam->setBackgroundColor(White);
-		m_PBViewYoungestTeam->setForegroundColor(Black);
+		m_PBAnalytics->setBackgroundColor(White);
+		m_PBAnalytics->setForegroundColor(Black);
 
 		m_PBSort->setBackgroundColor(White);
 		m_PBSort->setForegroundColor(Black);

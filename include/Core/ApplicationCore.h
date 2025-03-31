@@ -98,10 +98,8 @@ namespace core
          * @param team_name The name of the team.
          * @param gameNumber The game number of the player to find.
          * @return PlayerDataList A list of strings representing the player's data if found.
-         * 
-         * @throws throw std::runtime_error If the player was not found
          */
-        [[nodiscard]] PlayerDataList linearSearch(const std::string& team_name, std::uint16_t gameNumber) const;
+        [[nodiscard]] PlayerDataList linearSearch(const std::string& team_name, const std::string& surname) const;
 
         /**
          * @brief Performs a binary search to find a player by game number in a team.
@@ -109,10 +107,8 @@ namespace core
          * @param team_name The name of the team.
          * @param gameNumber The game number of the player to find.
          * @return PlayerDataList A list of strings representing the player's data if found.
-         * 
-         * @throws throw std::runtime_error If the player was not found
          */
-        [[nodiscard]] PlayerDataList binarySearch(const std::string& team_name, std::uint16_t gameNumber) const;
+        [[nodiscard]] PlayerDataList binarySearch(const std::string& team_name, const std::string& surname) const;
 
     private:
         /**
@@ -130,7 +126,7 @@ namespace core
          * @param game_number The game number of the player.
          * @return std::optional<Player> The player if found, otherwise an empty optional.
          */
-        std::optional<Player> __binarySearch(const std::string& team_name, std::uint16_t game_number) const;
+        std::optional<Player> __binarySearch(const std::string& team_name, const std::string& surname) const;
             
         /**
          * @brief Performs a linear search to find a player by their game number in a team.
@@ -139,7 +135,7 @@ namespace core
          * @param game_number The game number of the player.
          * @return std::optional<Player> The player if found, otherwise an empty optional.
          */
-        std::optional<Player> __linearSearch(const std::string& team_name, std::uint16_t game_number) const;
+        std::optional<Player> __linearSearch(const std::string& team_name, const std::string& surname) const;
 
     private:
         Storage m_storage; ///< Storage instance for team and player data.

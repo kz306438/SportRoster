@@ -20,7 +20,7 @@ namespace menu
 		void onUpdate() override;
 
 	private:
-		void init();
+				void init();
 
 	private:
 		void editTeam(int indexOfTeam);

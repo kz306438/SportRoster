@@ -34,7 +34,7 @@ namespace menu
 		std::unique_ptr<PushButton> m_PBEditTeam;
 		std::unique_ptr<PushButton> m_PBDeleteTeam;
 		std::unique_ptr<PushButton> m_PBViewTeam;
-		std::unique_ptr<PushButton> m_PBViewYoungestTeam;
+		std::unique_ptr<PushButton> m_PBAnalytics;
 		std::unique_ptr<PushButton> m_PBSort;
 		std::unique_ptr<PushButton> m_PBQuit;
 	};

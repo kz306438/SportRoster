@@ -123,4 +123,29 @@ namespace core::utils
         return totalAge / players.size();
     }
 
+    double averageHeightOfTeam(const Team& team)
+    {
+        const auto& players = team.getPlayersRef();
+        if (players.empty()) return -1.0;
+
+        double totalHeight = 0;
+        for (const auto& player : players) {
+            totalHeight += player.getHeight();
+        }
+        return totalHeight / players.size();
+    }
+
+    double averageWeightOfTeam(const Team& team)
+    {
+        const auto& players = team.getPlayersRef();
+        if (players.empty()) return -1.0;
+
+        double totalWeight = 0;
+        for (const auto& player : players) {
+            totalWeight += player.getWeight();
+        }
+        return totalWeight / players.size();
+
+    }
+
 } // namespace core::utils

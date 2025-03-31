@@ -56,6 +56,13 @@ namespace menu
         ViewTeamMenu,
 
         /**
+         * @brief Represents the menu for viewing analytics data.
+         *
+         * This menu provides options for analyzing statistics and performance metrics.
+         */
+        AnalyticsMenu,
+
+        /**
          * @brief Represents the menu for sorting teams based on various parameters.
          *
          * This menu allows users to sort teams using different criteria and displays
