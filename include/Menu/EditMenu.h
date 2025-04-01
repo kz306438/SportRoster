@@ -51,7 +51,7 @@ namespace menu
 		core::ApplicationCore& m_appCore;
 		
 	private:
-		std::unique_ptr<PushButton> m_PBBack;
+		std::unique_ptr<CustomButton> m_CBBack;
 		std::unique_ptr<ui::widgets::Slider> m_slider;
 		std::unique_ptr<ui::widgets::EditBox> m_editBox;
 	};

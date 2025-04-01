@@ -17,7 +17,7 @@ namespace menu
 	void EditMenu::onRender() /*override*/
 	{
 		m_slider->onRender();
-		m_PBBack->allowChanges(); m_PBBack->show();
+		m_CBBack->allowChanges(); m_CBBack->show();
 	}
 
 	void EditMenu::onUpdate() /*override*/
@@ -32,18 +32,23 @@ namespace menu
 			sliderButtons[4].get(),
 			sliderButtons[5].get(),
 			sliderButtons[6].get(),
-			m_PBBack.get()
+			m_CBBack.get()
 		);
 	}
 
 	void EditMenu::init()
 	{
-		m_PBBack = std::make_unique<PushButton>(20, 5, "BACK", 63, 21);
+		std::vector<std::vector<char>> backSym = {
+			{char(201),	 char(205),	  char(205),   char(205),	 char(187)},
+			{char(186),	 ' ',		  'X',		   ' ',		     char(186)},
+			{char(200),	 char(205),	  char(205),   char(205),	 char(188)}
+		};
+		m_CBBack = std::make_unique<CustomButton>(backSym, backSym, 85, 1);
 		m_slider = std::make_unique<ui::widgets::Slider>(5, 20, 3, 36, 5);
 		m_editBox = std::make_unique<ui::widgets::EditBox>(30, 15, 56, 7);
 
-		m_PBBack->setBackgroundColor(White);
-		m_PBBack->setForegroundColor(Black);
+		m_CBBack->setBackgroundColor(Blue);
+		m_CBBack->setForegroundColor(White);
 
 		connectButtons();
 		updateSliderButtonsName();
@@ -171,7 +176,7 @@ namespace menu
 
 	void EditMenu::connectButtons()
 	{
-		m_PBBack->connect([&]() {
+		m_CBBack->connect([&]() {
 			ui::ConsoleManager::getInstance().clearScreen();
 			setPendingMenu(MenuType::MainMenu);
 			});

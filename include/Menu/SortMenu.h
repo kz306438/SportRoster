@@ -84,7 +84,7 @@ namespace menu
 		std::vector<std::string> m_dataOfLastSortedTeam;
 
 	private:
-		std::unique_ptr<CustomButton> m_PBBack;
+		std::unique_ptr<CustomButton> m_CBBack;
 		
 		std::unique_ptr<PushButton> m_PBSortSurname;
 		std::unique_ptr<PushButton> m_PBSortAge;

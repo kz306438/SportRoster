@@ -29,7 +29,7 @@ namespace menu
 		m_PBSortGameNumber->allowChanges();	 m_PBSortGameNumber->show();
 		m_PBAscending->allowChanges();		 m_PBAscending->show();
 		m_PBDescending->allowChanges();		 m_PBDescending->show();
-		m_PBBack->allowChanges();			 m_PBBack->show();
+		m_CBBack->allowChanges();			 m_CBBack->show();
 	}
 
 	void SortMenu::onUpdate()
@@ -52,7 +52,7 @@ namespace menu
 			m_PBSortAge.get(),
 			m_PBSortHeight.get(),
 			m_PBSortGameNumber.get(),
-			m_PBBack.get(),
+			m_CBBack.get(),
 			m_PBAscending.get(),
 			m_PBDescending.get()
 		);
@@ -76,14 +76,14 @@ namespace menu
 			{char(186),	 ' ',		  'X',		   ' ',		     char(186)},
 			{char(200),	 char(205),	  char(205),   char(205),	 char(188)}
 		};
-		m_PBBack = std::make_unique<CustomButton>(backSym, backSym, 101, 2);
+		m_CBBack = std::make_unique<CustomButton>(backSym, backSym, 101, 2);
 
 
 		setupSortKeyButtonsColor();
 		setupSortOrderButtonsColor();
 
-		m_PBBack->setBackgroundColor(Blue);
-		m_PBBack->setForegroundColor(White);
+		m_CBBack->setBackgroundColor(Blue);
+		m_CBBack->setForegroundColor(White);
 
 		connectButtons();
 		updateSliderButtonsName();
@@ -97,7 +97,7 @@ namespace menu
 
 	void SortMenu::connectButtons()
 	{
-		m_PBBack->connect([&]() {
+		m_CBBack->connect([&]() {
 			if (m_indexOfLastSortedTeam >= 0 && confirmSave()) {
 				saveSortedTeam();
 			}

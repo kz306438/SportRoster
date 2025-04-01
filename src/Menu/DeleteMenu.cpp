@@ -18,7 +18,7 @@ namespace menu
 	void DeleteMenu::onRender()
 	{
 		m_slider->onRender();
-		m_PBBack->allowChanges(); m_PBBack->show();
+		m_CBBack->allowChanges(); m_CBBack->show();
 	}
 
 	void DeleteMenu::onUpdate()
@@ -32,7 +32,7 @@ namespace menu
 			buttons[4].get(),
 			buttons[5].get(),
 			buttons[6].get(),
-			m_PBBack.get()
+			m_CBBack.get()
 		);
 	}
 
@@ -58,9 +58,14 @@ namespace menu
 	{
 		m_slider = std::make_unique<ui::widgets::Slider>(5, 20, 3, 36, 5);
 
-		m_PBBack = std::make_unique<PushButton>(20, 5, "BACK", 62, 21);
-		m_PBBack->setBackgroundColor(White);
-		m_PBBack->setForegroundColor(Black);
+		std::vector<std::vector<char>> backSym = {
+			{char(201),	 char(205),	  char(205),   char(205),	 char(187)},
+			{char(186),	 ' ',		  'X',		   ' ',		     char(186)},
+			{char(200),	 char(205),	  char(205),   char(205),	 char(188)}
+		};
+		m_CBBack = std::make_unique<CustomButton>(backSym, backSym, 85, 1);
+		m_CBBack->setBackgroundColor(Blue);
+		m_CBBack->setForegroundColor(White);
 
 		connectButtons();
 		updateButtonsName();
@@ -70,7 +75,7 @@ namespace menu
 
 	void DeleteMenu::connectButtons()
 	{
-		m_PBBack->connect([&]() {
+		m_CBBack->connect([&]() {
 			ui::ConsoleManager::getInstance().clearScreen();
 			setPendingMenu(MenuType::MainMenu);
 			});

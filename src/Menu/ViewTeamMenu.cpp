@@ -18,7 +18,7 @@ namespace menu
 	{
 		m_slider->onRender();
 		m_textBox->onRender();
-		m_PBBack->allowChanges(); m_PBBack->show();
+		m_CBBack->allowChanges(); m_CBBack->show();
 	}
 
 	void ViewTeamMenu::onUpdate()
@@ -37,22 +37,27 @@ namespace menu
 			sliderButtons[6].get(),
 			textBoxUpButton.get(),
 			textBoxDownButton.get(),
-			m_PBBack.get()
+			m_CBBack.get()
 		);
 	}
 
 	void ViewTeamMenu::init() {
-		m_PBBack	 = std::make_unique<PushButton>(20, 5, "BACK", 87, 4);
-		m_slider	 = std::make_unique<ui::widgets::Slider>(5, 20, 3, 15, 5);	
-		m_textBox	 = std::make_unique<ui::widgets::TextBox>(40, 21, 40, 5);	
+		std::vector<std::vector<char>> backSym = {
+			{char(201),	 char(205),	  char(205),   char(205),	 char(187)},
+			{char(186),	 ' ',		  'X',		   ' ',		     char(186)},
+			{char(200),	 char(205),	  char(205),   char(205),	 char(188)}
+		};
+		m_CBBack = std::make_unique<CustomButton>(backSym, backSym, 88, 2);
+		m_slider	 = std::make_unique<ui::widgets::Slider>(5, 20, 3, 27, 5);	
+		m_textBox	 = std::make_unique<ui::widgets::TextBox>(40, 21, 52, 5);	
 
-		m_PBBack->setBackgroundColor(White);
-		m_PBBack->setForegroundColor(Black);
+		m_CBBack->setBackgroundColor(Blue);
+		m_CBBack->setForegroundColor(White);
 
 		connectButtons();
 		updateSliderButtonsName();
 
-		Window mainFrame(69, 24, 13, 3);
+		Window mainFrame(69, 24, 25, 3);
 		mainFrame.addWindowName("VIEW TEAM", 1, 0);
 		mainFrame.show();
 
@@ -80,7 +85,7 @@ namespace menu
 
 	void ViewTeamMenu::connectButtons()
 	{
-		m_PBBack->connect([&]() {
+		m_CBBack->connect([&]() {
 			ui::ConsoleManager::getInstance().clearScreen();
 			setPendingMenu(MenuType::MainMenu);
 			});
