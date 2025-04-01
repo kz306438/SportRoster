@@ -76,7 +76,6 @@ namespace menu
 			saveTeamData(teams[indexOfTeam], resultText);
 		}
 
-		ui::ConsoleManager::getInstance().clearScreen();
 		setPendingMenu(MenuType::MainMenu);
 	}
 

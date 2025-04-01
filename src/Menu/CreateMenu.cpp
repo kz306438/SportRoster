@@ -105,7 +105,6 @@ namespace menu
 				notificationMSG->run();
 			}
 			handleNotification("TEAM CREATED SUCCESSFULLY!", 63, 9, 28, 10);
-			ui::ConsoleManager::getInstance().clearScreen();
 			setPendingMenu(MenuType::MainMenu);
 		}
 	}

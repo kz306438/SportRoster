@@ -36,31 +36,24 @@ namespace menu
 
 
 		if (m_select == 0) {
-			ui::ConsoleManager::getInstance().clearScreen();
 			setPendingMenu(MenuType::CreateMenu);
 		}
 		else if (m_select == 1) {
-			ui::ConsoleManager::getInstance().clearScreen();
 			setPendingMenu(MenuType::AddPlayerMenu);
 		}
 		else if (m_select == 2) {
-			ui::ConsoleManager::getInstance().clearScreen();
 			setPendingMenu(MenuType::EditMenu);
 		}
 		else if (m_select == 3) {
-			ui::ConsoleManager::getInstance().clearScreen();
 			setPendingMenu(MenuType::DeleteMenu);
 		}
 		else if (m_select == 4) {
-			ui::ConsoleManager::getInstance().clearScreen();
 			setPendingMenu(MenuType::ViewTeamMenu);
 		}
 		else if (m_select == 5) {
-			ui::ConsoleManager::getInstance().clearScreen();
 			setPendingMenu(MenuType::AnalyticsMenu);
 		}
 		else if (m_select == 6) {
-			ui::ConsoleManager::getInstance().clearScreen();
 			setPendingMenu(MenuType::SortMenu);
 		}
 		else if (m_select == 7) {

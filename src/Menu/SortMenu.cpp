@@ -101,7 +101,6 @@ namespace menu
 			if (m_indexOfLastSortedTeam >= 0 && confirmSave()) {
 				saveSortedTeam();
 			}
-			ui::ConsoleManager::getInstance().clearScreen();
 			setPendingMenu(MenuType::MainMenu);
 			});
 

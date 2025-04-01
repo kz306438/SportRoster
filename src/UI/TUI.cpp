@@ -31,10 +31,9 @@ namespace ui
 		
 		menu::MenuType menuType = m_currentMenu->getPendingMenu();
 		if (menuType != menu::MenuType::Unknown) {
+			ConsoleManager::getInstance().clearScreen();
 			m_currentMenu = m_menuFactory->createMenu(menuType);
 		}
-
-
 	}
 
 	void TUI::init()

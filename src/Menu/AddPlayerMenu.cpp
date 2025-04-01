@@ -58,7 +58,6 @@ namespace menu
 				notificationMSG->run();
 			}
 			handleNotification("PLAYER SUCCESSFULLY ADDED!", 69, 9, 25, 10);
-			ui::ConsoleManager::getInstance().clearScreen();
 			setPendingMenu(MenuType::MainMenu);
 		}
 	}

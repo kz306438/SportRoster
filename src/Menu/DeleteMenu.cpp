@@ -76,7 +76,6 @@ namespace menu
 	void DeleteMenu::connectButtons()
 	{
 		m_CBBack->connect([&]() {
-			ui::ConsoleManager::getInstance().clearScreen();
 			setPendingMenu(MenuType::MainMenu);
 			});
 
