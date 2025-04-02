@@ -54,7 +54,7 @@ namespace menu
          *
          * @return The type of the pending menu.
          */
-        MenuType getPendingMenu() { return m_pendingMenu; }
+        MenuType getPendingMenu() const { return m_pendingMenu; }
 
     private:
         /**

@@ -20,9 +20,6 @@ namespace SportRoster
 
 	void Application::applicationLoop()
 	{
-		ui::ConsoleManager::getInstance().setColorBackground(Blue);
-		ui::ConsoleManager::getInstance().clearScreen();
-
 		while (true) {
 			onRender();
 			onUpdate();

@@ -4,6 +4,7 @@
 #include "Message/FatalErrorMSG.h"
 #include "Message/NotificationMSG.h"
 #include "Message/ConfirmMSG.h"
+#include "UI/Images.h"
 #include "window.h"
 
 namespace menu
@@ -52,6 +53,9 @@ namespace menu
 
 		ui::ConsoleManager::getInstance().setCursorPosition(65, 7); std::cout << "SELECT THE TEAM";
 		ui::ConsoleManager::getInstance().setCursorPosition(63, 8); std::cout << "YOU WANT TO DELETE";
+
+		ui::image::sadBoy.setBgColor(Blue);
+		ui::image::sadBoy.render(67, 11);
 	}
 
 	void DeleteMenu::init()

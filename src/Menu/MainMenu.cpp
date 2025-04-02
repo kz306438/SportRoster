@@ -6,14 +6,15 @@
 #include "Menu/CreateMenu.h"
 #include "Message/ConfirmMSG.h"
 
+#include "UI/Images.h"
+#include <random>
+
 namespace menu
 {
 	/*explicit*/ MainMenu::MainMenu(core::ApplicationCore& appCore)
 		: m_appCore(appCore)
 	{
-		createButtons();
-		connectButtons();
-		colorizeButtos();
+		init();
 	}
 
 	void MainMenu::onRender() /*override*/
@@ -23,7 +24,7 @@ namespace menu
 		m_PBEditTeam->allowChanges();			 m_PBEditTeam->show();
 		m_PBDeleteTeam->allowChanges();			 m_PBDeleteTeam->show();
 		m_PBViewTeam->allowChanges();			 m_PBViewTeam->show();
-		m_PBAnalytics->allowChanges();	 m_PBAnalytics->show();
+		m_PBAnalytics->allowChanges();			 m_PBAnalytics->show();
 		m_PBSort->allowChanges();				 m_PBSort->show();
 		m_PBQuit->allowChanges();				 m_PBQuit->show();
 	}
@@ -59,21 +60,31 @@ namespace menu
 		else if (m_select == 7) {
 			if (confirmCloseApplication())
 				exit(0);
+			renderAll();
 		}
 
 		m_select = -1;
 	}
 
+	void MainMenu::init()
+	{
+		createButtons();
+		connectButtons();
+		colorizeButtos();
+
+		renderAll();
+	}
+
 	void MainMenu::createButtons()
 	{
-		m_PBCreateTeam = std::make_unique<PushButton>(30, 3, "CREATE TEAM", 50, 14);
-		m_PBAddPlayer = std::make_unique<PushButton>(30, 3, "ADD PLAYER", 50, 17);
-		m_PBEditTeam = std::make_unique<PushButton>(30, 3, "EDIT TEAM", 50, 20);
-		m_PBDeleteTeam = std::make_unique<PushButton>(30, 3, "DELETE TEAM", 50, 23);
-		m_PBViewTeam = std::make_unique<PushButton>(30, 3, "VIEW TEAM", 85, 14);
-		m_PBAnalytics = std::make_unique<PushButton>(30, 3, "ANALYTICS", 85, 17);
-		m_PBSort = std::make_unique<PushButton>(30, 3, "SORT", 85, 20);
-		m_PBQuit = std::make_unique<PushButton>(30, 3, "QUIT", 85, 23);
+		m_PBCreateTeam	 = std::make_unique<PushButton>(30, 3, "CREATE TEAM", 50, 14);
+		m_PBAddPlayer	 = std::make_unique<PushButton>(30, 3, "ADD PLAYER", 50, 17);
+		m_PBEditTeam	 = std::make_unique<PushButton>(30, 3, "EDIT TEAM", 50, 20);
+		m_PBDeleteTeam	 = std::make_unique<PushButton>(30, 3, "DELETE TEAM", 50, 23);
+		m_PBViewTeam	 = std::make_unique<PushButton>(30, 3, "VIEW TEAM", 85, 14);
+		m_PBAnalytics	 = std::make_unique<PushButton>(30, 3, "ANALYTICS", 85, 17);
+		m_PBSort		 = std::make_unique<PushButton>(30, 3, "SORT", 85, 20);
+		m_PBQuit		 = std::make_unique<PushButton>(30, 3, "QUIT", 85, 23);
 	}
 
 	void MainMenu::connectButtons()
@@ -90,29 +101,58 @@ namespace menu
 
 	void MainMenu::colorizeButtos()
 	{
-		m_PBCreateTeam->setBackgroundColor(White);
-		m_PBCreateTeam->setForegroundColor(Black);
+		m_PBCreateTeam->setBackgroundColor(Blue);
+		m_PBCreateTeam->setForegroundColor(White);
 
-		m_PBAddPlayer->setBackgroundColor(White);
-		m_PBAddPlayer->setForegroundColor(Black);
+		m_PBAddPlayer->setBackgroundColor(Blue);
+		m_PBAddPlayer->setForegroundColor(White);
 
-		m_PBEditTeam->setBackgroundColor(White);
-		m_PBEditTeam->setForegroundColor(Black);
+		m_PBEditTeam->setBackgroundColor(Blue);
+		m_PBEditTeam->setForegroundColor(White);
 
-		m_PBDeleteTeam->setBackgroundColor(White);
-		m_PBDeleteTeam->setForegroundColor(Black);
+		m_PBDeleteTeam->setBackgroundColor(Blue);
+		m_PBDeleteTeam->setForegroundColor(White);
 
-		m_PBViewTeam->setBackgroundColor(White);
-		m_PBViewTeam->setForegroundColor(Black);
+		m_PBViewTeam->setBackgroundColor(Blue);
+		m_PBViewTeam->setForegroundColor(White);
 
-		m_PBAnalytics->setBackgroundColor(White);
-		m_PBAnalytics->setForegroundColor(Black);
+		m_PBAnalytics->setBackgroundColor(Blue);
+		m_PBAnalytics->setForegroundColor(White);
 
-		m_PBSort->setBackgroundColor(White);
-		m_PBSort->setForegroundColor(Black);
+		m_PBSort->setBackgroundColor(Blue);
+		m_PBSort->setForegroundColor(White);
 
-		m_PBQuit->setBackgroundColor(White);
-		m_PBQuit->setForegroundColor(Black);
+		m_PBQuit->setBackgroundColor(Blue);
+		m_PBQuit->setForegroundColor(White);
+	}
+
+	void MainMenu::renderAll()
+	{
+		ui::image::title.setBgColor(Blue);
+		ui::image::title.render(51, 5);
+
+		renderImage();
+	}
+
+	void MainMenu::renderImage()
+	{
+		static const std::vector<ui::Image*> images = {
+			&ui::image::boxer, &ui::image::diver, &ui::image::figureSkater,
+			&ui::image::figureSkaterGirl, &ui::image::footballPlayer,
+			&ui::image::girlSwimmer, &ui::image::hockeyPlayer, &ui::image::swimmer
+		};
+
+		std::random_device rd;
+		std::mt19937 gen(rd());
+		std::uniform_int_distribution<size_t> dist(0, images.size() - 1);
+
+		ui::Image* image = images[dist(gen)];
+		image->setBgColor(Blue);
+
+		int x = max(0, 50 / 2 - image->getWidth() / 2);
+		int y = max(0, ui::ConsoleManager::getInstance().getHeight() - image->getHeight());
+
+		image->render(x, y);
 	}
 
 	bool MainMenu::confirmCloseApplication()

@@ -42,6 +42,8 @@ namespace ui
 		ConsoleManager::getInstance().setSize(m_width, m_height);
 		ConsoleManager::getInstance().setTitle(m_title);
 		ConsoleManager::getInstance().setCursorVisibility(false);
+		ui::ConsoleManager::getInstance().setColorBackground(Blue);
+		ui::ConsoleManager::getInstance().clearScreen();
 
 		setupInputHandling();
 

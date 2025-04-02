@@ -16,11 +16,16 @@ namespace menu
 	public:
 		void onRender() override;
 		void onUpdate() override;
+
+	private:
+		void init();
+
 	private:
 		void createButtons();
 		void connectButtons();
 		void colorizeButtos();
-
+		void renderAll();
+		void renderImage();
 	private:
 		bool confirmCloseApplication();
 

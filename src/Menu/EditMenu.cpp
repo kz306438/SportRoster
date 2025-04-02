@@ -5,6 +5,7 @@
 #include "Core/Utils.h"
 #include "Message/ConfirmMSG.h"
 #include "Message/FatalErrorMSG.h"
+#include "UI/Images.h"
 
 namespace menu
 {
@@ -151,10 +152,16 @@ namespace menu
 
 		ui::ConsoleManager::getInstance().setCursorPosition(65, 7); std::cout << "SELECT THE TEAM";
 		ui::ConsoleManager::getInstance().setCursorPosition(65, 8); std::cout << "YOU WANT TO EDIT";
+
+		ui::image::boyWithBall.setBgColor(Blue);
+		ui::image::boyWithBall.render(63, 15);
 	}
 
 	void EditMenu::renderEditMenu()
 	{
+		ui::image::team.setBgColor(Blue);
+		ui::image::team.render(0, 16);
+
 		Window editMenuFrame(61, 19, 29, 5);
 		editMenuFrame.addWindowName("EDIT MENU", 1, 0);
 		editMenuFrame.show();
