@@ -99,6 +99,10 @@ set(HEADERS
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
+set_target_properties(SportRoster PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}"
+)
+
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/include)
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/consoleGUI)

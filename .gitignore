@@ -85,4 +85,4 @@ msbuild.wrn
 *.deploy-readme.txt
 *.pubxml
 *.pubxml.user
-/SportRoster.exe
+*.exe

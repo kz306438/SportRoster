@@ -29,11 +29,11 @@ namespace ui
 
     void Image::loadFromVector(const std::vector<std::vector<char>>& inputPixels) {
         m_pixels = inputPixels;
-        m_height = m_pixels.size();
+        m_height = (int)m_pixels.size();
         m_width = 0;
         for (const auto& row : m_pixels) {
             if (row.size() > m_width) {
-                m_width = row.size();
+                m_width = (int)row.size();
             }
         }
     }
@@ -56,11 +56,11 @@ namespace ui
             m_pixels.push_back(row);
         }
 
-        m_height = m_pixels.size();
+        m_height = (int)m_pixels.size();
         m_width = 0;
         for (const auto& row : m_pixels) {
             if (row.size() > m_width) {
-                m_width = row.size();
+                m_width = (int)row.size();
             }
         }
 

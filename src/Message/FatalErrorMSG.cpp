@@ -57,7 +57,7 @@ namespace msg
 		errorWindow.addWindowName("fatal error", 1, 0);
 		errorWindow.show();
 
-		ui::ConsoleManager::getInstance().setCursorPosition(m_width / 2 - m_title.size() / 2 + m_posX, m_posY + 1);
+		ui::ConsoleManager::getInstance().setCursorPosition(m_width / 2 - int(m_title.size() / 2) + m_posX, m_posY + 1);
 		std::cout << m_title;
 	}
 

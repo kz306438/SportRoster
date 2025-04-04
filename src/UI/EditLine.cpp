@@ -51,7 +51,7 @@ namespace ui::widgets
 	}
 
 	void EditLine::init() {
-		if (m_width < m_capacity + 3) m_width = m_capacity + 3;
+		if (m_width < m_capacity + 3) m_width = static_cast<std::uint16_t>(m_capacity + 3);
 		if (m_width < 5) m_width = 5;
 		if (m_height < 3) m_height = 3;
 		m_title = "edit line";
