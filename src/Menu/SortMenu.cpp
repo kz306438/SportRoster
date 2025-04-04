@@ -8,18 +8,16 @@
 #include "Core/Sort.h"
 #include "window.h"
 
-#include <algorithm>
-
 namespace menu
 {
 
-	SortMenu::SortMenu(core::ApplicationCore& appCore)
+	/*explicit*/ SortMenu::SortMenu(core::ApplicationCore& appCore)
 		: m_appCore(appCore)
 	{
 		init();
 	}
 
-	void SortMenu::onRender()
+	void SortMenu::onRender() /*override*/
 	{
 		m_slider->onRender();
 		m_textBox->onRender();
@@ -32,7 +30,7 @@ namespace menu
 		m_CBBack->allowChanges();			 m_CBBack->show();
 	}
 
-	void SortMenu::onUpdate()
+	void SortMenu::onUpdate() /*override*/
 	{
 		auto& sliderButtons		 = m_slider->getButtons();
 		auto& textBoxUpButton	 = m_textBox->getUpButton();
@@ -275,10 +273,18 @@ namespace menu
 
 		auto comparator = [&](const core::Player& p1, const core::Player& p2) {
 			switch (m_currentSortKey) {
-			case SortKey::Surname:     return m_currentSortOrder == SortOrder::Ascending ? p1.getSurname() < p2.getSurname() : p1.getSurname() > p2.getSurname();
-			case SortKey::Age:         return m_currentSortOrder == SortOrder::Ascending ? p1.getAge() < p2.getAge() : p1.getAge() > p2.getAge();
-			case SortKey::Height:      return m_currentSortOrder == SortOrder::Ascending ? p1.getHeight() < p2.getHeight() : p1.getHeight() > p2.getHeight();
-			case SortKey::GameNumber:  return m_currentSortOrder == SortOrder::Ascending ? p1.getGameNumber() < p2.getGameNumber() : p1.getGameNumber() > p2.getGameNumber();
+			case SortKey::Surname:
+				return m_currentSortOrder == SortOrder::Ascending ?
+					p1.getSurname() < p2.getSurname() : p1.getSurname() > p2.getSurname();
+			case SortKey::Age:   
+				return m_currentSortOrder == SortOrder::Ascending ?
+					p1.getAge() < p2.getAge() : p1.getAge() > p2.getAge();
+			case SortKey::Height:
+				return m_currentSortOrder == SortOrder::Ascending ?
+					p1.getHeight() < p2.getHeight() : p1.getHeight() > p2.getHeight();
+			case SortKey::GameNumber: 
+				return m_currentSortOrder == SortOrder::Ascending ?
+					p1.getGameNumber() < p2.getGameNumber() : p1.getGameNumber() > p2.getGameNumber();
 			default: return false;
 			}
 			};

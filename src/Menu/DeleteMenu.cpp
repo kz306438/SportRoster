@@ -10,19 +10,19 @@
 namespace menu
 {
 
-	DeleteMenu::DeleteMenu(core::ApplicationCore& appCore)
+	/*explicit*/ DeleteMenu::DeleteMenu(core::ApplicationCore& appCore)
 		: m_appCore(appCore)
 	{
 		init();
 	}
 
-	void DeleteMenu::onRender()
+	void DeleteMenu::onRender() /*override*/
 	{
 		m_slider->onRender();
 		m_CBBack->allowChanges(); m_CBBack->show();
 	}
 
-	void DeleteMenu::onUpdate()
+	void DeleteMenu::onUpdate() /*override*/
 	{
 		auto& buttons = m_slider->getButtons();
 		mouseButtonInteraction(

@@ -89,14 +89,14 @@ namespace menu
 
 	void MainMenu::connectButtons()
 	{
-		m_PBCreateTeam->connect([&]() { m_select = 0; });
-		m_PBAddPlayer->connect([&]() { m_select = 1; });
-		m_PBEditTeam->connect([&]() { m_select = 2; });
-		m_PBDeleteTeam->connect([&]() { m_select = 3; });
-		m_PBViewTeam->connect([&]() { m_select = 4; });
-		m_PBAnalytics->connect([&]() { m_select = 5; });
-		m_PBSort->connect([&]() { m_select = 6; });
-		m_PBQuit->connect([&]() { m_select = 7; });
+		m_PBCreateTeam->connect	([&]() { m_select = 0; });
+		m_PBAddPlayer->connect	([&]() { m_select = 1; });
+		m_PBEditTeam->connect	([&]() { m_select = 2; });
+		m_PBDeleteTeam->connect	([&]() { m_select = 3; });
+		m_PBViewTeam->connect	([&]() { m_select = 4; });
+		m_PBAnalytics->connect	([&]() { m_select = 5; });
+		m_PBSort->connect		([&]() { m_select = 6; });
+		m_PBQuit->connect		([&]() { m_select = 7; });
 	}
 
 	void MainMenu::colorizeButtos()

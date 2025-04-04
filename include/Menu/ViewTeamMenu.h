@@ -13,7 +13,7 @@ namespace menu
 	class ViewTeamMenu : public Menu
 	{
 	public:
-		ViewTeamMenu(core::ApplicationCore& appCore);
+		explicit ViewTeamMenu(core::ApplicationCore& appCore);
 
 	public:
 		void onRender() override;
@@ -21,11 +21,12 @@ namespace menu
 
 	private:
 		void init();
+		void connectButtons();
+
+	private:
 		void viewTeam(int indexOfTeam);
 
 	private:
-		void connectButtons();
-
 		void updateSliderButtonsName();
 		void sliderMoveUp();
 		void sliderMoveDown();

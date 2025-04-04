@@ -13,7 +13,7 @@ namespace menu
 	class EditMenu : public Menu
 	{
 	public:
-		EditMenu(core::ApplicationCore& appCore);
+		explicit EditMenu(core::ApplicationCore& appCore);
 
 	public:
 		void onRender() override;

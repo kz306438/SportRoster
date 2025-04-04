@@ -10,19 +10,18 @@
 namespace menu
 {
 
-	CreateMenu::CreateMenu(core::ApplicationCore& appCore)
-		: m_appCore(appCore)
+	/*explicit*/ CreateMenu::CreateMenu(core::ApplicationCore& appCore)
+		: m_appCore(appCore) 
 	{
-		m_editLine = std::make_unique<ui::widgets::EditLine>(48, 3, 36, 12, 14);
-		renderAll();
+		init();
 	}
 
-	void CreateMenu::onRender()
+	void CreateMenu::onRender() /*override*/
 	{
 		m_editLine->onRender();
 	}
 
-	void CreateMenu::onUpdate()
+	void CreateMenu::onUpdate() /*override*/
 	{
 		if (_kbhit())
 		{
@@ -38,6 +37,12 @@ namespace menu
 
 			m_editLine->onUpdate(key);
 		}
+	}
+
+	void CreateMenu::init()
+	{
+		m_editLine = std::make_unique<ui::widgets::EditLine>(48, 3, 36, 12, 14);
+		renderAll();
 	}
 
 	void CreateMenu::renderAll()
@@ -67,7 +72,6 @@ namespace menu
 		restoreConsoleAttributes();
 
 		m_editLine->renderAll();
-
 	}
 
 	void CreateMenu::handleNotification(std::string title

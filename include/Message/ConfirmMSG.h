@@ -14,7 +14,6 @@ namespace msg
 	public:
 		explicit ConfirmMSG(std::uint16_t width, std::uint16_t height, Callback callback);
 
-
 	public:
 		void onRender() override;
 		void onUpdate() override;

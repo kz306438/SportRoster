@@ -85,6 +85,7 @@ set(HEADERS
     "include/UI/UIFactory.h"
     "include/UI/UIType.h"
     "include/UI/Image.h"
+    "include/UI/Images.h"
     "include/UI/Widgets/EditBox.h"
     "include/UI/Widgets/EditLine.h"
     "include/UI/Widgets/Slider.h"
@@ -97,7 +98,7 @@ set(HEADERS
 
 )
 
-add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS} "include/UI/Images.h")
+add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/include)
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/consoleGUI)

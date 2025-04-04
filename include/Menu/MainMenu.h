@@ -26,6 +26,7 @@ namespace menu
 		void colorizeButtos();
 		void renderAll();
 		void renderImage();
+
 	private:
 		bool confirmCloseApplication();
 

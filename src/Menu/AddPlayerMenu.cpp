@@ -15,16 +15,37 @@
 namespace menu
 {
 
-	AddPlayerMenu::AddPlayerMenu(core::ApplicationCore& appCore)
+	/*explicit*/ AddPlayerMenu::AddPlayerMenu(core::ApplicationCore& appCore)
 		: m_appCore(appCore)
 	{
 		init();
 	}
 
-	void AddPlayerMenu::onRender()
+	void AddPlayerMenu::onRender() /*override*/
 	{
 		m_editLines[indexOfCurrentEditLine]->onRender();
 		renderMarker();
+	}
+
+	void AddPlayerMenu::onUpdate() /*override*/
+	{
+		if (_kbhit())
+		{
+			int key = _getch();
+			if (key == 27) {
+				ui::ConsoleManager::getInstance().clearScreen();
+				setPendingMenu(MenuType::MainMenu);
+			}
+			else if (key == '\t') {
+				indexOfCurrentEditLine = (indexOfCurrentEditLine + 1) % m_editLines.size();
+			}
+			else if (key == 13) {
+				handleEnterKey();
+			}
+
+
+			m_editLines[indexOfCurrentEditLine]->onUpdate(key);
+		}
 	}
 
 	std::pair<int, int> AddPlayerMenu::getMarkerPosition() const {
@@ -133,26 +154,6 @@ namespace menu
 		std::cout << '*';
 	}
 
-	void AddPlayerMenu::onUpdate()
-	{
-		if (_kbhit())
-		{
-			int key = _getch();
-			if (key == 27) {
-				ui::ConsoleManager::getInstance().clearScreen();
-				setPendingMenu(MenuType::MainMenu);
-			}
-			else if (key == '\t') {
-				indexOfCurrentEditLine = (indexOfCurrentEditLine + 1) % m_editLines.size();
-			}
-			else if (key == 13) {
-				handleEnterKey();
-			}
-
-
-			m_editLines[indexOfCurrentEditLine]->onUpdate(key);
-		}
-	}
 
 	void AddPlayerMenu::init()
 	{

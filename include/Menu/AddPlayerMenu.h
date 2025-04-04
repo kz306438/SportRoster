@@ -21,6 +21,7 @@ namespace menu
 	private:
 		void init();
 		void renderAll();
+
 	private:
 		void handleNotification(std::string,
 			std::uint16_t,

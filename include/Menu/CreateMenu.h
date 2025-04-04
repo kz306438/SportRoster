@@ -17,15 +17,18 @@ namespace menu
 		void onRender() override;
 		void onUpdate() override;
 
-		void renderAll();
 	private:
+		void init();
+		void renderAll();
+	
+	private:	
 		void handleNotification(std::string,
 			std::uint16_t,
 			std::uint16_t,
 			std::uint16_t,
 			std::uint16_t);
 
-
+	private:
 		void handleEnterKey();
 		bool isTeamNameDuplicate();
 

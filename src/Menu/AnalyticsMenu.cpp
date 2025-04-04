@@ -60,14 +60,14 @@ namespace menu
 
 	void AnalyticsMenu::init()
 	{
-		m_PBAverageTeamStats = std::make_unique<PushButton>(20, 3, "TEAM AVG STATS", 85, 5);
-		m_PBAverageOverallStats = std::make_unique<PushButton>(20, 3, "OVERALL AVG STATS", 85, 8);
-		m_PBYoungestTeam = std::make_unique<PushButton>(20, 3, "YOUNGEST TEAM", 85, 14);
-		m_PBHighestTeam = std::make_unique<PushButton>(20, 3, "HIGHEST TEAM", 85, 17);
-		m_PBFindPlayer = std::make_unique<PushButton>(20, 3, "FIND PLAYER", 85, 23);
+		m_PBAverageTeamStats	 = std::make_unique<PushButton>(20, 3, "TEAM AVG STATS", 85, 5);
+		m_PBAverageOverallStats	 = std::make_unique<PushButton>(20, 3, "OVERALL AVG STATS", 85, 8);
+		m_PBYoungestTeam		 = std::make_unique<PushButton>(20, 3, "YOUNGEST TEAM", 85, 14);
+		m_PBHighestTeam			 = std::make_unique<PushButton>(20, 3, "HIGHEST TEAM", 85, 17);
+		m_PBFindPlayer			 = std::make_unique<PushButton>(20, 3, "FIND PLAYER", 85, 23);
 
-		m_slider = std::make_unique<ui::widgets::Slider>(5, 20, 3, 15, 5);
-		m_textBox = std::make_unique<ui::widgets::TextBox>(40, 21, 40, 5);
+		m_slider	 = std::make_unique<ui::widgets::Slider>(5, 20, 3, 15, 5);
+		m_textBox	 = std::make_unique<ui::widgets::TextBox>(40, 21, 40, 5);
 
 		std::vector<std::vector<char>> backSym = {
 			{char(201),	 char(205),	  char(205),   char(205),	 char(187)},
@@ -291,7 +291,9 @@ namespace menu
 		return Text();
 	}
 
-	Text AnalyticsMenu::hanleAverageTeamStatsCriterion(const std::string& teamname, const TeamDataList& teamDataList)
+	Text AnalyticsMenu::hanleAverageTeamStatsCriterion(
+		const std::string& teamname,
+		const TeamDataList& teamDataList)
 	{
 		const core::Team& team = core::utils::textToTeam(teamname, teamDataList);
 

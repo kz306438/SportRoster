@@ -9,7 +9,7 @@
 
 namespace menu
 {
-	EditMenu::EditMenu(core::ApplicationCore& appCore)
+	/*explicit*/ EditMenu::EditMenu(core::ApplicationCore& appCore)
 		: m_appCore(appCore)
 	{
 		init();

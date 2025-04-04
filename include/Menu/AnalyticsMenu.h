@@ -40,6 +40,7 @@ namespace menu
 		void renderAll();
 
 		void proccessAnalyticsButtons();
+
 	private:
 		void updateSliderButtonsName();
 		void sliderMoveUp();

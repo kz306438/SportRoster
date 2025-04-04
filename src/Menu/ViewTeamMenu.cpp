@@ -8,20 +8,20 @@
 namespace menu
 {
 
-	ViewTeamMenu::ViewTeamMenu(core::ApplicationCore& appCore)
+	/*explicit*/ ViewTeamMenu::ViewTeamMenu(core::ApplicationCore& appCore)
 		: m_appCore(appCore)
 	{
 		init();
 	}
 
-	void ViewTeamMenu::onRender()
+	void ViewTeamMenu::onRender() /*override*/
 	{
 		m_slider->onRender();
 		m_textBox->onRender();
 		m_CBBack->allowChanges(); m_CBBack->show();
 	}
 
-	void ViewTeamMenu::onUpdate()
+	void ViewTeamMenu::onUpdate() /*override*/
 	{
 		auto& sliderButtons = m_slider->getButtons();
 		auto& textBoxUpButton = m_textBox->getUpButton();

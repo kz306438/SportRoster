@@ -96,7 +96,6 @@ namespace menu
 
 		std::unique_ptr<ui::widgets::Slider> m_slider;
 		std::unique_ptr<ui::widgets::TextBox> m_textBox;
-
 	};
 
 } // namespace menu

@@ -11,16 +11,15 @@ namespace menu
 	class DeleteMenu : public Menu
 	{
 	public:
-		DeleteMenu(core::ApplicationCore& appCore);
+		explicit DeleteMenu(core::ApplicationCore& appCore);
 
 	public:
 		void onRender() override;
 		void onUpdate() override;
 
-		void renderAll();
-
 	private:
 		void init();
+		void renderAll();
 
 		void connectButtons();
 
@@ -28,6 +27,7 @@ namespace menu
 		void deleteTeam(int indexOfTeam);
 
 		bool confirmDelete();
+
 	private:
 		void handleNotification(std::string,
 			std::uint16_t,
@@ -35,9 +35,11 @@ namespace menu
 			std::uint16_t,
 			std::uint16_t);
 
+	private:
 		void updateButtonsName();
 		void sliderMoveUp();
 		void sliderMoveDown();
+
 	private:
 		core::ApplicationCore& m_appCore;
 
