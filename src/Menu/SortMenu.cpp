@@ -270,28 +270,20 @@ namespace menu
 			return false;
 		}
 
-	    auto team = core::utils::textToTeam(teamname, teamDataList);
+		auto team = core::utils::textToTeam(teamname, teamDataList);
 		auto players = team.getPlayers();
-		if (m_currentSortKey == SortKey::Surname) {
-			core::utils::my_sort(players.begin(), players.end(), [&](const core::Player& p1, const core::Player& p2) {
-				return (m_currentSortOrder == SortOrder::Ascending) ? p1.getSurname() < p2.getSurname() : p1.getSurname() > p2.getSurname();
-				});
-		}
-		else if (m_currentSortKey == SortKey::Age) {
-			core::utils::my_sort(players.begin(), players.end(), [&](const core::Player& p1, const core::Player& p2) {
-				return (m_currentSortOrder == SortOrder::Ascending) ? p1.getAge() < p2.getAge() : p1.getAge() > p2.getAge();
-				});
-		}
-		else if (m_currentSortKey == SortKey::Height) {
-			core::utils::my_sort(players.begin(), players.end(), [&](const core::Player& p1, const core::Player& p2) {
-				return (m_currentSortOrder == SortOrder::Ascending) ? p1.getHeight() < p2.getHeight() : p1.getHeight() > p2.getHeight();
-				});
-		}
-		else if (m_currentSortKey == SortKey::GameNumber) {
-			core::utils::my_sort(players.begin(), players.end(), [&](const core::Player& p1, const core::Player& p2) {
-				return (m_currentSortOrder == SortOrder::Ascending) ? p1.getGameNumber() < p2.getGameNumber() : p1.getGameNumber() > p2.getGameNumber();
-				});
-		}
+
+		auto comparator = [&](const core::Player& p1, const core::Player& p2) {
+			switch (m_currentSortKey) {
+			case SortKey::Surname:     return m_currentSortOrder == SortOrder::Ascending ? p1.getSurname() < p2.getSurname() : p1.getSurname() > p2.getSurname();
+			case SortKey::Age:         return m_currentSortOrder == SortOrder::Ascending ? p1.getAge() < p2.getAge() : p1.getAge() > p2.getAge();
+			case SortKey::Height:      return m_currentSortOrder == SortOrder::Ascending ? p1.getHeight() < p2.getHeight() : p1.getHeight() > p2.getHeight();
+			case SortKey::GameNumber:  return m_currentSortOrder == SortOrder::Ascending ? p1.getGameNumber() < p2.getGameNumber() : p1.getGameNumber() > p2.getGameNumber();
+			default: return false;
+			}
+			};
+
+		core::utils::my_sort(players.begin(), players.end(), comparator);
 
 		team.removeAllPlayers();
 		team.addAllPlayers(players);

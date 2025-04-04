@@ -85,23 +85,19 @@ namespace menu
 	bool AddPlayerMenu::isValidInput()
 	{
 		static const std::array<std::pair<int (*)(int), const char*>, 7> validators = {
-			std::make_pair(::isdigit, "UNCORRECT NAME"),
-			std::make_pair(::isdigit, "UNCORRECT SURNAME"),
-			std::make_pair(::isalpha, "UNCORRECT AGE"),
-			std::make_pair(::isdigit, "UNCORRECT COUNTRY"),
-			std::make_pair(::isalpha, "UNCORRECT HEIGHT"),
-			std::make_pair(::isalpha, "UNCORRECT WEIGHT"),
-			std::make_pair(::isalpha, "UNCORRECT GAME NUMBER")
+			std::make_pair(::isalpha, "UNCORRECT NAME"),
+			std::make_pair(::isalpha, "UNCORRECT SURNAME"),
+			std::make_pair(::isdigit, "UNCORRECT AGE"),
+			std::make_pair(::isalpha, "UNCORRECT COUNTRY"),
+			std::make_pair(::isdigit, "UNCORRECT HEIGHT"),
+			std::make_pair(::isdigit, "UNCORRECT WEIGHT"),
+			std::make_pair(::isdigit, "UNCORRECT GAME NUMBER")
 		};
-
-		if (indexOfCurrentEditLine < 0 || indexOfCurrentEditLine >= validators.size()) {
-			return true;
-		}
 
 		for (size_t i = 0; i < m_editLines.size(); ++i)
 		{
 			const auto& text = m_editLines[i]->getText();
-			if (i < validators.size() && std::all_of(text.begin(), text.end(), validators[i].first)) {
+			if (i < validators.size() && !std::all_of(text.begin(), text.end(), validators[i].first)) {
 				handleNotification(validators[i].second, 69, 9, 25, 10);
 				return false;
 			}

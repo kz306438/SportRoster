@@ -53,13 +53,6 @@ namespace core
         void addAllPlayers(const std::vector<Player>& players);
 
         /**
-         * @brief Removes a player from the team by their game number.
-         *
-         * @param gameNumber The game number of the player to be removed.
-         */
-        void removePlayer(std::uint16_t gameNumber);
-
-        /**
          * @brief Removes all players from the team.
          */
         void removeAllPlayers();
@@ -85,34 +78,9 @@ namespace core
          */
         [[nodiscard]] const std::vector<Player>& getPlayersRef() const;
 
-        /**
-         * @brief Retrieves a specific player by their game number.
-         *
-         * @param gameNumber The game number of the player to retrieve.
-         * @return Player The player corresponding to the given game number.
-         */
-        [[nodiscard]] Player getPlayer(std::uint16_t gameNumber);
-
     private:
-        /**
-         * @brief Converts a vector of players to an unordered map.
-         *
-         * @param vec A vector of Player objects to convert.
-         */
-        void convertToMap(const std::vector<Player>& vec);
-
-        /**
-         * @brief Converts the unordered map of players to a vector.
-         *
-         * @return std::vector<Player> A vector of Player objects.
-         */
-        std::vector<Player> convertToVector() const;
-
-    private:
-        std::string m_teamName;               ///< The name of the team
-        std::unordered_map<int, Player> m_players; ///< A map of players indexed by their game number
-
-        mutable std::optional<std::vector<Player>> m_cachedPlayers; ///< Cached list of players for efficiency
+        std::string m_teamName; 
+        std::vector<Player> m_players;
     };
 
 } // namespace core
