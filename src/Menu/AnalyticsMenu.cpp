@@ -393,10 +393,20 @@ namespace menu
 			}
 		}
 
-		if (youngestTeam)
-			resultText = core::utils::teamToText(*youngestTeam);
+		if (youngestTeam) {
+			resultText.push_back("            THE YOUNGEST TEAM         ");
+			resultText.push_back("======================================");
 
-		return core::utils::teamToLabeledText(resultText);
+			std::string teamName = "            " + youngestTeam->getTeamName() + "        ";
+			resultText.push_back(teamName);
+			resultText.push_back("======================================");
+
+			auto teamText = core::utils::teamToText(*youngestTeam);
+			teamText = core::utils::teamToLabeledText(teamText);
+			resultText.insert(resultText.end(), teamText.begin(), teamText.end());
+		}
+
+		return resultText;
 	}
 
 
@@ -422,9 +432,20 @@ namespace menu
 		}
 
 		if (highestTeam)
-			resultText = core::utils::teamToText(*highestTeam);
+		{
+			resultText.push_back("            THE HIGHEST TEAM         ");
+			resultText.push_back("======================================");
 
-		return core::utils::teamToLabeledText(resultText);
+			std::string teamName = "            " + highestTeam->getTeamName() + "        ";
+			resultText.push_back(teamName);
+			resultText.push_back("======================================");
+
+			auto teamText = core::utils::teamToText(*highestTeam);
+			teamText = core::utils::teamToLabeledText(teamText);
+			resultText.insert(resultText.end(), teamText.begin(), teamText.end());
+		}
+
+		return resultText;
 	}
 
 	Text AnalyticsMenu::hanleFindPlayerCriterion(const std::string& teamname)
