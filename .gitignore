@@ -86,3 +86,4 @@ msbuild.wrn
 *.pubxml
 *.pubxml.user
 *.exe
+/storage
