@@ -93,22 +93,67 @@ namespace core
         TeamDataList findYoungestTeam() const;
 
         /**
-         * @brief Performs a linear search to find a player by game number in a team.
+         * @brief Template function for performing linear search for a player in a team based on the provided value.
          *
-         * @param team_name The name of the team.
-         * @param gameNumber The game number of the player to find.
-         * @return PlayerDataList A list of strings representing the player's data if found.
+         * This function performs a linear search for a player in a team by the given value. The comparison is done using the provided comparator.
+         * If the player is found, their text representation is returned. If not, an empty list is returned.
+         *
+         * @tparam T Type of the search value (e.g., surname, age).
+         * @tparam Compare Type of the comparator used to compare the value with the player's field.
+         *
+         * @param team_name The name of the team where the player should be searched.
+         * @param value The value to search for (e.g., surname or age).
+         * @param comp The comparator that defines how to compare the value with the player's field.
+         *
+         * @return Returns the player's text representation (if found) or an empty list (if not found).
          */
-        [[nodiscard]] PlayerDataList linearSearch(const std::string& team_name, const std::string& surname) const;
+        template <typename T, typename Compare>
+        PlayerDataList linearSearch(
+            const std::string& team_name,
+            const T& value,
+            Compare comp) const
+        {
+            auto result = __linearSearch(team_name, value, comp);
+
+            if (!result) {
+                return PlayerDataList();
+            }
+
+            return utils::playerToText(result.value());
+        }
+
 
         /**
-         * @brief Performs a binary search to find a player by game number in a team.
+         * @brief Template function for performing binary search for a player in a team based on the provided value.
          *
-         * @param team_name The name of the team.
-         * @param gameNumber The game number of the player to find.
-         * @return PlayerDataList A list of strings representing the player's data if found.
+         * This function performs a binary search for a player in the sorted list of players based on the given value.
+         * The comparison is done using the provided comparator.
+         * If the player is found, their text representation is returned. If not, an empty list is returned.
+         *
+         * @tparam T Type of the search value (e.g., surname, age).
+         * @tparam Compare Type of the comparator used to compare the value with the player's field.
+         *
+         * @param team_name The name of the team where the player should be searched.
+         * @param value The value to search for (e.g., surname or age).
+         * @param comp The comparator that defines how to compare the value with the player's field.
+         *
+         * @return Returns the player's text representation (if found) or an empty list (if not found).
          */
-        [[nodiscard]] PlayerDataList binarySearch(const std::string& team_name, const std::string& surname) const;
+        template <typename T, typename Compare>
+        PlayerDataList binarySearch(
+            const std::string& team_name,
+            const T& value,
+            Compare comp) const
+        {
+            auto result = __binarySearch(team_name, value, comp);
+
+            if (!result) {
+                return PlayerDataList();
+            }
+
+            return utils::playerToText(result.value());
+        }
+
 
     private:
         /**
@@ -120,22 +165,70 @@ namespace core
         Team __getTeam(const std::string& team) const;
 
         /**
-         * @brief Performs a binary search to find a player by their game number in a team.
+         * @brief Template function that performs a binary search for a player in a team based on the provided value and comparator.
          *
-         * @param team_name The name of the team.
-         * @param game_number The game number of the player.
-         * @return std::optional<Player> The player if found, otherwise an empty optional.
+         * This function performs a binary search on the players in the specified team using the given value and comparator. If the player is found,
+         * it returns the player. If not, it returns `std::nullopt`.
+         *
+         * @tparam T Type of the search value (e.g., surname, age).
+         * @tparam Compare Type of the comparator used to compare the value with the player's field.
+         *
+         * @param team_name The name of the team where the search will be performed.
+         * @param value The value to search for (e.g., surname or age).
+         * @param comp The comparator used to compare the player's field with the search value.
+         *
+         * @return Returns `std::optional<Player>` containing the player if found, or `std::nullopt` if not found.
          */
-        std::optional<Player> __binarySearch(const std::string& team_name, const std::string& surname) const;
+        template <typename T, typename Compare>
+        std::optional<Player> __binarySearch(
+            const std::string& team_name,
+            const T& value,
+            Compare comp) const
+        {
+            const Team& team = __getTeam(team_name);
+            const std::vector<Player>& players = team.getPlayersRef();
+
+            auto it = utils::binary_search(players.begin(), players.end(), value, comp);
+
+            if (it != players.end() && comp(*it, value) == false) {
+                return *it;
+            }
+            return std::nullopt;
+        }
+
             
         /**
-         * @brief Performs a linear search to find a player by their game number in a team.
+         * @brief Template function that performs a linear search for a player in a team based on the provided value and comparator.
          *
-         * @param team_name The name of the team.
-         * @param game_number The game number of the player.
-         * @return std::optional<Player> The player if found, otherwise an empty optional.
+         * This function performs a linear search on the players in the specified team using the given value and comparator. If the player is found,
+         * it returns the player. If not, it returns `std::nullopt`.
+         *
+         * @tparam T Type of the search value (e.g., surname, age).
+         * @tparam Compare Type of the comparator used to compare the value with the player's field.
+         *
+         * @param team_name The name of the team where the search will be performed.
+         * @param value The value to search for (e.g., surname or age).
+         * @param comp The comparator used to compare the player's field with the search value.
+         *
+         * @return Returns `std::optional<Player>` containing the player if found, or `std::nullopt` if not found.
          */
-        std::optional<Player> __linearSearch(const std::string& team_name, const std::string& surname) const;
+        template <typename T, typename Compare>
+        std::optional<Player> __linearSearch(
+            const std::string& team_name,
+            const T& value,
+            Compare comp) const
+        {
+            const Team& team = __getTeam(team_name);
+            const std::vector<Player>& players = team.getPlayersRef();
+
+            for (const auto& player : players) {
+                if (comp(player, value)) {
+                    return player;
+                }
+            }
+
+            return {};
+        }
 
     private:
         Storage m_storage; ///< Storage instance for team and player data.

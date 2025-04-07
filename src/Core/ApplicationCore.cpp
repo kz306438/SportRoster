@@ -88,84 +88,10 @@ namespace core
 		return utils::teamToText(youngestTeam);
 	}
 
-	PlayerDataList ApplicationCore::linearSearch(
-		const std::string& team_name,
-		const std::string& surname) const
-	{
-		auto result = __linearSearch(team_name, surname);
-
-		if (!result) {
-			return PlayerDataList();
-		}
-
-		return utils::playerToText(result.value());
-	}
-
-	PlayerDataList ApplicationCore::binarySearch(
-		const std::string& team_name,
-		const std::string& surname) const
-	{
-		auto result = __binarySearch(team_name, surname);
-
-		if (!result) {
-			return PlayerDataList();
-		}
-
-		return utils::playerToText(result.value());
-	}
-
 	Team ApplicationCore::__getTeam(const std::string& team_name) const
 	{
 		TeamDataList teamDataList = m_storage.getContent(team_name + ".txt");
 		return utils::textToTeam(team_name, teamDataList);
-	}
-
-	std::optional<Player> ApplicationCore::__binarySearch(
-		const std::string& team_name,
-		const std::string& surname) const
-	{
-		Team team = __getTeam(team_name);
-		const std::vector<Player>& players = team.getPlayersRef();
-
-		int left = 0, right = players.size() - 1;
-		while (left <= right) {
-			int mid = left + (right - left) / 2;
-			std::string midSurname = players[mid].getSurname();
-
-			if ((mid > left && players[mid].getSurname() < players[mid - 1].getSurname()) ||
-				(mid < right && players[mid].getSurname() > players[mid + 1].getSurname()))
-			{
-				return std::nullopt; 
-			}
-
-			if (midSurname == surname) {
-				return players[mid];
-			}
-			else if (midSurname < surname) {
-				left = mid + 1;
-			}
-			else {
-				right = mid - 1;
-			}
-		}
-
-		return std::nullopt;
-	}
-
-
-	std::optional<Player> ApplicationCore::__linearSearch(
-		const std::string& team_name, 
-		const std::string& surname) const
-	{
-		const Team team = __getTeam(team_name);
-		const std::vector<Player>& players = team.getPlayersRef();
-
-		for (const auto& player : players) {
-			if (player.getSurname() == surname) {
-				return player;
-			}
-		}
-		return {};
 	}
 
 } // namespace core

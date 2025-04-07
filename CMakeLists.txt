@@ -98,7 +98,7 @@ set(HEADERS
 
 )
 
-add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS} icon.rc)
+add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS} icon.rc "include/Core/BinarySearch.h")
 set_target_properties(SportRoster PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}"
 )

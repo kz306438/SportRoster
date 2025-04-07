@@ -11,14 +11,13 @@ namespace core
 
 	namespace utils
 	{
-
 		/**
 		 * @brief Binary search that returns an iterator to the found element or last if not found.
 		 *
 		 * @tparam ForwardIt Iterator type (requires at least ForwardIterator).
 		 * @tparam T Type of the searched value (default: value_type from iterator).
 		 * @tparam Compare Comparator function object.
-         *
+		 *
 		 * @param first Iterator to the beginning of the range.
 		 * @param last Iterator to the end of the range.
 		 * @param value Value to search for.
@@ -47,10 +46,10 @@ namespace core
 					count = half;
 				}
 				else {
-					return mid; 
+					return mid;
 				}
 			}
-			return last; 
+			return last;
 		}
 
 
