@@ -1,7 +1,7 @@
 #include "Core/ApplicationCore.h"
 
-#include "Core/Utils.h"
 #include "Core/Sort.h"
+#include "Core/Utils.h"
 #include <algorithm>
 #include <utility>
 

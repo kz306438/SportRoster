@@ -459,10 +459,20 @@ namespace menu
 
 		if (surname.empty()) return generateFileSelectionMessage();
 
-		Text resultText = m_appCore.binarySearch(teamname, surname);
+		Text resultText = m_appCore.binarySearch(teamname, surname, [](const core::Player& player, const std::string& surname) {
+			return player.getSurname() < surname;
+			});
 		
 		if (resultText.empty()) {
-			resultText = m_appCore.linearSearch(teamname, surname);
+			resultText = m_appCore.binarySearch(teamname, surname, [](const core::Player& player, const std::string& surname) {
+				return player.getSurname() > surname;
+				});
+		}
+
+		if (resultText.empty()) {
+			resultText = m_appCore.linearSearch(teamname, surname, [](const core::Player& player, const std::string& surname) {
+				return player.getSurname() == surname;
+				});
 		}
 		
 		resultText = core::utils::teamToLabeledText(resultText);

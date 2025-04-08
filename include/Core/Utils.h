@@ -4,13 +4,15 @@
 #include <optional>
 #include "Player.h"
 #include "Team.h"
-#include "ApplicationCore.h"
 
 namespace core
 {
 
 	namespace utils
 	{
+		using PlayerDataList = std::vector<std::string>; ///< A list of strings representing player data.
+		using TeamDataList = std::vector<std::string>; ///< A list of strings representing team data.
+
 		/**
 		 * @brief Binary search that returns an iterator to the found element or last if not found.
 		 *
@@ -24,31 +26,37 @@ namespace core
 		 * @param comp Comparison function (default: std::less<>).
 		 * @return Iterator to the found element or last if not found.
 		 */
-		template<class ForwardIt, class T = typename std::iterator_traits<ForwardIt>::value_type,
-			class Compare = std::less<>>
-			[[nodiscard]] constexpr ForwardIt binary_search(ForwardIt first, ForwardIt last, const T& value, Compare comp = Compare()) {
+		template<class ForwardIt, class T,
+			class Compare>
+		[[nodiscard]] constexpr ForwardIt binary_search(ForwardIt first, ForwardIt last, const T& value, Compare comp)
+		{
 			using category = typename std::iterator_traits<ForwardIt>::iterator_category;
 			static_assert(std::is_base_of_v<std::forward_iterator_tag, category>,
 				"binary_search requires at least forward iterators");
 
-			typename std::iterator_traits<ForwardIt>::difference_type count = std::distance(first, last);
+			using difference_type = typename std::iterator_traits<ForwardIt>::difference_type;
+
+			difference_type count = std::distance(first, last);
+			ForwardIt it;
 
 			while (count > 0) {
-				auto half = count / 2;
-				ForwardIt mid = first;
-				std::advance(mid, half);
+				difference_type step = count / 2;
+				it = first;
+				std::advance(it, step);
 
-				if (comp(*mid, value)) {
-					first = std::next(mid);
-					count -= half + 1;
-				}
-				else if (comp(value, *mid)) {
-					count = half;
+				if (comp(*it, value)) {
+					first = std::next(it);
+					count -= step + 1;
 				}
 				else {
-					return mid;
+					count = step;
 				}
 			}
+
+			if (first != last && !comp(*first, value)) {
+				return first;
+			}
+
 			return last;
 		}
 
