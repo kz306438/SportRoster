@@ -14,25 +14,31 @@ namespace core
 		using TeamDataList = std::vector<std::string>; ///< A list of strings representing team data.
 
 		/**
-		 * @brief Binary search that returns an iterator to the found element or last if not found.
+		 * @brief Finds the first element in the range [first, last) that is not less than the given value.
 		 *
-		 * @tparam ForwardIt Iterator type (requires at least ForwardIterator).
-		 * @tparam T Type of the searched value (default: value_type from iterator).
-		 * @tparam Compare Comparator function object.
+		 * This function implements a binary search using a one-sided comparator.
+		 * It returns an iterator pointing to the first element in the range for which
+		 * `!comp(*it, value)` is true (i.e., the first element that is not less than `value`).
+		 *
+		 * The comparator must define a strict weak ordering, typically through a "less than" comparison.
+		 *
+		 * @tparam ForwardIt Forward iterator type (must meet the requirements of ForwardIterator).
+		 * @tparam T Type of the searched value.
+		 * @tparam Compare Type of the comparison function object, satisfying the form comp(a, b) == a < b.
 		 *
 		 * @param first Iterator to the beginning of the range.
 		 * @param last Iterator to the end of the range.
-		 * @param value Value to search for.
-		 * @param comp Comparison function (default: std::less<>).
-		 * @return Iterator to the found element or last if not found.
+		 * @param value Value to compare the elements to.
+		 * @param comp Comparison function that returns true if the first argument is less than the second.
+		 * @return Iterator pointing to the first element not less than value, or last if all elements are less.
 		 */
-		template<class ForwardIt, class T,
-			class Compare>
-		[[nodiscard]] constexpr ForwardIt binary_search(ForwardIt first, ForwardIt last, const T& value, Compare comp)
+
+		template<class ForwardIt, class T, class Compare>
+		[[nodiscard]] constexpr ForwardIt lower_bound(ForwardIt first, ForwardIt last, const T& value, Compare comp)
 		{
 			using category = typename std::iterator_traits<ForwardIt>::iterator_category;
 			static_assert(std::is_base_of_v<std::forward_iterator_tag, category>,
-				"binary_search requires at least forward iterators");
+				"lower_bound requires at least forward iterators");
 
 			using difference_type = typename std::iterator_traits<ForwardIt>::difference_type;
 
@@ -52,12 +58,7 @@ namespace core
 					count = step;
 				}
 			}
-
-			if (first != last && !comp(*first, value)) {
-				return first;
-			}
-
-			return last;
+			return first;
 		}
 
 
