@@ -86,4 +86,6 @@ msbuild.wrn
 *.pubxml
 *.pubxml.user
 *.exe
+*.lnk
+*.aps
 /storage
