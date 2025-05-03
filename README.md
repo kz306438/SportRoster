@@ -25,7 +25,7 @@
 ## ⚙️ Сборка проекта
 
 ```bash
-git clone https://github.com/yourusername/SportRoster.git
+git clone https://github.com/kz306438/SportRoster.git
 cd SportRoster
 mkdir build
 cd build
